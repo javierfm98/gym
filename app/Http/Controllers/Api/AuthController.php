@@ -16,7 +16,7 @@ class AuthController extends Controller
         $token = JWTAuth::attempt($credentials);
 
         if($token){
-            $user = User::where('email' , $credentials['email'])->get()->first();
+            $user = User::where('email' , $credentials['email'])->with('photo')->get()->first();
             $success = true;
 
             return compact('success' , 'user' , 'token');

@@ -9,4 +9,8 @@ class Photo extends Model
     protected $fillable = [
         'route'
     ];
+
+    protected $hidden = [
+        'created_at' , 'updated_at' ,
+    ];
 }
