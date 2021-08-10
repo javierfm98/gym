@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 
 class Training extends Model
@@ -18,8 +19,20 @@ class Training extends Model
     ];
 
      protected $hidden = [
-         'created_at' , 'updated_at' ,
+         'created_at' , 'updated_at' , 'start' , 'end'
     ];
+
+    protected $appends = [
+        'time_format'
+    ];
+
+    public function getTimeFormatAttribute() {
+
+        $start = (new Carbon($this->start))->format('H:i');
+        $end = (new Carbon($this->end))->format('H:i');
+
+        return $start .' - '. $end;
+    }
 
 
   /* public function users(){
