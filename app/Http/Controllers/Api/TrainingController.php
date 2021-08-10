@@ -13,6 +13,6 @@ class TrainingController extends Controller
         $date = $request->only('day');
         $trainings = Training::where('day' , $date)->get();
 
-        return compact('trainings');
+        return $trainings;
     }
 }
