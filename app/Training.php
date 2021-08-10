@@ -23,10 +23,10 @@ class Training extends Model
     ];
 
     protected $appends = [
-        'time_format'
+        'training_time'
     ];
 
-    public function getTimeFormatAttribute() {
+    public function getTrainingTimeAttribute() {
 
         $start = (new Carbon($this->start))->format('H:i');
         $end = (new Carbon($this->end))->format('H:i');
