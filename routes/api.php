@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login' , 'AuthController@login');
-Route::get('/prueba', 'UserController@prueba');
+Route::get('/trainings' , 'TrainingController@show');
 
 Route::middleware('auth:api')->group(function () {
 

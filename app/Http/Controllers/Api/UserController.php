@@ -14,10 +14,4 @@ class UserController extends Controller
         return $user;
     }
 
-    public function prueba()
-    {
-        $success = true;
-        return compact('success'); 
-    }
-
 }

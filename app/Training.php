@@ -13,7 +13,13 @@ class Training extends Model
         'id', 'user_id' , 'day' , 'start' , 'end' , 'capacity' , 'enroll' , 'description'
     ];
 
-    protected $dates = ['day' , 'start' , 'end'];
+    protected $dates = [
+        'day' , 'start' , 'end'
+    ];
+
+     protected $hidden = [
+         'created_at' , 'updated_at' ,
+    ];
 
 
   /* public function users(){
@@ -29,8 +35,5 @@ class Training extends Model
     public function user(){
    		return $this->belongsTo(User::class);
    }
-
-
-
 
 }
