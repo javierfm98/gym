@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login' , 'AuthController@login');
-Route::get('/trainings' , 'TrainingController@show');
+Route::get('/trainings' , 'TrainingController@index');
 
 Route::middleware('auth:api')->group(function () {
 
     Route::get('/user', 'UserController@show');
     Route::post('/logout' , 'AuthController@logout');
+    Route::post('/trainings' , 'TrainingController@store');
 
 });
 
