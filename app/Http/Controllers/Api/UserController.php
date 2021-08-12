@@ -22,7 +22,6 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $reservation = Reservation::where('user_id' , $user->id)->get(['training_id']);
-
         $allReservation = Training::whereIn('id' , $reservation)->get();
 
         return $allReservation;
