@@ -41,7 +41,7 @@ class UserController extends Controller
             }
         }
 
-        return compact('reservationOfDay');
+        return $reservationOfDay;
     }
 
 
