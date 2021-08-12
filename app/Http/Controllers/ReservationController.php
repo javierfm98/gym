@@ -47,8 +47,6 @@ class ReservationController extends Controller
         $training_id = $request->input('trainingId');
         $dateTraining = $request->input('currentDay');
 
-        dd($training_id);
-
         $training = Training::findOrFail($training_id);
 
         $data  =  [ 'user_id' => $user_id , 
