@@ -19,11 +19,11 @@ class Training extends Model
     ];
 
      protected $hidden = [
-         'created_at' , 'updated_at' , 'start' , 'end'
+         'created_at' , 'updated_at' , 'start' , 'end' , 'day'
     ];
 
     protected $appends = [
-        'training_time'
+        'training_time' , 'training_day'
     ];
 
     public function getTrainingTimeAttribute() {
@@ -32,6 +32,10 @@ class Training extends Model
         $end = (new Carbon($this->end))->format('H:i');
 
         return $start .' - '. $end;
+    }
+
+    public function getTrainingDayAttribute() {
+        return (new Carbon($this->day))->format('d/m/Y');
     }
 
 

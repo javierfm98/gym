@@ -10,6 +10,10 @@ class Reservation extends Model
         'id' , 'training_id' , 'user_id' 
     ];
 
+    protected $hidden = [
+        'created_at' , 'updated_at' , 
+    ];
+
     public function training(){
     	
     	return $this->belongsTo(Training::class);
