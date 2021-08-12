@@ -26,4 +26,35 @@ class UserController extends Controller
 
         return $allReservation;
     }
+
+    public function check(Request $request)
+    {
+        $user = Auth::user();
+        $trainings = Training::where('day' , $request->date)->orderBy('start')->get();
+        $clientReservation = Reservation::where('user_id' , $user->id)->get();
+        $array = array();
+
+        foreach($trainings as $training){
+            $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
+            if($isReserved){
+                array_push($array,$training->id);
+            }
+        }
+
+        return $array;
+    }
+
+
+    public function isReserved($clientReservation , $trainings , $idTraining){
+
+        foreach($trainings as $training){
+            foreach($clientReservation as $reservation){
+                if($training->id == $reservation->training_id && $training->id == $idTraining){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

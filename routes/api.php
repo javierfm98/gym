@@ -23,6 +23,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout' , 'AuthController@logout');
     Route::post('/trainings' , 'TrainingController@store');
     Route::get('trainings/reserves' , 'UserController@reservation');
+    Route::get('trainings/check' , 'UserController@check');
 
 });
 
