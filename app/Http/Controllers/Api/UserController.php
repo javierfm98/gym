@@ -32,16 +32,16 @@ class UserController extends Controller
         $user = Auth::user();
         $trainings = Training::where('day' , $request->date)->orderBy('start')->get();
         $clientReservation = Reservation::where('user_id' , $user->id)->get();
-        $array = array();
+        $reservationOfDay = array();
 
         foreach($trainings as $training){
             $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
             if($isReserved){
-                array_push($array,$training->id);
+                array_push($reservationOfDay,$training);
             }
         }
 
-        return $array;
+        return $reservationOfDay;
     }
 
 
