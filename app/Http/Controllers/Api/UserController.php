@@ -32,17 +32,17 @@ class UserController extends Controller
         $user = Auth::user();
         $trainings = Training::where('day' , $request->date)->orderBy('start')->get();
         $clientReservation = Reservation::where('user_id' , $user->id)->get();
+        $success = false;
 
         foreach($trainings as $training){
             $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
             if($isReserved){
-                 return $training;
+                $success = true;
+                 return compact('success' , 'training');
             }
         }
 
-        return [];
-
-       
+        return compact('success');   
     }
 
 
