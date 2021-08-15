@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Reservation;
 use App\Training;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -21,9 +22,11 @@ class UserController extends Controller
     public function reservation()
     {
         $user = Auth::user();
+        $currentDate = Carbon::now();
         $reservation = Reservation::where('user_id' , $user->id)->get(['training_id']);
-        $allReservation = Training::whereIn('id' , $reservation)->get();
+        $allReservation = Training::whereIn('id' , $reservation)->whereDate('day' , '>=' ,  $currentDate)->get();
 
+        
         return $allReservation;
     }
 
