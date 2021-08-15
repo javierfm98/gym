@@ -23,7 +23,7 @@ class Training extends Model
     ];
 
     protected $appends = [
-        'training_time' , 'training_day'
+        'training_time' , 'training_day' , 'training_day_DB'
     ];
 
     public function getTrainingTimeAttribute() {
@@ -37,6 +37,11 @@ class Training extends Model
     public function getTrainingDayAttribute() {
         return (new Carbon($this->day))->format('d/m/Y');
     }
+
+        public function getTrainingDayDBAttribute() {
+        return (new Carbon($this->day))->format('Y-m-d');
+    }
+
 
 
   /* public function users(){
