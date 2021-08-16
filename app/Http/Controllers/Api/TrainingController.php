@@ -36,4 +36,22 @@ class TrainingController extends Controller
         $success = true;
         return compact('success');
     }
+
+    public function destroy($id)
+    {
+        $user = Auth::user();
+        $user_id = $user->id;
+
+        $training = Training::findOrFail($id);
+
+        $del = Reservation::where("user_id" , $user_id)->where("training_id" , $id)->delete();
+
+        $countClientRes = Reservation::where('training_id' , $id)->get()->count();
+        $trainingUpdate = Training::findOrFail($id);
+        $trainingUpdate->enroll = $countClientRes;
+        $trainingUpdate->save();
+
+        $success = true;
+        return compact('success');
+    }
 }
