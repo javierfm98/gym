@@ -54,4 +54,13 @@ class TrainingController extends Controller
         $success = true;
         return compact('success');
     }
+
+    public function show($id)
+    {
+        $users = Reservation::where('training_id' , $id)->with('user')->get();
+        $training = Training::findOrFail($id);
+
+        return compact('users' , 'training');
+
+    }
 }
