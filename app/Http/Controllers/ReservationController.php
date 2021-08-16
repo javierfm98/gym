@@ -53,7 +53,7 @@ class ReservationController extends Controller
                     'training_id' => $training_id ];
 
 
-        $entrenoCurrentDay = Training::where('day' ,   $dateTraining)->get(['id'])->makeHidden(['training_time', 'training_day']);
+        $entrenoCurrentDay = Training::where('day' ,   $dateTraining)->get(['id'])->makeHidden(['training_time', 'training_day' , 'training_day_DB']);
         $reservadoYa = Reservation::where('user_id' , $user_id)->whereIn('training_id' , $entrenoCurrentDay)->get();
 
          $cosa = $dateTraining;
