@@ -60,9 +60,9 @@ class TrainingController extends Controller
 
     public function show($id)
     {
-        $users = Reservation::where('training_id' , $id)->with('user.photo')->get();
+        $allUsers = Reservation::where('training_id' , $id)->with('user.photo')->get();
         $training = Training::findOrFail($id);
 
-        return compact('users' , 'training');
+        return compact('allUsers' , 'training');
     }
 }
