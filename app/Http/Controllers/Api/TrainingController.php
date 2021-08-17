@@ -51,8 +51,8 @@ class TrainingController extends Controller
         $trainingUpdate->enroll = $countClientRes;
         $trainingUpdate->save();
 
-        $success = true;
-        return compact('success');
+        return $trainingUpdate;
+
     }
 
     public function show($id)
