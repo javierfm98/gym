@@ -51,7 +51,9 @@ class TrainingController extends Controller
         $trainingUpdate->enroll = $countClientRes;
         $trainingUpdate->save();
 
-        return $trainingUpdate;
+        $training = Training::where('id' , $id)->get();
+
+        return $training;
 
     }
 
