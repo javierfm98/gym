@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Training;
 use App\Reservation;
+use App\User;
 
 class TrainingController extends Controller
 {
@@ -60,9 +61,11 @@ class TrainingController extends Controller
 
     public function show($id)
     {
-        $allUsers = Reservation::where('training_id' , $id)->with('user.photo')->get()->first();
+        $usersId = Reservation::where('training_id' , $id)->pluck('user_id');
+        $allUsers = User::whereIn('id' , $usersId)->with('photo')->get();
         $training = Training::findOrFail($id);
 
         return compact('allUsers' , 'training');
     }
 }
+
