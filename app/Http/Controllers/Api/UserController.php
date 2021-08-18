@@ -62,15 +62,15 @@ class UserController extends Controller
         return false;
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
         $data = $request->only('name', 'email', 'surname', 'phone' , 'username');
 
         $user->fill($data);
         $user->save();
 
-        $user = User::where('id' , $id)->with('photo')->get()->first();
+        $user = User::where('id' , $user->id)->with('photo')->get()->first();
         return $user;
     }
 }
