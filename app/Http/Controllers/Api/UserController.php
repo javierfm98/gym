@@ -70,7 +70,7 @@ class UserController extends Controller
         $user->fill($data);
         $user->save();
 
-        $user = User::where('id' , $id)->with('photo')->get();
+        $user = User::where('id' , $id)->with('photo')->get()->first();
         return $user;
     }
 }
