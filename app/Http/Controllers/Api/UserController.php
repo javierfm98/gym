@@ -61,4 +61,16 @@ class UserController extends Controller
 
         return false;
     }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $data = $request->only('name', 'email', 'surname', 'phone' , 'username');
+
+        $user->fill($data);
+        $user->save();
+
+        $user = User::where('id' , $id)->with('photo')->get();
+        return $user;
+    }
 }
