@@ -26,6 +26,7 @@
                <tr style="text-align: center;">
                   <th>nombre</th>
                   <th>apellido</th>
+                  <th>Tipo</th>
                   <th>Estatus</th>
                   <th></th>
                </tr>
@@ -35,6 +36,7 @@
                   <tr class="list" style="text-align: center;">
                      <td> {{ $subscription->user->name }} </td>
                      <td> {{ $subscription->user->surname }} </td>
+                     <td>{{ $subscription->rate->name}}</td>
                      <td>
                            @if($subscription->status == 1)
                               <span class="badge badge-pill badge-success">PAGADO</span>
@@ -67,9 +69,9 @@
             </div>
          @endif
       </div>
-      <div class="border-0">
+  <!--    <div class="border-0">
          {{ $clients->links('vendor.pagination.custom') }}  
-      </div>
+      </div> -->
 
 @endsection
 

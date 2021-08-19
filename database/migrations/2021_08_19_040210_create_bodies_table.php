@@ -19,8 +19,8 @@ class CreateBodiesTable extends Migration
             //FK User
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('stat_id');
-            $table->float('goal');
-            $table->time('date');
+            $table->float('value');
+            $table->date('date');
             $table->timestamps();
         });
     }

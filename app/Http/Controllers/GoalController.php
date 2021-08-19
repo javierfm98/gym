@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Body;
 use App\Goal;
-use Carbon\Carbon;
 
-class BodyController extends Controller
+class GoalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,7 @@ class BodyController extends Controller
      */
     public function index()
     {
-        $user_id =  auth()->user()->id;
-        $goals_weight = Goal::where('user_id' , $user_id)->where('name_goal_id' , 1)->first();
-        $goals_body_fat = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->first();
 
-        return view('bodies.index' , compact('goals_weight' , 'goals_body_fat'));
-
-       
     }
 
     /**
@@ -43,12 +35,44 @@ class BodyController extends Controller
      */
     public function store(Request $request)
     {
-       $user_id =  auth()->user()->id;
+        $user_id =  auth()->user()->id;
+        $goal_weight = Goal::where('user_id' , $user_id)->where('name_goal_id' , 1)->first();
+        $goal_body_fat = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->first();
 
-       $stats = Body::where('user_id' , $user_id)->get();
+        if( $request->goal_weight != null){
+            if($goal_weight == null){
+                Goal::create([
+                    'user_id' => $user_id,
+                    'value' => $request->goal_weight,
+                    'name_goal_id' => 1
+                ]);
+            }else{
+                $data = ['value' => $request->goal_weight];
 
-       dd($stats->toArray());
+                $goal_weight->fill($data);
+                $goal_weight->save(); 
+            }
+        }
+
+        if( $request->goal_body_fat != null){
+            if($goal_body_fat == null){
+                Goal::create([
+                    'user_id' => $user_id,
+                    'value' => $request->goal_body_fat,
+                    'name_goal_id' => 2
+                ]);
+            }else{
+                $data = ['value' => $request->goal_body_fat];
+
+                $goal_body_fat->fill($data);
+                $goal_body_fat->save(); 
+            }
+        }
+
+
+        return redirect('bodies');
     }
+
 
     /**
      * Display the specified resource.

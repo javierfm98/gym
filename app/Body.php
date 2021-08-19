@@ -8,7 +8,7 @@ class Body extends Model
 {
 
     protected $fillable = [
-        'id' , 'user_id' , 'stat_id' , 'goal' , 'date'
+        'id' , 'user_id' , 'stat_id' , 'value'  , 'date'
     ];
 
     protected $hidden = [

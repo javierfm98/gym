@@ -37,6 +37,8 @@ Route::resource('subscriptions', 'SubscriptionController')->middleware('auth');
 
 Route::resource('bodies' , 'BodyController')->middleware('auth');
 
+Route::resource('goals' , 'GoalController')->middleware('auth');
+
 
 Route::get('/hours', 'TrainingController@hoursList')->name('reservations.hoursList')->middleware('auth');
 Route::post('/admin-reservation', 'ReservationController@storeModal')->name('reservations.storeModal')->middleware('auth');
@@ -45,6 +47,7 @@ Route::get('/display-trainings', 'TrainingController@displayTrainings')->name('r
 Route::post('/back-reservation', 'ReservationController@backReservation')->name('reservations.backReservation')->middleware('auth');
 Route::post('/paid', 'SubscriptionController@paid')->name('subscriptions.paid')->middleware('auth');
 Route::post('/unpaid', 'SubscriptionController@unpaid')->name('subscriptions.unpaid')->middleware('auth');
+
 
 
 Route::resource('trainings', 'TrainingController')->middleware('auth');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatsTable extends Migration
+class CreateGoalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateStatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stats', function (Blueprint $table) {
+        Schema::create('goals', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->unsignedBigInteger('user_id');
+            $table->float('value');
+            $table->unsignedBigInteger('name_goal_id');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateStatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stats');
+        Schema::dropIfExists('goals');
     }
 }

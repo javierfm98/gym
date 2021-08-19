@@ -12,12 +12,18 @@
                </ul>
 
                <div class="tab-content">
-                  <div class="tab-pane active" role="tabpanel" id="graphic">1</div>
+                  <div class="tab-pane active" role="tabpanel" id="graphic">
+                     @include('bodies.tables.graphic' , ['goals_weight' => $goals_weight , 'goals_body_fat' => $goals_body_fat ])
+                  </div>
                   <div class="tab-pane" role="tabpanel" id="add">
                   	@include('bodies.tables.add')
                   </div>
-                  <div class="tab-pane" role="tabpanel" id="goal">3</div>
-                  <div class="tab-pane" role="tabpanel" id="measuring">4</div>
+                  <div class="tab-pane" role="tabpanel" id="goal">
+                     @include('bodies.tables.goal')
+                  </div>
+                  <div class="tab-pane" role="tabpanel" id="measuring">
+                      @include('bodies.tables.measuring')
+                  </div>
                </div>
             </div>
 @endsection

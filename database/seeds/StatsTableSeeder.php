@@ -13,11 +13,13 @@ class StatsTableSeeder extends Seeder
     public function run()
     {
         Stat::create([
-            'name' => 'Peso',
+            'name' => 'weight',
+            'description' => 'Peso'
         ]);
 
         Stat::create([
-            'name' => '% Grasa corporal',
+            'name' => 'body_fat',
+            'description' => '% Grasa corporal'
         ]);
     }
 }
