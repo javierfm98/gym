@@ -53,6 +53,11 @@ class User extends Authenticatable implements JWTSubject  /*implements MustVerif
         return $this->hasMany(Reservation::class);
     }
 
+    public function body(){
+
+        return $this->hasMany(Body::class);
+    }
+
     public function photo(){
 
         return $this->belongsTo(Photo::class);

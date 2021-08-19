@@ -35,6 +35,8 @@ Route::resource('profiles', 'ProfileController')->middleware('auth');
 
 Route::resource('subscriptions', 'SubscriptionController')->middleware('auth');
 
+Route::resource('bodies' , 'BodyController')->middleware('auth');
+
 
 Route::get('/hours', 'TrainingController@hoursList')->name('reservations.hoursList')->middleware('auth');
 Route::post('/admin-reservation', 'ReservationController@storeModal')->name('reservations.storeModal')->middleware('auth');

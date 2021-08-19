@@ -957,3 +957,26 @@
   
 
    /************************************************************/
+
+   /* NAV TAB */
+
+  .nav-pills .nav-link.active {
+    background-color: #00b8ff;
+    color: white !important;
+  }
+
+
+
+  .nav-pills .nav-link {
+    background-color: #fff;
+    border: 1px solid #00b8ff;
+    color: #00b8ff;
+    border-radius: 6px;
+  }
+
+  .nav-item{
+    margin-right: 20px;
+  }
+
+
+  /************************************************************/

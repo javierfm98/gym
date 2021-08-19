@@ -32,7 +32,7 @@
             <nav class=" lista menu h5 d-flex d-sm-block justify-content-center flex-wrap" id="lista"> 
                <a href="{{ route('home') }}" class="link {{ (request()->routeIs('home')) ? 'active' : '' }}"><i class="fas fa-home fa-fw"></i><span>Inicio</span></a> 
                <a href="{{ route('reservations.index') }}" class="link {{ (request()->routeIs('reservations.index')) ? 'active' : '' }}"><i class="fas fa-calendar-alt fa-fw"></i><span>Reservar</span></a> 
-               <a href="#" class="link"><i class="fas fa-heartbeat fa-fw"></i><span>Mi cuerpo</span></a> 
+               <a href="{{ route('bodies.index') }}" class="link {{ (request()->routeIs('bodies.index')) ? 'active' : '' }}"><i class="fas fa-heartbeat fa-fw"></i><span>Mi cuerpo</span></a> 
                <a href="{{ route('profiles.index') }}" class="link {{ (request()->routeIs('profiles.index')) ? 'active' : '' }}"><i class="fas fa-user-edit fa-fw"></i><span>Perfil</span></a> 
                @if(auth()->user()->hasRole(['admin', 'trainer']))
                <hr class="mx-3 divider">
