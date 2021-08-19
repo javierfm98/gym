@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Subscription extends Model
 {
@@ -12,6 +13,14 @@ class Subscription extends Model
 
     protected $dates = ['end_at'];
 
+    protected $hidden = [
+       'updated_at' , 'end_at'
+    ];
+
+    protected $appends = [
+         'subs_end' 
+    ];
+
     public function user(){
         return $this->belongsTo(User::class);
    }
@@ -20,4 +29,9 @@ class Subscription extends Model
 
         return $this->belongsTo(Rate::class);
     }
+
+    public function getSubsEndAttribute() {
+        return (new Carbon($this->end_at))->format('d/m/Y');
+    }
+
 }
