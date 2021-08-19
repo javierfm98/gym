@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Reservation;
 use App\Training;
+use App\Subscription;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -72,5 +73,13 @@ class UserController extends Controller
 
         $user = User::where('id' , $user->id)->with('photo')->get()->first();
         return $user;
+    }
+
+    public function subs()
+    {
+        $user = Auth::user();
+        $subscription = Subscription::where('user_id' , $user->id)->get();
+
+        return $subscription;
     }
 }
