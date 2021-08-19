@@ -20,6 +20,10 @@ class BodyController extends Controller
         $goals_weight = Goal::where('user_id' , $user_id)->where('name_goal_id' , 1)->first();
         $goals_body_fat = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->first();
 
+        $measurements = Body::where('user_id' , $user_id)->get();
+
+       // dd($measurements->toArray());
+
         return view('bodies.index' , compact('goals_weight' , 'goals_body_fat'));
 
        
@@ -43,11 +47,31 @@ class BodyController extends Controller
      */
     public function store(Request $request)
     {
-       $user_id =  auth()->user()->id;
+        $user_id = auth()->user()->id;
+        $date = Carbon::now();
+        
+        if( $request->weight != null)
+        {
+            Body::create([
+                'user_id' => $user_id,
+                'stat_id' => 1,
+                'value' => $request->weight,
+                'date' => $date
+            ]);
+        }
 
-       $stats = Body::where('user_id' , $user_id)->get();
+        if( $request->body_fat != null)
+        {
+            Body::create([
+                'user_id' => $user_id,
+                'stat_id' => 2,
+                'value' => $request->body_fat,
+                'date' => $date
+            ]);
+        }
 
-       dd($stats->toArray());
+
+        return redirect('bodies');
     }
 
     /**

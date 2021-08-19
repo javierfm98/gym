@@ -20,7 +20,7 @@
          }
 
          .container{
-            margin-top: 150px;
+            margin-top: 20px;
             max-width: 400px;
             height: 275px;
             border-radius: 15px;
@@ -136,6 +136,10 @@
 
   /***********************************************/
 
+    .img-container {
+        text-align: center;
+    }
+
 
       
       </style>
@@ -147,20 +151,14 @@
                     {{ $errors->first() }}
                 </div>
             @endif
-
+        <div class="img-container"> 
+           <img src="{{ asset('img/logo.svg') }}" width="150" height="150" alt="Logo">
+        </div>
+        
       <div class="container bg-white">
          <h4 class="fw-bold text-center pt-3 mb-4">Iniciar sesión</h4>
             <form method="POST" action="{{ route('login') }}">
             @csrf
-
-     <!--        <div class="col-md-12 px-4 form-group" id="login-email ">
-                <input type="email" class="form-control rounded-10 mt-3" name="email" placeholder="Correo electrónico" value="{{ old('email') }}" required autocomplete="email" autofocus>
-             </div>
-
-             <div class="col-md-12 px-4 form-group" id="login-password ">
-                <input type="password" class="form-control rounded-10 mt-3" name="password" placeholder="Constraseña"  required>
-             </div> -->
-
              <div class=" col-md-12 field-outlined px-4 mb-3">
                <input type="text" name="email" class="input"  value="{{ old('email') }}" required autocomplete="email" autofocus="">
                <label for="" class="label">Correo electrónico</label>
@@ -180,7 +178,7 @@
              </div>
 
          </form>
-
       </div>
+
    </body>
 </html>

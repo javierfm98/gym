@@ -29,6 +29,9 @@
    <div class="container-fluid">
       <div class="row">
          <div class="sidebar col-12 col-sm-auto fixed">
+         <div class="img-container"> 
+           <img src="{{ asset('img/logo.svg') }}" width="50" height="50" alt="Logo">
+        </div>
             <nav class=" lista menu h5 d-flex d-sm-block justify-content-center flex-wrap" id="lista"> 
                <a href="{{ route('home') }}" class="link {{ (request()->routeIs('home')) ? 'active' : '' }}"><i class="fas fa-home fa-fw"></i><span>Inicio</span></a> 
                <a href="{{ route('reservations.index') }}" class="link {{ (request()->routeIs('reservations.index')) ? 'active' : '' }}"><i class="fas fa-calendar-alt fa-fw"></i><span>Reservar</span></a> 
