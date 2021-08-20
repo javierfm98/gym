@@ -987,3 +987,15 @@
     text-align: center;
     margin-top: 10px;
   }
+
+/************************************************************/
+
+
+/* TABLA MEDICION */
+
+
+  tr.border_bottom td {
+  border-bottom: 1px solid #ececec !important;
+}
+
+/************************************************************/

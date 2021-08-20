@@ -19,12 +19,10 @@ class BodyController extends Controller
         $user_id =  auth()->user()->id;
         $goals_weight = Goal::where('user_id' , $user_id)->where('name_goal_id' , 1)->first();
         $goals_body_fat = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->first();
-
         $measurements = Body::where('user_id' , $user_id)->get();
 
-       // dd($measurements->toArray());
 
-        return view('bodies.index' , compact('goals_weight' , 'goals_body_fat'));
+        return view('bodies.index' , compact('goals_weight' , 'goals_body_fat' , 'measurements'));
 
        
     }
@@ -49,25 +47,43 @@ class BodyController extends Controller
     {
         $user_id = auth()->user()->id;
         $date = Carbon::now();
-        
+
         if( $request->weight != null)
         {
-            Body::create([
-                'user_id' => $user_id,
-                'stat_id' => 1,
-                'value' => $request->weight,
-                'date' => $date
-            ]);
+            $stat_weight = Body::where('date' , $date->format('Y-m-d'))->where('stat_id' , 1)->first();
+
+            if($stat_weight != null){
+                $data = ['value' => $request->weight];
+
+                $stat_weight->fill($data);
+                $stat_weight->save(); 
+            }else{
+                Body::create([
+                    'user_id' => $user_id,
+                    'stat_id' => 1,
+                    'value' => $request->weight,
+                    'date' => $date
+                ]);
+            }    
         }
 
         if( $request->body_fat != null)
         {
-            Body::create([
-                'user_id' => $user_id,
-                'stat_id' => 2,
-                'value' => $request->body_fat,
-                'date' => $date
-            ]);
+            $stat_body_fat = Body::where('date' , $date->format('Y-m-d'))->where('stat_id' , 2)->first();
+
+            if($stat_body_fat != null){
+                $data = ['value' => $request->body_fat];
+
+                $stat_body_fat->fill($data);
+                $stat_body_fat->save(); 
+            }else{
+                Body::create([
+                    'user_id' => $user_id,
+                    'stat_id' => 2,
+                    'value' => $request->body_fat,
+                    'date' => $date
+                ]);
+            }
         }
 
 
@@ -116,6 +132,9 @@ class BodyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $stat = Body::findOrFail($id);
+        $stat->delete();
+
+        return redirect('bodies');
     }
 }

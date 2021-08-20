@@ -22,7 +22,7 @@
                      @include('bodies.tables.goal')
                   </div>
                   <div class="tab-pane" role="tabpanel" id="measuring">
-                      @include('bodies.tables.measuring')
+                      @include('bodies.tables.measuring' , ['measurements' => $measurements])
                   </div>
                </div>
             </div>
