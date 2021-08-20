@@ -13,7 +13,7 @@
 
                <div class="tab-content">
                   <div class="tab-pane active" role="tabpanel" id="graphic">
-                     @include('bodies.tables.graphic' , ['goals_weight' => $goals_weight , 'goals_body_fat' => $goals_body_fat ])
+                     @include('bodies.tables.graphic')
                   </div>
                   <div class="tab-pane" role="tabpanel" id="add">
                   	@include('bodies.tables.add')
@@ -22,7 +22,7 @@
                      @include('bodies.tables.goal')
                   </div>
                   <div class="tab-pane" role="tabpanel" id="measuring">
-                      @include('bodies.tables.measuring' , ['measurements' => $measurements])
+                      @include('bodies.tables.measuring')
                   </div>
                </div>
             </div>

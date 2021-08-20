@@ -21,10 +21,61 @@ class BodyController extends Controller
         $goals_body_fat = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->first();
         $measurements = Body::where('user_id' , $user_id)->get();
 
+        $mouths = Body::where('user_id' , $user_id)->orderBy('date')->get(['date'])->toArray();
+        $countMouths = [];
+        $goalWeightCount = [];
+        $goalBodyFatCount = [];
 
-        return view('bodies.index' , compact('goals_weight' , 'goals_body_fat' , 'measurements'));
+        $goals_weight_array = $goals_weight->toArray();
+        $goals_body_fat_array =  $goals_body_fat->toArray();
 
-       
+
+        foreach($mouths as $mouth){
+            array_push($countMouths , $mouth['date']);  
+        }
+
+
+         $countMouths = array_unique($countMouths);
+         $countMouths = array_values($countMouths);
+
+         
+        for($i = 0 ; $i< count($countMouths) ; $i++){
+            array_push($goalWeightCount , $goals_weight_array['value']);
+            array_push($goalBodyFatCount , $goals_body_fat_array['value']);
+        }
+
+        $measurementsWeight = Body::where('user_id' , $user_id)->where('stat_id' , 1)->orderBy('date')->get()->toArray();
+
+        //$arrayWeight = $this->createArrayWeight($countMouths, $measurementsWeight);
+
+        return view('bodies.index' , compact(   'goals_weight' , 
+                                                'goals_body_fat' , 
+                                                'measurements' , 
+                                                'countMouths' , 
+                                                'goalWeightCount' , 
+                                                'goalBodyFatCount'
+                                            ));
+    }
+
+    public function createArrayWeight($mouths, $weightsArray)
+    {
+        $array = array_fill(0 , count($mouths) , 0);
+
+        dd($array);
+
+        foreach($mouths as $mouth){
+            foreach($weightsArray as $weight){
+                if($weight['date'] == $mouth){
+                    print_r($weight['value']);
+                }else{
+                    dd($mouth);
+                }
+            }
+        }
+
+
+
+        dd("Prueba");
     }
 
     /**
