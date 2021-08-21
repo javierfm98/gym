@@ -36,7 +36,7 @@
         dashStyle: 'ShortDash',
         data: @json($goalWeightCount)
     }, {
-        name: 'Obj % Grasa corporal',
+        name: 'Objetivo % Grasa corporal',
         dashStyle: 'ShortDash',
         data: @json($goalBodyFatCount)
     } , {
