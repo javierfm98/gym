@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Body;
 use App\Goal;
 use Carbon\Carbon;
+use App\Training;
 
 class BodyController extends Controller
 {
@@ -19,63 +20,113 @@ class BodyController extends Controller
         $user_id =  auth()->user()->id;
         $goals_weight = Goal::where('user_id' , $user_id)->where('name_goal_id' , 1)->first();
         $goals_body_fat = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->first();
-        $measurements = Body::where('user_id' , $user_id)->get();
+        $measurements = Body::where('user_id' , $user_id)->orderBy('date' , 'DESC')->get();
 
-        $mouths = Body::where('user_id' , $user_id)->orderBy('date')->get(['date'])->toArray();
+        $mouths = Body::where('user_id' , $user_id)->orderBy('date')->get();
         $countMouths = [];
+        $countMouthsFormat = [];
         $goalWeightCount = [];
         $goalBodyFatCount = [];
 
-        $goals_weight_array = $goals_weight->toArray();
-        $goals_body_fat_array =  $goals_body_fat->toArray();
 
+       
+
+        $goals_weight_array = Goal::where('user_id' , $user_id)->where('name_goal_id' , 1)->get();
+        $goals_body_fat_array = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->get();
 
         foreach($mouths as $mouth){
-            array_push($countMouths , $mouth['date']);  
+            array_push($countMouths , $mouth->date_format);
         }
-
 
          $countMouths = array_unique($countMouths);
          $countMouths = array_values($countMouths);
 
-         
-        for($i = 0 ; $i< count($countMouths) ; $i++){
-            array_push($goalWeightCount , $goals_weight_array['value']);
-            array_push($goalBodyFatCount , $goals_body_fat_array['value']);
+
+         if($goals_weight_array){
+            $goals_weight_array = $goals_weight_array->first();
+            for($i = 0 ; $i< count($countMouths) ; $i++){
+                array_push($goalWeightCount , $goals_weight_array['value']);
+            }
+         }
+
+         if($goals_body_fat_array){
+            $goals_body_fat_array = $goals_body_fat_array->first();
+            for($i = 0 ; $i< count($countMouths) ; $i++){
+                array_push($goalBodyFatCount , $goals_body_fat_array['value']);
+            }
+         }
+
+        $measurementsWeight = Body::select('value' , 'date')->where('user_id' , $user_id)->where('stat_id' , 1)->orderBy('date')->get()->toArray();
+        $measurementsBodyFat = Body::select('value' , 'date')->where('user_id' , $user_id)->where('stat_id' , 2)->orderBy('date')->get()->toArray();
+
+     //  dd($measurementsWeight);
+
+        $arrayWeight = $this->createArrayData($countMouths, $measurementsWeight);
+        $pointStartWeight = $this->setPointStart($arrayWeight);
+
+        $arrayBodyFat = $this->createArrayData($countMouths, $measurementsBodyFat);
+        $pointStartBodyFat = $this->setPointStart($arrayBodyFat);
+
+        foreach($arrayWeight as $key =>$weight){
+            if($weight == -1){
+                unset($arrayWeight[$key]);
+            }
         }
 
-        $measurementsWeight = Body::where('user_id' , $user_id)->where('stat_id' , 1)->orderBy('date')->get()->toArray();
+        foreach($arrayBodyFat as $key =>$body){
+            if($body == -1){
+                unset($arrayBodyFat[$key]);
+            }
+        }
 
-        //$arrayWeight = $this->createArrayWeight($countMouths, $measurementsWeight);
+        $arrayWeight = array_values($arrayWeight);
+        $arrayBodyFat = array_values($arrayBodyFat);
 
         return view('bodies.index' , compact(   'goals_weight' , 
                                                 'goals_body_fat' , 
                                                 'measurements' , 
                                                 'countMouths' , 
                                                 'goalWeightCount' , 
-                                                'goalBodyFatCount'
+                                                'goalBodyFatCount',
+                                                'arrayWeight',
+                                                'pointStartWeight',
+                                                'arrayBodyFat',
+                                                'pointStartBodyFat'
                                             ));
     }
 
-    public function createArrayWeight($mouths, $weightsArray)
+    public function createArrayData($mouths, $dataArray)
     {
-        $array = array_fill(0 , count($mouths) , 0);
+        $arrayValue = array_fill(0 , count($mouths) , -1);
 
-        dd($array);
-
-        foreach($mouths as $mouth){
-            foreach($weightsArray as $weight){
-                if($weight['date'] == $mouth){
-                    print_r($weight['value']);
-                }else{
-                    dd($mouth);
+        foreach($dataArray as $data){
+            foreach($mouths as $key => $mouth){
+                if($data['date_format'] == $mouth){
+                    $arrayValue[$key] = $data['value'];
+                    break;
                 }
             }
         }
 
+        
 
+        foreach($arrayValue as $key =>$item){
+            if($item == -1 && $key != 0 && $key != (count($arrayValue)-1)){
+                $arrayValue[$key] = $arrayValue[$key-1];
+            }
+        }
 
-        dd("Prueba");
+       return $arrayValue;
+    }
+
+    public function setPointStart($arrayData){
+
+        foreach($arrayData as $key => $data){
+            if($data != -1){
+                return $key;
+            }
+        }
+        return 0;
     }
 
     /**
@@ -97,11 +148,11 @@ class BodyController extends Controller
     public function store(Request $request)
     {
         $user_id = auth()->user()->id;
-        $date = Carbon::now();
+        $date = $request->day;
 
         if( $request->weight != null)
         {
-            $stat_weight = Body::where('date' , $date->format('Y-m-d'))->where('stat_id' , 1)->first();
+            $stat_weight = Body::where('date' , $date)->where('stat_id' , 1)->first();
 
             if($stat_weight != null){
                 $data = ['value' => $request->weight];
@@ -113,14 +164,14 @@ class BodyController extends Controller
                     'user_id' => $user_id,
                     'stat_id' => 1,
                     'value' => $request->weight,
-                    'date' => $date
+                    'date' =>  $date
                 ]);
             }    
         }
 
         if( $request->body_fat != null)
         {
-            $stat_body_fat = Body::where('date' , $date->format('Y-m-d'))->where('stat_id' , 2)->first();
+            $stat_body_fat = Body::where('date' , $date)->where('stat_id' , 2)->first();
 
             if($stat_body_fat != null){
                 $data = ['value' => $request->body_fat];
@@ -132,11 +183,10 @@ class BodyController extends Controller
                     'user_id' => $user_id,
                     'stat_id' => 2,
                     'value' => $request->body_fat,
-                    'date' => $date
+                    'date' =>  $date
                 ]);
             }
         }
-
 
         return redirect('bodies');
     }

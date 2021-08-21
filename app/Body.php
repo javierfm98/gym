@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Body extends Model
 {
@@ -14,6 +15,19 @@ class Body extends Model
     protected $hidden = [
         'created_at' , 'updated_at' , 
     ];
+
+    protected $dates = [
+        'date'
+    ];
+
+    protected $appends = [
+        'date_format'
+    ];
+
+    public function getDateFormatAttribute() {
+        return (new Carbon($this->date))->format('Y-m-d');
+    }
+ 
 
     public function user(){
         return $this->belongsTo(User::class);

@@ -67,6 +67,7 @@ class TrainingController extends Controller
         $start = new Carbon($splitHours[0]);
         $end = new Carbon($splitHours[1]);
 
+
         $flag = true;
 
         $trainings = Training::where('day' , $request->day)->get();
@@ -421,3 +422,5 @@ class TrainingController extends Controller
     }
 
 }
+
+

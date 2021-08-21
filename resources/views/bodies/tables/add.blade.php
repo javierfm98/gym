@@ -2,6 +2,11 @@
     <form action="{{ route('bodies.store') }}" method="POST" autocomplete="off">
         <div class="row" style="margin-bottom: 40px;">
         	@csrf
+            <div class="col field-outlined mb-4">      
+                <input type="date" name="day" class="input input-date2" style="padding-left: 16px;" value="{{ old('day') }}" id="datePicker">
+                <i class="far fa-calendar-alt fa-fw date-icon"></i> 
+                <label class="label">Fecha</label>
+            </div>
             <div class=" col field-outlined">
                 <input type="text" class="input" name="weight">
                 <label for="" class="label">Peso</label>

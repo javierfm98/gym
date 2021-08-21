@@ -1,6 +1,7 @@
 
 <div id="container" class="mt-4"></div>
 
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -31,13 +32,21 @@
 	        }
 	    },
 	    series: [{
-        name: 'Peso',
-        pointStart: 0,
-        data: [7.0, 6.9, 9.5]
+        name: 'Objetivo Peso',
+        dashStyle: 'ShortDash',
+        data: @json($goalWeightCount)
     }, {
-        name: '% Grasa',
-        pointStart: 2,
-        data: [3.9]
+        name: 'Obj % Grasa corporal',
+        dashStyle: 'ShortDash',
+        data: @json($goalBodyFatCount)
+    } , {
+    	name: 'Peso',
+    	pointStart: @json($pointStartWeight),
+    	data: @json($arrayWeight)
+    }, {
+    	name: '% Grasa corporal',
+    	pointStart: @json($pointStartBodyFat),
+    	data: @json($arrayBodyFat)
     }]
 	});
 </script>
