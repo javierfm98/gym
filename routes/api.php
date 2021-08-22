@@ -29,6 +29,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('users/update' , 'UserController@update');
     Route::get('users/subscription' , 'UserController@subs');
     Route::get('axis' , 'ChartController@getAxis');
+    Route::get('goal/weight' , 'ChartController@getGoalWeight');
 
 });
 
