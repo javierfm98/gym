@@ -30,6 +30,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('users/subscription' , 'UserController@subs');
     Route::get('axis' , 'ChartController@getAxis');
     Route::get('goal/weight' , 'ChartController@getGoalWeight');
+    Route::get('goal/body' , 'ChartController@getGoalBodyFat');
 
 });
 

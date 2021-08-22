@@ -52,4 +52,31 @@ class ChartController extends Controller
 
          return $goalWeightCount;
     }
+
+        public function getGoalBodyFat()
+    {
+        $user = Auth::user();
+        $countMouths = [];
+        $goalBodyFatCount = [];
+        $mouths = Body::where('user_id' , $user->id)->orderBy('date')->get();
+
+        foreach($mouths as $mouth){
+            array_push($countMouths , $mouth->date_format);
+        }
+
+        $countMouths = array_unique($countMouths);
+        $countMouths = array_values($countMouths);
+
+
+        $goals_body_fat_array = Goal::where('user_id' , $user->id)->where('name_goal_id' , 2)->get();
+
+        if($goals_body_fat_array){
+            $goals_body_fat_array = $goals_body_fat_array->first();
+            for($i = 0 ; $i< count($countMouths) ; $i++){
+                array_push($goalBodyFatCount , $goals_body_fat_array['value']);
+            }
+         }
+
+         return $goalBodyFatCount;
+    }
 }
