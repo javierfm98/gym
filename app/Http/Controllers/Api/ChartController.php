@@ -51,7 +51,5 @@ class ChartController extends Controller
          }
 
          return $goalWeightCount;
-
-
     }
 }
