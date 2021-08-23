@@ -33,7 +33,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('goal/body' , 'ChartController@getGoalBodyFat');
     Route::get('weight' , 'ChartController@getWeight');
     Route::get('body' , 'ChartController@getBodyFat');
-    Route::get('data' , 'ChartController@getDataChart');
+    Route::get('chart' , 'ChartController@getDataChart');
 
 });
 

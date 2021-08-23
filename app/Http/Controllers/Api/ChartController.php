@@ -167,9 +167,6 @@ class ChartController extends Controller
         $goalWeightCount = [];
         $goalBodyFatCount = [];
 
-
-       
-
         $goals_weight_array = Goal::where('user_id' , $user->id)->where('name_goal_id' , 1)->get();
         $goals_body_fat_array = Goal::where('user_id' , $user->id)->where('name_goal_id' , 2)->get();
 
