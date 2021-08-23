@@ -88,6 +88,14 @@ class ChartController extends Controller
         $measurementsWeight = Body::select('value' , 'date')->where('user_id' , $user->id)->where('stat_id' , 1)->orderBy('date')->get()->toArray();
         $arrayWeight = $this->createArrayData($countMouths, $measurementsWeight);
 
+        foreach($arrayWeight as $key =>$weight){
+            if($weight == -1){
+                unset($arrayWeight[$key]);
+            }
+        }
+
+        $arrayWeight = array_values($arrayWeight);
+
         return $arrayWeight;
     }
 
@@ -99,6 +107,15 @@ class ChartController extends Controller
 
         $measurementsBodyFat = Body::select('value' , 'date')->where('user_id' , $user->id)->where('stat_id' , 2)->orderBy('date')->get()->toArray();
         $arrayBodyFat = $this->createArrayData($countMouths, $measurementsBodyFat);
+
+        foreach($arrayBodyFat as $key =>$body){
+            if($body == -1){
+                unset($arrayBodyFat[$key]);
+            }
+        }
+
+        $arrayBodyFat = array_values($arrayBodyFat);
+
 
         return $arrayBodyFat;
     }
