@@ -79,4 +79,38 @@ class ChartController extends Controller
 
          return $goalBodyFatCount;
     }
+
+    public function getWeight()
+    {
+        $user = Auth::user();
+        $countMouths = $this->getAxis();
+
+        $measurementsWeight = Body::select('value' , 'date')->where('user_id' , $user->id)->where('stat_id' , 1)->orderBy('date')->get()->toArray();
+        $arrayWeight = $this->createArrayData($countMouths, $measurementsWeight);
+
+        return $arrayWeight;
+    }
+
+        public function createArrayData($mouths, $dataArray)
+    {
+        $arrayValue = array_fill(0 , count($mouths) , -1);
+
+        foreach($dataArray as $data){
+            foreach($mouths as $key => $mouth){
+                if($data['date_format'] == $mouth){
+                    $arrayValue[$key] = $data['value'];
+                    break;
+                }
+            }
+        }
+
+        foreach($arrayValue as $key =>$item){
+            if($item == -1 && $key != 0 && $key != (count($arrayValue)-1)){
+                $arrayValue[$key] = $arrayValue[$key-1];
+            }
+        }
+
+       return $arrayValue;
+    }
+
 }

@@ -31,6 +31,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('axis' , 'ChartController@getAxis');
     Route::get('goal/weight' , 'ChartController@getGoalWeight');
     Route::get('goal/body' , 'ChartController@getGoalBodyFat');
+    Route::get('weight' , 'ChartController@getWeight');
 
 });
 
