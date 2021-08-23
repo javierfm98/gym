@@ -91,6 +91,20 @@ class ChartController extends Controller
         return $arrayWeight;
     }
 
+
+        public function getBodyFat()
+    {
+        $user = Auth::user();
+        $countMouths = $this->getAxis();
+
+        $measurementsBodyFat = Body::select('value' , 'date')->where('user_id' , $user->id)->where('stat_id' , 2)->orderBy('date')->get()->toArray();
+        $arrayBodyFat = $this->createArrayData($countMouths, $measurementsBodyFat);
+
+        return $arrayBodyFat;
+    }
+
+
+
         public function createArrayData($mouths, $dataArray)
     {
         $arrayValue = array_fill(0 , count($mouths) , -1);
