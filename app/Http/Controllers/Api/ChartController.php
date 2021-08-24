@@ -225,8 +225,8 @@ class ChartController extends Controller
     public function getGoal()
     {
         $user = Auth::user();
-        $goals_weight = Goal::select('value')->where('user_id' , $user->id)->where('name_goal_id' , 1)->first();
-        $goals_body_fat = Goal::select('value')->where('user_id' , $user->id)->where('name_goal_id' , 2)->first();
+        $goals_weight = Goal::where('user_id' , $user->id)->where('name_goal_id' , 1)->pluck('value');
+        $goals_body_fat = Goal::where('user_id' , $user->id)->where('name_goal_id' , 2)->pluck('value');
 
         return compact( 'goals_weight', 
                         'goals_body_fat');
