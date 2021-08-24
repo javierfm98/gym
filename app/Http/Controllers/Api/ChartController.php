@@ -228,8 +228,20 @@ class ChartController extends Controller
         $goals_weight = Goal::where('user_id' , $user->id)->where('name_goal_id' , 1)->pluck('value');
         $goals_body_fat = Goal::where('user_id' , $user->id)->where('name_goal_id' , 2)->pluck('value');
 
-        return compact( 'goals_weight', 
-                        'goals_body_fat');
+        if(count($goals_weight) > 0){
+            $number_goals_weight = $goals_weight[0];
+        }else{
+            $number_goals_weight = null;
+        }
+
+        if(count($goals_body_fat) > 0){
+            $number_goals_body_fat = $goals_body_fat[0];
+        }else{
+            $number_goals_body_fat = null;
+        }
+        
+        return compact( 'number_goals_weight', 
+                        'number_goals_body_fat');
     }
 
 }
