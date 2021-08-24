@@ -110,8 +110,10 @@ class BodyController extends Controller
 
         
 
+        $countNumber = $this->countNumber($arrayValue);
+
         foreach($arrayValue as $key =>$item){
-            if($item == -1 && $key != 0 && $key != (count($arrayValue)-1)){
+            if($item == -1 && $key != 0 && $key != (count($arrayValue)-1) && count($arrayValue)-$countNumber != 1){
                 $arrayValue[$key] = $arrayValue[$key-1];
             }
         }
@@ -127,6 +129,20 @@ class BodyController extends Controller
             }
         }
         return 0;
+    }
+
+    public function countNumber($arrayData)
+    {
+        $count = 0;
+
+        foreach($arrayData as $item){
+            if($item == -1){
+                $count++;
+            }
+        }
+
+        return $count;
+
     }
 
     /**
