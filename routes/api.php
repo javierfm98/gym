@@ -28,12 +28,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get('trainings/{training}' , 'TrainingController@show');
     Route::post('users/update' , 'UserController@update');
     Route::get('users/subscription' , 'UserController@subs');
-    Route::get('axis' , 'ChartController@getAxis');
-    Route::get('goal/weight' , 'ChartController@getGoalWeight');
-    Route::get('goal/body' , 'ChartController@getGoalBodyFat');
-    Route::get('weight' , 'ChartController@getWeight');
-    Route::get('body' , 'ChartController@getBodyFat');
     Route::get('chart' , 'ChartController@getDataChart');
+    Route::get('chart/store' , 'ChartController@store');
+    Route::get('chart/goal' , 'ChartController@storeGoal');
+    Route::get('chart/list' , 'ChartController@list');
+    Route::get('chart/destroy/{body}' , 'ChartController@destroy');
+    Route::get('chart/goal/show' , 'ChartController@getGoal');
 
 });
 
