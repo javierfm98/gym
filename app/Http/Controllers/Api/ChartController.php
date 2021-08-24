@@ -215,11 +215,12 @@ class ChartController extends Controller
 
     public function destroy($id)
     {
+        $user = Auth::user();
         $stat = Body::findOrFail($id);
         $stat->delete();
 
-        $success = true;
-        return compact('success');
+        $measurements = Body::where('user_id' , $user->id)->orderBy('date' , 'DESC')->get();
+        return $measurements;
     }
 
     public function getGoal()
