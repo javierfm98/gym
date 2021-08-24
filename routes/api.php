@@ -32,7 +32,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('chart/store' , 'ChartController@store');
     Route::get('chart/goal/store' , 'ChartController@storeGoal');
     Route::get('chart/list' , 'ChartController@list');
-    Route::get('chart/destroy/{body}' , 'ChartController@destroy');
+    Route::post('chart/destroy/{body}' , 'ChartController@destroy');
     Route::get('chart/goal/show' , 'ChartController@getGoal');
 
 });
