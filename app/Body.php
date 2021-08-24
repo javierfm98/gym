@@ -13,7 +13,7 @@ class Body extends Model
     ];
 
     protected $hidden = [
-        'created_at' , 'updated_at' , 
+        'created_at' , 'updated_at' , 'date'
     ];
 
     protected $dates = [
