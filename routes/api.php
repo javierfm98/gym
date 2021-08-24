@@ -30,7 +30,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('users/subscription' , 'UserController@subs');
     Route::get('chart' , 'ChartController@getDataChart');
     Route::get('chart/store' , 'ChartController@store');
-    Route::get('chart/goal' , 'ChartController@storeGoal');
+    Route::get('chart/goal/store' , 'ChartController@storeGoal');
     Route::get('chart/list' , 'ChartController@list');
     Route::get('chart/destroy/{body}' , 'ChartController@destroy');
     Route::get('chart/goal/show' , 'ChartController@getGoal');
