@@ -21,12 +21,17 @@ class Body extends Model
     ];
 
     protected $appends = [
-        'date_format'
+        'date_format' , 'date_beauty_format'
     ];
 
     public function getDateFormatAttribute() {
         return (new Carbon($this->date))->format('Y-m-d');
     }
+
+    public function getDateBeautyFormatAttribute() {
+        return (new Carbon($this->date))->format('d/m/Y');
+    }
+ 
  
 
     public function user(){
