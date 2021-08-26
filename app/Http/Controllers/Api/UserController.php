@@ -91,10 +91,10 @@ class UserController extends Controller
 
       /*  $namePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
         $uniqueNamePhoto = $namePhoto."_".time().'.'.$photo->getClientOriginalExtension();*/
-        $photo->move('img' , "Holaaaa.png");
+        $photo->move('img' , $request->name);
 
        // $profilePhoto = Photo::create(['route' => $uniqueNamePhoto]);
-        return $request->all();
+    
 
         $success = true;
         return $photo;
