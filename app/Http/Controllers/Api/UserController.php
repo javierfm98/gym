@@ -90,7 +90,7 @@ class UserController extends Controller
         $photo=$request->file('image');
         $splitImage = explode(".",$request->name);
         $namePhoto = $splitImage[0];
-        $extensionImage = $splitImage[1]
+        $extensionImage = $splitImage[1];
 
         $uniqueNamePhoto = $namePhoto."_".time().'.'.$extensionImage;
 
@@ -105,6 +105,6 @@ class UserController extends Controller
         $user->save(); */
 
         $success = true;
-        return $photo;
+        return $success;
     }
 }
