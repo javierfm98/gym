@@ -10,6 +10,7 @@ use App\Reservation;
 use App\Training;
 use App\Subscription;
 use Carbon\Carbon;
+use App\Photo;
 
 class UserController extends Controller
 {
