@@ -87,7 +87,7 @@ class UserController extends Controller
     {
      //   $photo=$request->file('photo');
 
-        $photo = $request->photo
+        $photo = $request->photo;
 
       /*  $namePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
         $uniqueNamePhoto = $namePhoto."_".time().'.'.$photo->getClientOriginalExtension();*/
