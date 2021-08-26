@@ -34,6 +34,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('chart/list' , 'ChartController@list');
     Route::post('chart/destroy/{body}' , 'ChartController@destroy');
     Route::get('chart/goal/show' , 'ChartController@getGoal');
+    Route::post('image' , 'UserController@uploadImage');
 
 });
 
