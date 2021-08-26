@@ -88,15 +88,21 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $photo=$request->file('image');
+        $splitImage = explode(".",$request->name);
+        $namePhoto = $splitImage[0];
+        $extensionImage = $splitImage[1]
 
-        $photo->move('img' , $request->name);
-        $profilePhoto = Photo::create(['route' =>  $request->name]);
+        $uniqueNamePhoto = $namePhoto."_".time().'.'.$extensionImage;
+
+        $photo->move('img' , $uniqueNamePhoto);
+
+      /*  $profilePhoto = Photo::create(['route' =>  $uniqueNamePhoto]);
         $photoId = $profilePhoto->id;
 
 
         $data = ['photo_id' => $photoId ];
         $user->fill($data);
-        $user->save(); 
+        $user->save(); */
 
         $success = true;
         return $photo;
