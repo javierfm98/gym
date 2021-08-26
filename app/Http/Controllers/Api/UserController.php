@@ -85,15 +85,15 @@ class UserController extends Controller
 
     public function uploadImage(Request $request)
     {
-       // $photo=$request->file('photo');
+        $photo=$request->file('photo');
 
       /*  $namePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
         $uniqueNamePhoto = $namePhoto."_".time().'.'.$photo->getClientOriginalExtension();*/
-       // $photo->move('img' , $request->name);
+        $photo->move('img' , $request->name);
 
        // $profilePhoto = Photo::create(['route' => $uniqueNamePhoto]);
 
         $success = true;
-        return $request->name;
+        return $success;
     }
 }
