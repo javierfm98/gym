@@ -96,13 +96,13 @@ class UserController extends Controller
 
         $photo->move('img' , $uniqueNamePhoto);
 
-      /*  $profilePhoto = Photo::create(['route' =>  $uniqueNamePhoto]);
+        $profilePhoto = Photo::create(['route' =>  $uniqueNamePhoto]);
         $photoId = $profilePhoto->id;
 
 
         $data = ['photo_id' => $photoId ];
         $user->fill($data);
-        $user->save(); */
+        $user->save(); 
 
         $success = true;
         return $success;
