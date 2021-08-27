@@ -319,7 +319,7 @@ class TrainingController extends Controller
                         $botonAdmin = ' <hr class="solid mx-3 divider" style="background: #ececec;">
                                         <div class="col" style="display: flex;">
                                             <a href="#clientModal" class="boton-admin-reserva boton-cancelar" onClick="enviarId('.$training->id.')" data-toggle="modal">Apuntar a un atleta</a>
-                                            <button class="boton-admin-reserva boton-cancelar">Apuntar invitado</button>
+                                        <!--    <button class="boton-admin-reserva boton-cancelar">Apuntar invitado</button> -->
                                         <button class="boton-admin-reserva boton-cancelar">Modificar entreno</button>
                                         </div> ';
                     }else{
