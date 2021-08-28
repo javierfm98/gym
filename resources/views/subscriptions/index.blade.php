@@ -73,6 +73,9 @@
             </div>
          @endif
       </div>
+      <div class="border-0">
+         {{ $subscriptions->links('vendor.pagination.custom') }}  
+      </div>
 @endsection
 
 @section('scripts')
