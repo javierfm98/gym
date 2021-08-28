@@ -21,6 +21,7 @@ class SubscriptionController extends Controller
        $clients = User::clients()->orderBy('created_at', 'desc')
                     ->name($name)
                     ->paginate(5);
+
         return view('subscriptions.index', compact('clients' , 'subscriptions'));
     }
 

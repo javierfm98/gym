@@ -16,7 +16,7 @@ class SearchController extends Controller
             $name = $request->search;
             $salida = "";
 
-            if(url()->previous() == "http://64.225.72.59/reservations"){
+            if(url()->previous() == url('/')."/reservations"){
 
                 if($name == null){
                     $clients = User::all();

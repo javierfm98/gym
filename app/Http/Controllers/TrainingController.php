@@ -27,7 +27,7 @@ class TrainingController extends Controller
             $trainings = Training::where('user_id' , $user->id)->orderBy('day', 'desc')->paginate(5);
         }
 
-       // dd($trainings);
+       // dd(url('/'));
 
         return view('trainings.index' , compact('trainings'));
     }

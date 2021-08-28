@@ -32,6 +32,7 @@
                </tr>
             </thead>
             <tbody>
+
                @foreach ($subscriptions as $subscription)
                   <tr class="list" style="text-align: center;">
                      <td> {{ $subscription->user->name }} </td>
