@@ -20,7 +20,8 @@
                {{ session('notification') }}
             </div>
          @endif
-
+         
+         @if(count($subscriptions) > 0)
          <table class="table custom-table">
             <thead>
                <tr style="text-align: center;">
@@ -32,6 +33,8 @@
                </tr>
             </thead>
             <tbody>
+
+               
 
                @foreach ($subscriptions as $subscription)
                   <tr class="list" style="text-align: center;">
@@ -64,16 +67,12 @@
                @endforeach
             </tbody>
          </table>
-         @if(count($clients) < 1)
+         @else
             <div class="container mt-5 empty d-flex justify-content-center">
                <h3 style="opacity: 0.5;" >No hay clientes</h3>
             </div>
          @endif
       </div>
-  <!--    <div class="border-0">
-         {{ $clients->links('vendor.pagination.custom') }}  
-      </div> -->
-
 @endsection
 
 @section('scripts')

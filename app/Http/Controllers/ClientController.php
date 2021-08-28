@@ -197,6 +197,9 @@ class ClientController extends Controller
         $clientName = $client->name;
         $client->delete();
 
+        $subscription = Subscription::where('user_id' , $id);
+        $subscription->delete();
+
         $notification = "El cliente $clientName se ha eliminado correctamente.";
         return redirect('/clients')->with(compact('notification'));
     }
