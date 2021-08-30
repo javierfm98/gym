@@ -1028,9 +1028,20 @@
       display: none;
     }
 
-    .profile{
+    .profile .name , .profile .exit{
       display: none;
     }
+
+    .profile{
+      min-width: 95px;
+      max-width: 95px;
+    }
+
+    .photo{
+      margin-left: 30px;
+    }
+
+
   }
   
   @media screen and (max-width:480px) {
@@ -1047,8 +1058,17 @@
       display: none;
     }
 
-    .profile{
+    .profile .name , .profile .exit{
       display: none;
+    }
+
+    .profile{
+      min-width: 75px;
+      max-width: 75px;
+    }
+
+    .photo{
+      margin-left: 20px;
     }
   }
   

@@ -61,7 +61,7 @@
                      <div class="col col-item name">
                         <a href="{{ route('profiles.index') }}" class="link">{{ auth()->user()->name }} {{ auth()->user()->surname }}</a>
                      </div>
-                     <div class="col col-item icon-bar fa-fw ">
+                     <div class="col col-item icon-bar fa-fw exit">
                         <a href="{{ route('logout') }}" class="link"  onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt fa-fw" ></i></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
