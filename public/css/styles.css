@@ -1002,6 +1002,28 @@
 
 /* MEDIA QUERY MENU */
 
+  @media screen and (max-width: 1300px) {
+    .sidebar {
+      min-width: auto;
+    }
+    .sidebar .photo {
+      display: none;
+    }
+    .sidebar .menu a span {
+      display: none;
+    }
+    .sidebar .menu a i {
+      margin: 0;
+    }
+    .sidebar .menu a {
+      margin: 0;
+    }
+
+    .profile{
+      display: none;
+    }
+  }
+  
   @media screen and (max-width: 575px) {
     .sidebar {
       min-height: auto;
@@ -1017,5 +1039,5 @@
       display: none;
     }
   }
-
+  
 /************************************************************/
