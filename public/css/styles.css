@@ -43,7 +43,8 @@
 
   .sidebar {
     width: 245px;
-    height: 100vh;
+    height: 100%;
+    position:relative;
     padding: 0;
     background: linear-gradient(#028bbf, #00b8ff);
     background: linear-gradient(#00b8ff, #02a3e0);
@@ -115,6 +116,8 @@
   .name{
     font-size: 15px;
     margin-left: 5px;
+    max-width: 90px;
+    min-width: 90px;
   }
 
   .name a{
