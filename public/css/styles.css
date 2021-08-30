@@ -1017,7 +1017,7 @@
 
     .sidebar .menu a i {
       margin-left: 5px;
-     
+
     }
 
     .img-container{
@@ -1035,11 +1035,14 @@
   
   @media screen and (max-width:480px) {
     .sidebar {
-      min-height: auto;
+      min-width: 75px;
+      max-width: 75px;
     }
     .sidebar .menu a i {
       margin: 0;
     }
+
+
     .sidebar hr {
       display: none;
     }
