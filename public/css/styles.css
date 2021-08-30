@@ -999,3 +999,23 @@
 }
 
 /************************************************************/
+
+/* MEDIA QUERY MENU */
+
+  @media screen and (max-width: 575px) {
+    .sidebar {
+      min-height: auto;
+    }
+    .sidebar .menu a i {
+      margin: 0;
+    }
+    .sidebar hr {
+      display: none;
+    }
+
+    .profile{
+      display: none;
+    }
+  }
+
+/************************************************************/
