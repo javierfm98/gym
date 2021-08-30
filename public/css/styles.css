@@ -1053,6 +1053,10 @@
       margin: 0;
     }
 
+    .img-container{
+      margin-left: 8px;
+    }
+
 
     .sidebar hr {
       display: none;
