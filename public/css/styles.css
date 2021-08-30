@@ -85,7 +85,7 @@
     font-weight: bold;
     padding: 0 0.75rem;
     margin-top: 10px;
-  }
+  } 
 
   .active {
     background-color: #fff;
@@ -1005,21 +1005,27 @@
 
 /* MEDIA QUERY MENU */
 
-  @media screen and (max-width: 1300px) {
+  @media screen and (max-width: 768px) {
     .sidebar {
-      min-width: auto;
+      min-width: 95px;
+      max-width: 95px;
     }
-    .sidebar .photo {
-      display: none;
-    }
+
     .sidebar .menu a span {
       display: none;
     }
+
     .sidebar .menu a i {
-      margin: 0;
+      margin-left: 5px;
+     
     }
-    .sidebar .menu a {
-      margin: 0;
+
+    .img-container{
+      margin-left: 15px;
+    }
+
+    .divider{
+      display: none;
     }
 
     .profile{
@@ -1027,7 +1033,7 @@
     }
   }
   
-  @media screen and (max-width: 575px) {
+  @media screen and (max-width:480px) {
     .sidebar {
       min-height: auto;
     }
