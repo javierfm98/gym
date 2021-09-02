@@ -1044,6 +1044,11 @@
       left: 95px;
     }
 
+    .empty h3{
+      font-size: 25px;
+    }
+
+
   }
   
   @media screen and (max-width:480px) {
@@ -1080,6 +1085,10 @@
 
     .input-date{
       padding-left: 10%;
+    }
+
+    .empty h3{
+      font-size: 20px;
     }
 
   }
