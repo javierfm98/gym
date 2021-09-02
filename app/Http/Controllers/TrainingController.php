@@ -358,7 +358,7 @@ class TrainingController extends Controller
                                     '.$method.'
                                     <input type="hidden" value="'.$training->id.'" name="trainingId" class="fechas">
                                     <input type="hidden" value="'.$training->day->format('Y-m-d').'" name="currentDay">
-                                    <table class="table custom-table ">
+                                    <table class="table custom-table w-100 d-block d-md-table">
                                     <tbody>
                                     <tr class="list" id="table'.$training->id.'" >
                                         <td colspan="100%" class="pb-3">

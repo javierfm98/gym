@@ -46,7 +46,7 @@
             </div>
             <div class="modal-body">
             <div class="table-responsive">
-               <table class="table-modal custom-table-modal w-100 d-block d-md-table">
+               <table class="table-modal custom-table-modal ">
                   <thead>
                      <tr>
                         <th>nombre</th>
