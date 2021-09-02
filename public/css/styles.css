@@ -1039,6 +1039,11 @@
       max-width: 95px;
     }
 
+    .all-content{
+      width: calc(100% - 95px);
+      left: 95px;
+    }
+
   }
   
   @media screen and (max-width:480px) {
@@ -1066,6 +1071,11 @@
     .profile{
       min-width: 75px;
       max-width: 75px;
+    }
+
+    .all-content{
+      width: calc(100% - 75px);
+      left: 75px;
     }
 
   }
