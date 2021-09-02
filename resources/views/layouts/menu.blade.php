@@ -72,9 +72,12 @@
                </div>
             </div>
          </div>
-         <main class="main col">
-           @yield('content')
-         </main>
+         <div class="all-content ">
+            <div class=" content">
+                @yield('content')
+            </div>
+          
+         </div>
       </div>
    </div>
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

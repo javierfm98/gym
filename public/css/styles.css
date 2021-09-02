@@ -4,14 +4,16 @@
     font-family: 'Roboto' !important;
   }
 
-  .main{ 
-  /*  height: 100%;
-    margin: 60px;*/
-    margin: 60px;
-    margin-left: 307px;
-    margin-top: 30px;
-  }
+.content{
+  margin: 60px;
+}
 
+  .all-content{
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 245px);
+    left: 245px;
+  }
   .title-wrapper {
     font-size: 24px;
     margin-bottom: 15px;
@@ -526,8 +528,8 @@
   .date-icon{
     font-size: 15px;
     position: absolute;
-    top: 15px;
-    right: 30px;
+    top: 75px;
+    right: 85px;
   }
 
 
