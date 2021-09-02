@@ -8,7 +8,7 @@
 @endif
 	
 
-    <div class="mb-5">
+    <div class="mb-5 div-date">
        <input type="date" class="input-date" id="datePicker">
        <i class="far fa-calendar-alt fa-fw date-icon"></i> 
     </div>
