@@ -15,7 +15,7 @@
 					</div>
 
 				@if (session('notification'))
-					<div class="alert alert-danger  mb-5 alert-reservation " role="alert" id="same">
+					<div class="custom-alert alert-red">
 						{{ session('notification') }}
 					</div> 
 				@endif

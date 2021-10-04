@@ -7,7 +7,7 @@
 		<div class="wrapper">
 			<h3 class="title">Editar cliente</h3>
           	@if ($errors->any())
-        		<div class="alert alert-danger rounded-10 error" role="alert">
+        		<div class="custom-alert alert-red">
           			<ul>
 	            		@foreach ($errors->all() as $error)
 	              			<li>{{ $error }}</li>

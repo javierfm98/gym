@@ -6,13 +6,13 @@
 		<div class="wrapper">
 			<h3 class="title">Editar entreno</h3>
 		    @if (session('notification'))
-		      <div class="alert alert-danger mb-4" role="alert">
+		      <div class="custom-alert alert-red">
 		            {{ session('notification') }}
 		      </div>
 		    @endif
 
 			@if ($errors->any())
-			<div class="alert alert-danger rounded-10 error" role="alert">
+			<div class="custom-alert alert-red">
 				<ul>
 					@foreach ($errors->all() as $error)
 						<li>{{ $error }}</li>

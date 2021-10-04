@@ -15,7 +15,7 @@
 				<div class="table-container">
 
 					@if (session('notification'))
-						<div class="alert alert-success" role="alert">
+						<div class="custom-alert alert-green">
 							{{ session('notification') }}
 						</div>
 					@endif

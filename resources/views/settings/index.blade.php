@@ -6,13 +6,13 @@
 
 		<div class="wrapper">
 			@if (session('notification'))
-	      		<div class="alert alert-success  mb-5 alert-reservation " role="alert" id="same">
+	      		<div class="custom-alert alert-green">
 	            	{{ session('notification') }}
 	      		</div> 
 			@endif
 
 			@if (session('error'))
-	      		<div class="alert alert-danger  mb-5 alert-reservation " role="alert" id="same">
+	      		<div class="custom-alert alert-red">
 	            	{{ session('error') }}
 	      		</div> 
 			@endif
