@@ -21,21 +21,22 @@ class SearchController extends Controller
                 if($name == null){
                     $clients = User::all();
                     foreach($clients as $client){
-                        $salida.='<tr>
-                            <td>' .$client->name.  '</td>
-                            <td>
-                               <div class="d-flex flex-row-reverse">
-                                <form action="/admin-reservation" method="POST">
-                                     '.csrf_field().'
-                                    <input type="hidden" value='.$client->id.' name="cliente_id">
-                                    <input type="hidden" name="training_id" id="training_id" class="entreno">
-                                    <input type="hidden" name="current_date" id="current_date" class="current_date">
-                                    <button type="submit" class="border-0 bg-white pr-4" data-toggle="tooltip" data-placement="top" title="Añadir"> <i class="fas fa-plus fa-fw"></i> </button>
-                                </form>   
-                               </div>
-                            </td>
-                         </tr>
-                         <tr class="spacer-modal"></tr>';
+                        $salida.='  <tr>
+                                        <td>
+                                            <div class="table-modal-content">
+                                                <span>' .$client->name.  '</span>
+                                                <form action="/admin-reservation" method="POST">
+                                                    '.csrf_field().'
+                                                    <input type="hidden" value='.$client->id.' name="cliente_id">
+                                                    <input type="hidden" name="training_id" id="training_id" class="entreno">
+                                                    <input type="hidden" name="current_date" id="current_date" class="current_date">
+                                                    <button type="submit" class="button-table-modal"><i class="fas fa-plus fa-fw"></i> </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="spacer-modal"></tr>';
+
                     } 
 
                     $salida.='<img onerror="func2(this)" src="" style="display:none">';                
@@ -45,21 +46,21 @@ class SearchController extends Controller
 
                     if($clients->count() > 0){
                         foreach($clients as $client){
-                            $salida.='<tr>
-                                <td>' .$client->name.  '</td>
-                                <td>
-                                   <div class="d-flex flex-row-reverse">
-                                    <form action="/admin-reservation" method="POST">
-                                        '.csrf_field().'
-                                        <input type="hidden"  value='.$client->id.' name="cliente_id">
-                                        <input type="hidden" name="training_id" id="training_id" class="entreno">
-                                        <input type="hidden" name="current_date" id="current_date" class="current_date">
-                                        <button type="submit" class="border-0 bg-white pr-4" data-toggle="tooltip" data-placement="top" title="Añadir"> <i class="fas fa-plus fa-fw"></i> </button>
-                                    </form>   
-                                   </div>
-                                </td>
-                             </tr>
-                             <tr class="spacer-modal"></tr>';
+                        $salida.='  <tr>
+                                        <td>
+                                            <div class="table-modal-content">
+                                                <span>' .$client->name.  '</span>
+                                                <form action="/admin-reservation" method="POST">
+                                                    '.csrf_field().'
+                                                    <input type="hidden" value='.$client->id.' name="cliente_id">
+                                                    <input type="hidden" name="training_id" id="training_id" class="entreno">
+                                                    <input type="hidden" name="current_date" id="current_date" class="current_date">
+                                                    <button type="submit" class="button-table-modal"><i class="fas fa-plus fa-fw"></i> </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="spacer-modal"></tr>';
                         }
 
                         $salida.='<img onerror="func2(this)" src="" style="display:none">';
@@ -74,7 +75,7 @@ class SearchController extends Controller
 
             return $salida;
            
-       }
+       } //Fin if ajax
 
          
     }

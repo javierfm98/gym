@@ -3,60 +3,47 @@
 @section('title', 'Detalles entreno')
 @section('content')
 
-    <div class=" container d-flex"> 
-    </div>
-    <div class="container wrapper-back mt-4">
-      <form action="{{ route('reservations.backReservation') }}" method="POST" class="mb-2">
-         @csrf
-         <input type="hidden" name="date" value="{{ $training->day->format('Y-m-d') }}">
-         <button type="submit" class="btn-circle border-0 btn-back-reservation"> <i class="fas fa-arrow-left fa-fw"></i> </button>
-      </form> 
-       <h3 class="mb-3">Detalles del entreno</h3>
-       <h6 style="margin-left: 13px;">Atletas apuntados</h6>
-       <div class="container">
-          	<div class="row">
-          		@foreach ($clients as $client)
-            	<div class="col-2 detalles">
-            		<form id="form-del"  action="{{ route('reservations.destroy', $client->training_id) }}" method="POST">
-            			@csrf
-                     @method('DELETE')
-            			<input type="hidden" name="user_id" value="{{ $client->user_id}}">
-            			<button type="submit" class="client-delete"><i class="fas fa-times icon-cross fa-fw"></i></button>
-            		</form>
-	                <div class="row">
-	                   <div class="col-3 photo-col">
-	                      <span><img src="/img/{{ $client->user->photo->route }}" alt="profileImg" class="detalles-photo"></span>
-	                   </div>
-	                   <div class="col-9 name-col">
-	                      <span>{{ $client->user->name }} {{ $client->user->surname }}</span> 
-	                   </div>
-	                </div> 
-            	</div>
-            	@endforeach
-       		</div>
-       		@if(count($clients) < 1)
-	            <div class="container mt-3 empty d-flex justify-content-center">
-	               <h5 style="opacity: 0.5;" >No hay atletas apuntados</h5>
-	            </div>
-         	@endif
-       	</div>
-        <h6 style="margin-left: 13px;">Entrenador</h6>
-        <div class="row">
-            <div class="col-2 detalles">
-                <div class="row">
-                   <div class="col-3 photo-col">
-                      <span><img src="/img/{{ $training->user->photo->route }}" alt="profileImg" class="detalles-photo"></span>
-                   </div>
-                   <div class="col-9 name-col">
-                      <span>{{ $training->user->name }} {{ $training->user->surname }}</span> 
-                   </div>
-                </div> 
-            </div>
-        </div>
-       <div class="container mt-4">
-           <h3 class="mb-4 font-weight-bold">WOD</h3>
-          <td>{!! nl2br($training->description) !!}</td>
-       </div>
-    </div>
+	
+		<div class="wrapper" style="padding-top:20px">
+			<form action="{{ route('reservations.backReservation') }}" method="POST">
+				@csrf
+				<input type="hidden" name="date" value="{{ $training->day->format('Y-m-d') }}">
+				<button type="submit" class="button-back"><i class="fas fa-arrow-left fa-fw"></i></button>	
+			</form>
+			<h3 style="margin-bottom: 12px;">Detalles del entreno</h3>
+			<h6 class="indentation-training">Atletas apuntados</h6>
+			<div class="details-clients">
+				@foreach ($clients as $client)
+					<div class="card-client">
+						<form id="form-del" action="{{ route('reservations.destroy', $client->training_id) }}" method="POST">
+            				@csrf
+                     		@method('DELETE')
+						   	<input type="hidden" name="user_id" value="{{ $client->user_id}}">
+							<button type="submit" class="button-delete-client"><i class="fas fa-times fa-fw icon-cross"></i></button>
+						</form>
+						<img src="/img/{{ $client->user->photo->route }}" alt="profileImg" class="details-photo"></span>
+						<span> {{ $client->user->name }} {{ $client->user->surname }} </span>
+					</div>
+				@endforeach
+			</div>   
+                    
+            @if(count($clients) < 1)
+                <div class="container mt-3 empty d-flex justify-content-center">
+                    <h5 style="opacity: 0.5;" >No hay atletas apuntados</h5>
+                </div>
+            @endif
+
+			<h6 class="indentation-training">Entrenador</h6>
+			<div class="details-clients">
+				<div class="card-client" style="cursor: default;">
+					<img src="/img/{{ $training->user->photo->route }}" alt="profileImg" class="details-photo"></span>
+					<span> {{ $training->user->name }} {{ $training->user->surname }} </span>
+				</div>
+			</div>
+			<h3 class="title-wod indentation-training">WOD</h3>
+			<div class="indentation-training">
+				<td>{!! nl2br($training->description) !!}</td>
+			</div>							
+		</div>
 
 @endsection

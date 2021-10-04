@@ -1,5 +1,5 @@
 
-<div id="container" class="mt-4"></div>
+<div id="grafica"></div>
 
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -8,7 +8,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
-	Highcharts.chart('container', {
+	Highcharts.chart('grafica', {
 	    chart: {
 	        type: 'line'
 	    },

@@ -1,7 +1,6 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$('#search-bar').on('keyup' , function(){
 		var client = $(this).val();
-		console.log(client);
 		if(client != ""){
 			searchClient(client);
 		}else{
@@ -18,6 +17,7 @@ function searchClient(client){
 	data:{'search':client } ,
 	success:function(data){
 		$('#result').html(data);
+		console.log(data);
 	} 
 
 	});
@@ -44,5 +44,6 @@ function func2(img) {
 function clearSearchBar(){
 	document.getElementById('search-bar').value = ''
 	searchClient();
-}
+}*/
+
 
