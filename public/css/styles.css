@@ -715,12 +715,9 @@
   /* RESERVATION LIST */
 
  .training-container{
-
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    margin: 0 50px;
-    padding-top: 20px;
  }
 
  .date-picker-container{
