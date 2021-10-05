@@ -778,6 +778,10 @@
     margin-right: 10px;
   }
 
+  .admin-container a{
+    text-align: center;
+  }
+
  /************************************************************/
 
  /* TRAINING LIST */
@@ -1053,7 +1057,8 @@
     background: white;
     margin-left: 150px;
     margin-top: 100px;
-    width: 40%;
+    width: 85%;
+    max-width: 570px;
     height: 50%;
     border-radius: 4px;
     transition: transform 1s;
@@ -1389,7 +1394,6 @@
     .modal-wrapper{
       margin-left: 0;
       margin-top: 100px;
-      width: 60%;
     }
  }
 
@@ -1403,10 +1407,6 @@
     .search-bar-modal{
       max-width: 130px;
     }
-
-    .modal-wrapper{
-        width: 80%;
-      }
 
     .clear-search-bar{
       left: 120px;
