@@ -422,7 +422,7 @@ class TrainingController extends Controller
                     if(auth()->user()->hasRole(['admin', 'trainer'])){
                         $botonAdmin = ' <hr class="spacer-training">
                                         <div class="admin-container">
-                                            <a href="#" class="mini-button button-cancel" id="open-modal">Apuntar a un atleta</a>
+                                            <a class="mini-button button-cancel" id="open-modal" onClick="openModal('.$training->id.')">Apuntar a un atleta</a>
                                             <input type="hidden" value="'.$training->id.'" id="trainingId">
                                             <a href="#" class="mini-button button-cancel" style="margin-bottom: 0px">Modificar entreno</a>
                                         </div>';
@@ -433,7 +433,7 @@ class TrainingController extends Controller
                     $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
                     if($isReserved){
                         $botones = '<button type="submit" class="button button-primary text-bold">Cancelar Reserva</button>
-                                    <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
+                                    <a href="/trainings/'.$training->id.'"class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
                         $badge = '<span class="badge-custom badge-green">CLASE RESERVADA</span>';
                         $link = '/reservations/'.$training->id;
                         $method =  '<input type="hidden" name="_method" value="DELETE">';
@@ -482,8 +482,8 @@ class TrainingController extends Controller
                                     </div>';
                 }
 
-                $salida.= '<img onerror="func(this)" src="" style="display:none">
-                            <script src="'.$url.'/js/modal.js") }}"></script>';
+                $salida.= '<script src="'.$url.'/js/modal.js"></script>
+                            <img onerror="func(this)" src="" style="display:none">';
 
             }
 

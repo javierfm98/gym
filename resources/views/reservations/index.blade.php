@@ -30,7 +30,7 @@
 						<div class="header-modal">
 							<div class="close-modal">
 								<small>Selecciona el cliente que quiere apuntar</small>
-								<button type="submit" class="button-back" id="close-modal"><i class="fas fa-times fa-fw"></i></button>
+								<button class="button-back" id="close-modal" onClick="closeModal()"><i class="fas fa-times fa-fw"></i></button>
 							</div>
 							<div class="search-container-modal">
 								<form autocomplete="off">
