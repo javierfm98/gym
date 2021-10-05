@@ -3,6 +3,8 @@
 @section('title', 'Entrenos')
 @section('content')
 
+		<div class="no-wrapper">
+
 			@if(auth()->user()->hasRole(['admin']))
 				<div class="settings-container">
 					<a href="{{ route('trainings_settings.index') }}"><i class="fas fa-cog"></i></a>						
@@ -64,5 +66,6 @@
 					</tbody>						 	
 				</table>
 			</div>
+		</div>
 
 @endsection

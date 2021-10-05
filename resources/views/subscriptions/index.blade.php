@@ -3,7 +3,7 @@
 @section('title', 'Pagos')
 @section('content')
 
-
+			<div class="no-wrapper">
 				<h3>Listado de pagos de clientes</h3>
 				<div class="header">
 					<div class="search-container">
@@ -72,6 +72,7 @@
 				<div>
          			{{ $subscriptions->links('vendor.pagination.custom') }}  
       			</div>
+      		</div>
 
 @endsection
 

@@ -2,7 +2,8 @@
 
 @section('title', 'Clientes')
 @section('content')
-
+         
+            <div class="no-wrapper">
                <h3>Clientes</h3>
                <div class="header">
                   <div class="search-container">
@@ -66,6 +67,7 @@
                <div>
                   {{ $clients->links('vendor.pagination.custom') }}  
                </div>
+            </div>
 
 @endsection
 

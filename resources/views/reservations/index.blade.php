@@ -8,7 +8,7 @@
 				@endif
 
 
-				<div class="training-container">
+				<div class="training-container no-wrapper">
 					<div class="date-picker-container">
 						<input type="date" class="input-date" id="datePicker">
 						<i class="far fa-calendar-alt fa-fw date-icon "></i> 
