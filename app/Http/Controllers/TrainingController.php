@@ -422,9 +422,9 @@ class TrainingController extends Controller
                     if(auth()->user()->hasRole(['admin', 'trainer'])){
                         $botonAdmin = ' <hr class="spacer-training">
                                         <div class="admin-container">
-                                            <a class="mini-button button-cancel" id="open-modal">Apuntar a un atleta</a>
+                                            <a href="#" class="mini-button button-cancel" id="open-modal">Apuntar a un atleta</a>
                                             <input type="hidden" value="'.$training->id.'" id="trainingId">
-                                            <a class="mini-button button-cancel" style="margin-bottom: 0px">Modificar entreno</a>
+                                            <a href="#" class="mini-button button-cancel" style="margin-bottom: 0px">Modificar entreno</a>
                                         </div>';
                     }else{
                         $botonAdmin = '';

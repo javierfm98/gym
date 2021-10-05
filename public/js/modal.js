@@ -9,10 +9,10 @@
 
 
 	open.addEventListener("click", function(e){
-		searchClient();
-	//	console.log(e.currentTarget.myParam);
+		e.preventDefault();
 		var id_training = document.getElementById("id_training");
  		id_training.value = e.currentTarget.trainingId;
+ 		searchClient();
 		modalC.style.opacity = "1";
 		modalC.style.visibility = "visible";
 		modal.classList.toggle("hidden-modal");
