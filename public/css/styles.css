@@ -12,6 +12,7 @@
     padding: 0;
     background: linear-gradient(#00b8ff, #02a3e0);
     overflow-y: auto;
+    transition: transform 1s ease;
   }
 
   .sidebar .menu{
@@ -134,7 +135,6 @@
   display: none;
   position: sticky;
   top: 0;
-  z-index: 2;
 }
 
 .burger i{
@@ -142,6 +142,7 @@
   margin-top: 15px;
   color: white;
   cursor: pointer;
+  transition: transform 1s ease;
 }
 
 
@@ -1375,7 +1376,7 @@
         z-index: 1;
         -webkit-box-shadow: 11px 0px 13px 2px rgba(0,0,0,0.20); 
         box-shadow: 11px 0px 13px 2px rgba(0,0,0,0.20);
-        display: none;
+        transform: translateX(-150vw);
       }
 
       .burger{

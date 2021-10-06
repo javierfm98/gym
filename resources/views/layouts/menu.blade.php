@@ -101,7 +101,7 @@
 
 			</div>
 			<div class="all-content">
-				<div class="burger" id="bar">
+				<div class="burger">
 					<i class="fas fa-bars" onclick="barClick()" id="bar"></i>	
 				</div>
 				<div class="content ">
@@ -127,12 +127,12 @@
 			var barButton = document.getElementById("bar");
 			
 			if(barButton.classList.contains("hidden-bar")){
-				sidebar.style.display = 'none';
-				barButton.style.marginLeft = "0px";
+				sidebar.style.transform = 'translateX(-150vw)';
+				barButton.style.transform = 'translateX(0)';
 				barButton.classList.remove("hidden-bar");
 			}else{
-				sidebar.style.display = 'block';
-				barButton.style.marginLeft = "245px";
+				sidebar.style.transform = 'translateX(0)';
+				barButton.style.transform = 'translateX(245px)';
 				barButton.classList.add("hidden-bar");
 			}
 		}
