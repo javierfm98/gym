@@ -133,8 +133,9 @@
 .burger{
   background: #00b8ff;
   height: 50px;
+  width: 100%;
   display: none;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1;
 }
@@ -147,6 +148,7 @@
   transition: transform 1s ease;
 }
 
+/************************************************************/
 
 .wrapper{
     background: #fff;
@@ -167,6 +169,7 @@
     margin-bottom: 50px;  
   }
 
+/************************************************************/
 
   /* MATERIAL DESIGN INPUT */
 
@@ -1388,6 +1391,7 @@
         width: calc(100% - 0px);
         height: calc(100% - 50px);
         left: 0px;
+        margin-top: 30px;
       }
 
       .content{
