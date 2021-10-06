@@ -100,10 +100,11 @@
 			</div>
 
 			</div>
+			<div class="burger">
+				<i class="fas fa-bars" onclick="barClick()" id="bar"></i>	
+			</div>
 			<div class="all-content">
-				<div class="burger">
-					<i class="fas fa-bars" onclick="barClick()" id="bar"></i>	
-				</div>
+
 				<div class="content ">
 					 @yield('content')
 				</div>
