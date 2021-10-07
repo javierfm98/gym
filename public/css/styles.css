@@ -1222,9 +1222,9 @@
  /* EMPTY DATA */
 
 .empty-data{
-  margin-top: 32px;
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 .empty-data h3{
@@ -1400,6 +1400,10 @@
 
     .modal-wrapper{
       margin-top: 100px;
+    }
+
+    .empty-data h3{
+      font-size: 20px;
     }
  }
 
