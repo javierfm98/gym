@@ -1048,27 +1048,26 @@
  .modal-container{
     position: fixed;
     z-index: 1;
-    width: 100%;
+    width: calc(100% - 245px);
     height: 100vh;
     background: rgba(0, 0, 0, .5);
     top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
+    left: 0;    
     opacity: 0;
     visibility: hidden;
+    left: 245px;
  }
 
  .modal-wrapper{
     background: white;
-    margin-left: 150px;
-    margin-top: 100px;
     width: 85%;
     max-width: 570px;
     height: 50%;
     border-radius: 4px;
     transition: transform 1s;
     transform: translateY(0%);
+    margin: auto;
+    margin-top: 100px;
  }
 
   .hidden-modal{
@@ -1392,6 +1391,11 @@
         height: calc(100% - 50px);
         left: 0px;
         margin-top: 30px;
+      }
+
+      .modal-container{
+        width: calc(100% - 0px);
+        left: 0px;
       }
 
       .content{
