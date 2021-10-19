@@ -1338,8 +1338,8 @@
 /* ANIMATION */
 
 .animate {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
+  -webkit-animation-duration: .8s;
+  animation-duration: .8s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -1349,8 +1349,6 @@
   -moz-animation-delay: var(--time);
   animation-delay: var(--time);  
 }
-
-
 
 .fadeInDown {
   -webkit-animation-name: fadeInDown;
