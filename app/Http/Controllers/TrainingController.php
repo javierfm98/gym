@@ -405,6 +405,7 @@ class TrainingController extends Controller
             $date = $request->date;
             $user = auth()->user()->id;
             $salida = "";
+            $time = 0.5;
             $url = url('/');
 
             $clientReservation = Reservation::where('user_id' , $user)->get();
@@ -462,7 +463,7 @@ class TrainingController extends Controller
                                     '.$method.'
                                     <input type="hidden" value="'.$training->id.'" name="trainingId" class="fechas">
                                     <input type="hidden" value="'.$training->day->format('Y-m-d').'" name="currentDay">
-                                    <div class="details-training-container">
+                                    <div class="details-training-container animate fadeInDown time-anim" style="--time: '.$time.'s;">
                                         <div class="wrapper-training">
                                             <div class="details-training">
                                                 <span class="text-color-primary text-bold">'.$training->start->format('H:i').' - '.$training->end->format('H:i').'</span>
@@ -480,6 +481,8 @@ class TrainingController extends Controller
                                             '.$botonAdmin.'
                                         </div>
                                     </div>';
+
+                    $time = $time + 1;
                 }
 
                 $salida.= '<script src="'.$url.'/js/modal.js"></script>

@@ -21,7 +21,7 @@
     font-weight: bold;
     padding: 0 0.75rem;
     margin-top: 10px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
   } 
 
 
@@ -1258,6 +1258,118 @@
 
  /************************************************************/
 
+ /* HOME */
+
+.home-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  max-width:1100px;
+  width: 100%;
+  margin: auto;
+ } 
+
+.home-box-1{
+  margin-bottom: 20px;
+  width:65%;
+  }
+
+
+.home-box-2{
+  margin-bottom: 20px;
+  width: 30%;
+}
+
+.card-home{
+  padding: 0;
+}
+
+.card-home-header{
+  background: #f8f9fa;
+  border-bottom: 1px solid #bbb;
+  padding: 10px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-weight: bold;
+}
+
+.card-home-body{
+  padding: 10px;
+}
+
+.list-home{
+  padding: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.list-home-info{
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.list-home-info ~ span{
+  margin-left: 10px;
+}
+
+.list-home-sub{
+  display: block;
+  color: #6c757d;
+}
+
+.button-home-list{
+  width: 100%;
+  margin: 15px 0 5px;
+}
+
+.list-training{
+  cursor: pointer;
+  transition: background .3s;
+}
+
+.list-training:hover{
+  background: rgba(0, 0, 0, 0.1);  
+}
+
+
+/************************************************************/
+
+/* ANIMATION */
+
+.animate {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.time-anim{
+  -webkit-animation-delay: var(--time);
+  -moz-animation-delay: var(--time);
+  animation-delay: var(--time);  
+}
+
+
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+ }
+
+@keyframes fadeInDown {
+   0% {
+      opacity: 0;
+      transform: translateY(-20px);
+   }
+   100% {
+      opacity: 1;
+      transform: translateY(0);
+   }
+} 
+
+
+/************************************************************/
 
 @media screen and (max-width: 1297px){
 
@@ -1311,6 +1423,16 @@
       width: 100%;
       margin-bottom: 10px;
     }
+
+    .home-box-1{
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .home-box-2{
+      width: 100%;
+    }
+
 
   }
 
