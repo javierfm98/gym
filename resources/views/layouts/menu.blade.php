@@ -21,8 +21,10 @@
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 			<div class="sidebar" id="sidebar">
-				<div class="img-container"> 
-					<img src="{{ asset('img/logo.svg') }}" width="50" height="50" alt="Logo"> 
+				<div class="logo-container"> 
+					<a href="{{ route('home') }}">
+						<img src="{{ asset('img/logo.svg') }}" width="50" height="50" alt="Logo"> 
+					</a>
 				</div>
 				<nav class="menu" id="lista"> 
 					<a href="{{ route('home') }}" class="link {{ (request()->routeIs('home')) ? 'active' : '' }}">
@@ -148,6 +150,8 @@
          }, 10000 ); // 10 seg
 
       });
+
+
    </script>
 
 	@yield('scripts') 

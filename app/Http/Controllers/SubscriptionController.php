@@ -17,7 +17,7 @@ class SubscriptionController extends Controller
     {
         $name = $request->get('search');
         $subscriptions = Subscription::all();
-        $subscriptions = Subscription::orderBy('created_at' , 'desc')
+        $subscriptions = Subscription::ordreBy('created_at' , 'desc')
             ->paginate(5);
 
         return view('subscriptions.index', compact('subscriptions'));
@@ -111,5 +111,15 @@ class SubscriptionController extends Controller
         $subscription->save();
 
         return redirect('/subscriptions');
+    }
+
+    public function payment()
+    {
+        $user_id =  auth()->user()->id;
+        $payments = Subscription::where('user_id', $user_id)->get();
+
+        dd($payments->toArray());
+
+        return 'Hola';
     }
 }
