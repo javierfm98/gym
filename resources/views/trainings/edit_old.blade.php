@@ -45,7 +45,7 @@
         @endif 
 
       <div class="mt-4 field-outlined select">      
-          <select name="schedule" id="horario" class="input" required>
+          <select name="schedule" id="horario" class="input" value="Hola" required>
           </select>
           <label for="" class="label label-select">Horario</label>
       </div>

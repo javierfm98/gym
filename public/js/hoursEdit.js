@@ -1,5 +1,8 @@
 let $date = $('#datePicker');
-let $horario = $('#horario');
+let $horario = $('#currentHour');
+
+
+//console.log($horario.val());
 
 window.onload = loadHours;
 $date.change(loadHours);

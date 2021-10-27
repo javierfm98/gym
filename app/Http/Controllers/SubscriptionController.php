@@ -17,7 +17,7 @@ class SubscriptionController extends Controller
     {
         $name = $request->get('search');
         $subscriptions = Subscription::all();
-        $subscriptions = Subscription::ordreBy('created_at' , 'desc')
+        $subscriptions = Subscription::orderBy('created_at' , 'desc')
             ->paginate(5);
 
         return view('subscriptions.index', compact('subscriptions'));

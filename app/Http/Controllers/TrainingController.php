@@ -243,6 +243,8 @@ class TrainingController extends Controller
 
             $hoursIntervals = $this->createArrayHours($start[0] , $end[0] , $duration[0] , $date);
 
+            
+
             if($schedule != null){
                 $splitHours = explode("-",$schedule);
                 $salida = ' <option value="'.$schedule.'">'.$splitHours[0].' - '.$splitHours[1].'</option>
@@ -254,7 +256,7 @@ class TrainingController extends Controller
 
             foreach($hoursIntervals as $hours){
                 $salida.= '<option value="'.$hours['start'].'-'.$hours['end'].'">'.$hours['start'].' - '.$hours['end'].'</option>';
-            }                
+            }              
 
             return $salida;
         } //Fin if ajax

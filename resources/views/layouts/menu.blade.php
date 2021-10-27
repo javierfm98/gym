@@ -11,7 +11,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
 	<link href="{{ asset('/css/styles.css')}}" rel="stylesheet" type="text/css">
-
+	<link rel="icon" href="{{ asset('img/logo_blue.svg') }}"/>
 
 	@yield('styles')
 
@@ -23,7 +23,7 @@
 			<div class="sidebar" id="sidebar">
 				<div class="logo-container"> 
 					<a href="{{ route('home') }}">
-						<img src="{{ asset('img/logo.svg') }}" width="50" height="50" alt="Logo"> 
+						<img src="{{ asset('img/logo_white.svg') }}" width="50" height="50" alt="Logo"> 
 					</a>
 				</div>
 				<nav class="menu" id="lista"> 

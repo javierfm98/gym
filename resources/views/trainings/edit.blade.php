@@ -26,10 +26,10 @@
 				@method('PUT')
 				<div class="input-container">
 					<div class="input-box-100 field-outlined">
-						<input type="date" class="input input-date2" id="datePicker" name="day" value="{{ old('day' , $training->day->format('Y-m-d'))}}"">
+						<input type="date" class="input input-date2" id="datePicker" name="day" value="{{ old('day' , $training->day->format('Y-m-d'))}}">
 						<i class="far fa-calendar-alt fa-fw date-icon"></i> 
 						<label for="" class="label">Fecha</label>
-       					<input type="hidden" name=""  value="{{ $training->start->format('H:i') }}-{{ $training->end->format('H:i') }}">
+       					<input type="hidden" name="" id="currentHour"   value="{{ $training->start->format('H:i') }}-{{ $training->end->format('H:i') }}">
 					</div>
 					 @if(auth()->user()->hasRole(['admin']))
 						<div class="select-box-m-20 select field-outlined">
@@ -45,7 +45,7 @@
 					@endif 
 
 					<div class="select-box-m-20 select field-outlined">
-						<select class="input" name="schedule" id="horario" required>
+						<select class="input" name="schedule" id="horario" value="Hola" required>
 						</select>
 						<label for="" class="label">Horario</label>
 					</div>

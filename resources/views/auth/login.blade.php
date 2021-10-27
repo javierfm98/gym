@@ -152,7 +152,7 @@
                 </div>
             @endif
         <div class="img-container"> 
-           <img src="{{ asset('img/logo.svg') }}" width="150" height="150" alt="Logo">
+           <img src="{{ asset('img/logo_white.svg') }}" width="150" height="150" alt="Logo">
         </div>
         
       <div class="container bg-white">
