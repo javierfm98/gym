@@ -43,6 +43,11 @@
 						<i class="fas fa-user-edit fa-fw"></i>
 						<span>Perfil</span>
 					</a>
+					<a href="{{ route('logout') }}" class="link" onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                  		<i class="fas fa-sign-out-alt fa-fw"></i>
+                  <span>Salir</span>
+             	</a>
 					 @if(auth()->user()->hasRole(['admin', 'trainer']))					 
 					<hr class="divider">
 					 @if(auth()->user()->hasRole(['admin'])) 

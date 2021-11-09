@@ -426,6 +426,11 @@
     background: rgba(0, 0, 0, .1);
   }
 
+  .button-100{
+    width: 100%;
+    text-align: center;
+  }
+
 
 
   /**************************************************************************/
@@ -1404,6 +1409,35 @@
 
 /************************************************************/
 
+
+/* VERIFIED */
+
+.bg-blue{
+  background: #00b8ff;
+  height: 100vh;
+  width: 100%;
+}
+
+.data-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.data-wrapper{
+  background: white;
+  width: 80%;
+  max-width: 450px;
+  border-radius: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 60px;
+  padding: 25px;
+  text-align: justify;
+}
+
+/************************************************************/ 
+
 @media screen and (max-width: 1297px){
 
 
@@ -1519,6 +1553,10 @@
         display: inline-block;
         text-align: center;
 
+    }
+
+    .data-wrapper .button{
+      margin-bottom: 0px;
     }
 
     .status-training span{

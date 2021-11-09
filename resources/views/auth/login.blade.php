@@ -170,7 +170,7 @@
             </div>
 
               <div class="mt-2">
-                    <a href="{{ route('password.request') }}" class="olvidar">He olvidado mi contraseña</a>
+                    <a href="{{ route('password.request') }}" class="olvidar">¿Olvidaste tu contraseña?</a>
               </div>
 
              <div class="form-group col-md-12 px-4 mt-3" id="login">

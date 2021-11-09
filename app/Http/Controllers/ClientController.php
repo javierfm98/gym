@@ -8,6 +8,8 @@ use App\User;
 use App\Rate;
 use App\Subscription;
 use Carbon\Carbon;
+use Mail;
+use App\Mail\WelcomeMailable;
 
 class ClientController extends Controller
 {
@@ -74,13 +76,14 @@ class ClientController extends Controller
         $split = explode('@', $request->input('email'));
         $username = $split[0];
         $rate = Rate::where('id' , $request->rate)->pluck('duration');
+        $password = Str::random(8);
 
          $user = User::create(
             $request->only('name', 'email', 'surname', 'phone')
             + [
                 'role_id' => 3,
-                //'password' => bcrypt(Str::random(8)),
-                'password' => bcrypt(123456789),
+                'password' => bcrypt($password),
+                /*'password' => bcrypt(123456789),*/
                 'username' => $username , 
                 'photo_id' => 1
             ]
@@ -98,6 +101,12 @@ class ClientController extends Controller
         ]);
 
        // $user->sendEmailVerificationNotification();
+        $data = [
+            'email' => $user->email, 
+            'password' => $password
+        ];
+
+        Mail::to('javierelcachas@gmail.com')->send(new WelcomeMailable($data));
 
         $notification = 'Cliente añadido correctamente.';
         return redirect('/clients')->with(compact('notification'));

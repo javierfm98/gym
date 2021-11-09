@@ -39,6 +39,8 @@ Route::resource('bodies' , 'BodyController')->middleware('auth');
 
 Route::resource('goals' , 'GoalController')->middleware('auth');
 
+Route::resource('verified' , 'VerifiedController')->middleware('auth');
+
 
 Route::get('/hours', 'TrainingController@hoursList')->name('reservations.hoursList')->middleware('auth');
 Route::post('/admin-reservation', 'ReservationController@storeModal')->name('reservations.storeModal')->middleware('auth');
