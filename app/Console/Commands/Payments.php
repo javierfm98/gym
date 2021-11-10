@@ -40,7 +40,8 @@ class Payments extends Command
     public function handle()
     {
         $currentDay = Carbon::now()->format('Y-m-d');
-        $allSubs = Subscription::where('end_at', $currentDay)->get();
+        $date = $currentDay->subDays(1);
+        $allSubs = Subscription::where('end_at', $date)->get();
 
         foreach($allSubs as $subs){
             $subs->status = 0;

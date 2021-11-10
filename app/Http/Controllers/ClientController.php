@@ -9,6 +9,7 @@ use App\Rate;
 use App\Subscription;
 use Carbon\Carbon;
 use Mail;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Mail\WelcomeMailable;
 
 class ClientController extends Controller
@@ -77,6 +78,7 @@ class ClientController extends Controller
         $username = $split[0];
         $rate = Rate::where('id' , $request->rate)->pluck('duration');
         $password = Str::random(8);
+        $token = Str::random(100);
 
          $user = User::create(
             $request->only('name', 'email', 'surname', 'phone')
@@ -85,7 +87,8 @@ class ClientController extends Controller
                 'password' => bcrypt($password),
                 /*'password' => bcrypt(123456789),*/
                 'username' => $username , 
-                'photo_id' => 1
+                'photo_id' => 1 , 
+                'registration_token' => $token
             ]
         );
 
@@ -100,13 +103,20 @@ class ClientController extends Controller
                         'end_at' => $end_at
         ]);
 
+        $url = url(route('verified.confirm', [
+            'token' => $token,
+            'email' => $user->email,
+        ], false));
+
        // $user->sendEmailVerificationNotification();
         $data = [
             'email' => $user->email, 
-            'password' => $password
+            'password' => $password,
+            'url' => $url
         ];
 
-        Mail::to('javierelcachas@gmail.com')->send(new WelcomeMailable($data));
+
+        Mail::to($user->email)->send(new WelcomeMailable($data));
 
         $notification = 'Cliente añadido correctamente.';
         return redirect('/clients')->with(compact('notification'));

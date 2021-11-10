@@ -7,6 +7,7 @@ use App\Training;
 use App\User;
 use App\Reservation;
 use App\Setting;
+use App\Subscription;
 use Carbon\Carbon;
 
 class TrainingController extends Controller
@@ -298,122 +299,18 @@ class TrainingController extends Controller
         return !$existsHour; // si no exite signifca que esta disponible 
     }
 
-  /*  public function displayTrainings(Request $request){
-
-        if($request->ajax()){
-            $date = $request->date;
-            $user = auth()->user()->id;
-            $salida = "";
-
-            $clientReservation = Reservation::where('user_id' , $user)->get();
-            $trainings = Training::where('day' , $date)->orderBy('start')->get();
-
-            //dd($trainings->toArray());
-
-            if($trainings->count() == 0){
-                $salida = ' <div class="container mt-5 empty d-flex justify-content-center">
-                                <h3 style="opacity: 0.5;" >No hay entrenos disponibles</h3>
-                            </div>';
-            }else{
-
-                foreach($trainings as $training){
-                    if(auth()->user()->hasRole(['admin', 'trainer'])){
-                        $botonAdmin = ' <hr class="solid mx-3 divider" style="background: #ececec;">
-                                        <div class="col" style="display: flex;">
-                                            <a href="#clientModal" class="boton-admin-reserva boton-cancelar" onClick="enviarId('.$training->id.')" data-toggle="modal">Apuntar a un atleta</a>
-                                        <!--    <button class="boton-admin-reserva boton-cancelar">Apuntar invitado</button> -->
-                                        <button class="boton-admin-reserva boton-cancelar">Modificar entreno</button>
-                                        </div> ';
-                    }else{
-                        $botonAdmin = '';
-                    }
-
-                    $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
-                    if($isReserved){
-                        $botones = '<a href="/trainings/'.$training->id.'" style="margin-right: 5px;" class="boton boton-primary boton-reservar">Detalles</a>
-                                    <button type="submit" class="boton boton-primary boton-reservar">Cancelar reserva</button>';
-                        $badge = '<span class="badge badge-pill badge-success">CLASE RESERVADA</span>';
-                        $link = '/reservations/'.$training->id;
-                        $method =  '<input type="hidden" name="_method" value="DELETE">';
-                    }else{
-                        $botones = '<a href="/trainings/'.$training->id.'" style="margin-right: 5px;" class="boton boton-primary boton-reservar">Detalles</a>
-                                    <button type="submit" class="boton boton-primary boton-reservar">Reservar</button>';
-                        $badge = '';
-                        $link = '/reservations';
-                        $method = '';
-                    }
-
-                     $isFull = $this->isFull($training->capacity ,  $training->enroll);
-                     if($isFull){
-                            $badgeFull = '<span class="badge badge-pill badge-danger">CLASE COMPLETA</span>';
-                            $classSpan = 'span-red';
-                            if(!$isReserved)
-                            $botones = '<a href="/trainings/'.$training->id.'" style="margin-right: 5px;" class="boton boton-primary boton-reservar">Detalles</a>
-                                        <button type="submit"  class="boton boton-primary boton-reservar boton-disabled">Reservar</button>';
-                     }else{
-                            $badgeFull = '';
-                            $classSpan = '';
-                     }
-
-                    $salida.='<form action="'.$link.'" method="POST" id="form'.$training->id.'">
-                                    '.csrf_field().'
-                                    '.$method.'
-                                    <input type="hidden" value="'.$training->id.'" name="trainingId" class="fechas">
-                                    <input type="hidden" value="'.$training->day->format('Y-m-d').'" name="currentDay">
-                                    <table class="table custom-table w-100 d-block d-md-table">
-                                    <tbody>
-                                    <tr class="list" id="table'.$training->id.'" >
-                                        <td colspan="100%" class="pb-3">
-                                        <p style="margin: 0px; font-weight: bold; color: #00b8ff; ">'.$training->start->format('H:i').' - '.$training->end->format('H:i').'</p>
-                                        <span style="font-weight: bold;" class="mr-2">Crossfit</span>
-                                        '.$badgeFull.'
-                                        '.$badge.'
-                                        <div class="row">
-                                        <div class="col m-0">
-                                            <p style="margin: 0px; font-size: 0.875em; font-weight: bold; opacity: 0.5;">Plazas ocupadas: <span class="'.$classSpan.'" id="full'.$training->id.'">'.$training->enroll.'/'.$training->capacity.'</span></p>
-                                        </div>
-                                        <div class="col" style="display: flex; justify-content: flex-end;">
-                                            '.$botones.'
-                                        </div>
-                                      </div>
-                                      '.$botonAdmin.'
-                                      
-                        </form>
-                                </td>
-                          </tr>
-                         
-                       
-                        <tr class="spacer"></tr>
-                  
-                        
-                          </tbody>
-                          </table>';
-                }
-
-                $salida.= '<img onerror="func(this)" src="" style="display:none">';
-
-            }
-
-            
-
-            return $salida;
-        } //Fin if ajax
-
-    } //Fin funcion displayTrainings */
-
     public function displayTrainings(Request $request){
 
         if($request->ajax()){
             $date = $request->date;
-            $user = auth()->user()->id;
+            $user_id = auth()->user()->id;
             $salida = "";
             $time = 0.5;
             $url = url('/');
 
-            $clientReservation = Reservation::where('user_id' , $user)->get();
+            $clientReservation = Reservation::where('user_id' , $user_id)->get();
             $trainings = Training::where('day' , $date)->orderBy('start')->get();
 
-            //dd($trainings->toArray());
 
             if($trainings->count() == 0){
                 $salida = ' <div class="empty-data">
@@ -434,6 +331,7 @@ class TrainingController extends Controller
                     }
 
                     $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
+                    $statusSub = $this->canReservation($user_id);
                     if($isReserved){
                         $botones = '<button type="submit" class="button button-primary text-bold">Cancelar Reserva</button>
                                     <a href="/trainings/'.$training->id.'"class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
@@ -441,8 +339,14 @@ class TrainingController extends Controller
                         $link = '/reservations/'.$training->id;
                         $method =  '<input type="hidden" name="_method" value="DELETE">';
                     }else{
-                        $botones = '<button type="submit" class="button button-primary text-bold">Reservar</button>
-                                    <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
+                        if($statusSub){
+                            $botones = '<button type="submit" class="button button-primary text-bold">Reservar</button>
+                                        <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';                            
+                        }else{
+                            $botones = '<button type="submit" class="button button-primary button-disabled text-bold">Reservar</button>
+                                        <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';                            
+                        }
+
                         $badge = '';
                         $link = '/reservations';
                         $method = '';
@@ -453,7 +357,7 @@ class TrainingController extends Controller
                             $badgeFull = '<span class="badge-custom badge-red">CLASE COMPLETA</span>';
                             $classSpan = 'text-red';
                             if(!$isReserved)
-                            $botones = '<button type="submit" class="button button-primary text-bold">Disable button</button>
+                            $botones = '<button type="submit" class="button button-primary button-disabled text-bold">Disable button</button>
                                         <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
                      }else{
                             $badgeFull = '';
@@ -519,6 +423,16 @@ class TrainingController extends Controller
         }
 
         return false;
+    }
+
+    public function canReservation($user_id){
+        $user_sub = Subscription::where('user_id' , $user_id)->first();
+        if($user_sub->status == 1){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 }

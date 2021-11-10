@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject  /*implements MustVerif
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'surname' , 'phone' , 'role_id' , 'username' , 'photo_id' ,
+        'name', 'email', 'password', 'surname' , 'phone' , 'role_id' , 'username' , 'photo_id' , 'registration_token'
     ];
 
     /**
@@ -27,7 +27,7 @@ class User extends Authenticatable implements JWTSubject  /*implements MustVerif
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'email_verified_at' , 'created_at' , 'updated_at' , 'photo_id'
+        'password', 'remember_token', 'email_verified_at' , 'created_at' , 'updated_at' , 'photo_id' , 'registration_token'
     ];
 
     /**
@@ -62,6 +62,10 @@ class User extends Authenticatable implements JWTSubject  /*implements MustVerif
     public function photo(){
 
         return $this->belongsTo(Photo::class);
+    }
+
+    public function subscription(){
+        return $this->hasOne(Subscription::class);
     }
 
     

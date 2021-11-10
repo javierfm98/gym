@@ -19,9 +19,5 @@ class ForgotPasswordController extends Controller
     |
     */
 
- /*   public function sendResetLinkEmail(Request $request){
-        dd("Hola");
-    }*/
-
     use SendsPasswordResetEmails;
 }

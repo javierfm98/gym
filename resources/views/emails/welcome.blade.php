@@ -72,20 +72,20 @@
 		  margin-top: 30px;
 		}
 
+		.email-bottom{
+		  border-top: 1px solid #ccc;
+		  color: #777;
+		  font-size: 14px;
 
-		.credential{
-		  margin-left: 20px; 
 		}
 
-		.text-bold{
-		  font-weight: bold;
+		.email-bottom span{
+		  margin-top: 15px;
+		  display: inline-block;
 		}
 
-		.warning{
-		  display: flex;
-		  justify-content: center;
-		  margin: 8px;
-		  font-size: 13px;
+		.email-bottom a{
+		  word-break: break-all;  
 		}
 
 		.button{
@@ -129,21 +129,16 @@
 					<h1>Bienvenido!</h1>						
 				</div>
 				<div class="email-body">
-					<p>Estamos emocionados de que empieces. A continuacion le mostraremos su usuario y contraseña:</p>
-					<div class="credential">
-						<p><span class="text-bold">Correo electrónico:</span> javier@gmail.com</p>
-						<p><span class="text-bold">Contraseña:</span> 123456789</p>
-						<div class="warning">
-						<span>*&nbsp</span>
-						<span> Por favor cambia su contraseña en el perfil, al haberse mandado por correo, puede que la seguridad se haya visto comprometida</span>	
-						</div>			
-					</div>
+					<p>Estamos emocionados de que empieces. Para poder usar la cuenta primero tendrá que escribir su contaseña, para ello pulse el siguiente enlace:</p>
 				</div>
 				<div class="email-footer">
-					<a href="#" class="button button-primary">Iniciar sesion</a>
+					<a href="{{ $data['url'] }}" class="button button-primary">Activar cuenta</a>
 					<img src="{{ asset('img/logo_black.svg') }}" alt="Logo"> 					
 				</div>
-
+                <div class="email-bottom">
+                  <span>Si tiene problemas para hacer clic en el "Activar cuenta" , copie y pegue la URL a continuación en su navegador web:</span>
+                  <a href="{{ $data['url'] }}">{{ $data['url'] }}</a>
+                </div>
 			</div>
 		</div>			
 	</div>

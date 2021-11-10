@@ -18,21 +18,33 @@
 	<div class="bg-blue">
 		<div class="data-box">
 			<div class="data-wrapper">
-				Para activar su cuenta escriba una contraseña.
+				
+            @if ($errors->any())
+              <div class="custom-alert alert-red">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
 
-               <form>
+				Para activar su cuenta escriba una contraseña.
+               <form method="POST" action="{{ route('verified.activate') }}">
+               	@csrf
+               	<input type="hidden"  name="token" value="{{ request()->token }}">
                   <div class="input-container">
                      <div class="input-box-100 field-outlined">
-                        <input type="text" class="input" required>
-                        <label for="" class="label">Contraseña</label>
+                         <input id="password" type="password" type="text" class="input" name="password" required>
+                         <label for="" class="label">Contraseña</label>
                      </div>
                      <div class="input-box-100 field-outlined">
-                        <input type="text" class="input" required>
-                        <label for="" class="label">Confirmar contraseña</label>
+                         <input id="password-confirm" type="password" class="input" name="password_confirmation" required>
+                         <label for="" class="label">Confirmar contraseña</label>
                      </div>
                   </div>
 					<div>
-						<button class="button button-primary button-100">Activar cuenta</button>
+						<button type="submit" class="button button-primary button-100">Activar cuenta</button>
 					</div>
                </form>
 			</div>			

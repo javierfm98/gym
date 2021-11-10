@@ -7,7 +7,7 @@
 			<div class="welcome-container">
 				<div class="welcome-box">
 					<div class="welcome">
-						<h1>Bienvenido {{ auth()->user()->name }}</h1>
+						<h1>Bienvenid@ {{ auth()->user()->name }}</h1>
 						<p class="list-home-sub">{{ $phrases }}</p>									
 					</div>
 					<div class="logo-welcome">

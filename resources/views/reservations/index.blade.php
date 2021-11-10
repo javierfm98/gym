@@ -20,6 +20,13 @@
 					</div> 
 				@endif
 
+
+				@if (auth()->user()->subscription->status == 0)
+					<div class="custom-alert alert-red">
+						No puede reservar ya que ha vencido su cuota. Por favor pague lo antes posible.
+					</div> 
+				@endif
+
 				<div id="trainings"></div>	
 			</div> 
 
