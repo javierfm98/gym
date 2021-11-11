@@ -40,7 +40,7 @@
 					<span> {{ $training->user->name }} {{ $training->user->surname }} </span>
 				</div>
 			</div>
-			<h3 class="title-wod indentation-training">WOD</h3>
+			<h3 class="title-wod indentation-training">ENTRENO</h3>
 			<div class="indentation-training">
 				<td>{!! nl2br($training->description) !!}</td>
 			</div>							

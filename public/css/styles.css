@@ -539,7 +539,8 @@
   .search-bar{
     border: none;
     background: #fff;
-    height: 100%;
+    height: 42px;
+    max-height: 42px;
     border-radius: 30px;
     outline: none;
     padding-left: 45px;
@@ -565,6 +566,33 @@
     top: 13px;
     left: 10px;
   }
+
+.clear{
+  position: absolute;
+  width: 10px;
+  height: 15px;
+  top: 15px;
+  left: 250px;
+  cursor: pointer;
+}
+
+.clear::before{
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 12px;
+  background: #999;
+  transform: rotate(45deg);
+}
+
+.clear::after{
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 12px;
+  background: #999;
+  transform: rotate(315deg);
+}
 
 
   /**************************************************************************/
@@ -1022,6 +1050,30 @@
     background: #dc3545
  }
 
+   .badge-filter{
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background: white;
+    border: 1px solid #00b8ff;
+    color: #00b8ff;
+    border-radius: 10px
+ }
+
+
+ .badge-blue, .badge-filter:hover{
+    background: #00b8ff;
+    color: white;
+ }
+
+
  /************************************************************/ 
 
   /* TEXT */
@@ -1443,7 +1495,18 @@
  /* word-break: break-all; */
 }
 
-/************************************************************/ 
+/************************************************************/
+
+
+/* FILTER */
+
+.option-filter span{
+  cursor: pointer;
+}
+
+
+
+/************************************************************/
 
 @media screen and (max-width: 1297px){
 
@@ -1537,6 +1600,10 @@
     }
 
     .welcome{
+      width: 100%;
+    }
+
+    .filter-container{
       width: 100%;
     }
 }

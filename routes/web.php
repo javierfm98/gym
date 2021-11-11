@@ -57,6 +57,7 @@ Route::get('/payment', 'SubscriptionController@payment')->name('subscriptions.pa
 
 
 
+
 Route::resource('trainings', 'TrainingController')->middleware('auth');
 Route::resource('trainings_settings', 'SettingController')->middleware('auth');
 

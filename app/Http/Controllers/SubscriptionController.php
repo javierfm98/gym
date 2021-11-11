@@ -15,10 +15,25 @@ class SubscriptionController extends Controller
      */
     public function index(Request $request)
     {
+
         $name = $request->get('search');
-        $subscriptions = Subscription::all();
-        $subscriptions = Subscription::orderBy('created_at' , 'desc')
-            ->paginate(5);
+        $filter = $request->get('filter');
+
+        if($filter == 1){
+            $subscriptions = Subscription::where('status' , 0)->paginate(5);
+        }else if($filter == 2){
+            $subscriptions = Subscription::where('status' , 1)->paginate(5);
+        }else{
+           if($name){
+                $users = User::clients() ->name($name)->pluck('id');
+                $subscriptions = Subscription::whereIn('user_id' , $users)->paginate(5);
+            }else{
+                $subscriptions = Subscription::all();
+                $subscriptions = Subscription::orderBy('created_at' , 'desc')->paginate(5);
+            }             
+        }
+
+
 
         return view('subscriptions.index', compact('subscriptions'));
     }
@@ -122,4 +137,5 @@ class SubscriptionController extends Controller
 
         return 'Hola';
     }
+
 }

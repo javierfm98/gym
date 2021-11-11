@@ -8,8 +8,9 @@
                <div class="header">
                   <div class="search-container">
                      <form>
-                        <input type="text" name="search" class="search-bar" placeholder="Buscar..." id="search" autocomplete="off">
+                        <input type="text" name="search" class="search-bar" placeholder="Buscar..." value="{{ request()->get('search') }}" id="search" autocomplete="off">
                         <i class="fas fa-search fa-fw icon-search"></i>
+                        <span class="clear" onclick="document.getElementById('search').value = ''"></span>
                      </form>
                   </div>
                   
@@ -20,8 +21,9 @@
                         <div class="custom-alert alert-green">
                               {{ session('notification') }}
                         </div>
-                     @endif
+                  @endif
 
+                  @if(count($clients) > 0)
                   <table class="custom-table">
                      <thead>
                       <tr style="text-align: center;">
@@ -58,14 +60,14 @@
                         @endforeach
                      </tbody>                   
                   </table>
-                  @if(count($clients) < 1)
+                  @else
                         <div class="empty-data">
                            <h3>No hay clientes</h3>
                         </div>
                     @endif
                </div>
                <div>
-                  {{ $clients->links('vendor.pagination.custom') }}  
+                  {{ $clients->appends(request()->input())->links('vendor.pagination.custom') }}  
                </div>
             </div>
 
