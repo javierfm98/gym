@@ -36,10 +36,13 @@ class VerifiedController extends Controller
 
         $data = ['password' => $password , 'registration_token' => NULL];
 
-        $user->fill($data);
-        $user->save();
 
-        Auth::login($user);
+        if($user != null){
+            $user->fill($data);
+            $user->save();
+
+            Auth::login($user);            
+        }
 
         return redirect('/login'); 
 

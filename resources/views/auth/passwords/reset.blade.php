@@ -11,6 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
     <link href="{{ asset('/css/styles.css')}}" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{{ asset('img/logo_blue.svg') }}"/>
     <title>Restablecer contraseña</title>
 </head>
 <body>

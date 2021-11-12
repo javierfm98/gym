@@ -41,8 +41,8 @@ Route::resource('goals' , 'GoalController')->middleware('auth');
 
 //Route::resource('verified' , 'VerifiedController');
 
-Route::get('verified/{token}' , 'VerifiedController@confirm')->name('verified.confirm');
-Route::post('verified' , 'VerifiedController@activate')->name('verified.activate');
+Route::get('verified/{token}' , 'VerifiedController@confirm')->name('verified.confirm')->middleware('activate');
+Route::post('verified' , 'VerifiedController@activate')->name('verified.activate')/*->middleware('activate')*/;
 
 
 

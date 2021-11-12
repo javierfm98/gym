@@ -18,9 +18,9 @@
 						<div class="option-filter">
 							<form>
 								<input id="filter" type="hidden" name="filter"> 
-								<button class="badge-filter {{ (request()->has('filter')) ? '' : 'badge-blue' }} {{ (request()->get('filter')) == '0' ? 'badge-blue' : '' }}" id="all" value="0">Todos</button>
-								<button class="badge-filter {{ (request()->get('filter')) == '1' ? 'badge-blue' : '' }}" id="unpaid" value="1">Impago</button>
-								<button class="badge-filter {{ (request()->get('filter')) == '2' ? 'badge-blue' : '' }}" id="paid" value="2">Pagado</button>
+								<button class="badge-filter {{ (request()->has('filter')) ? '' : 'badge-blue' }} {{ (request()->get('filter')) == '0' ? 'badge-blue' : '' }}" id="all">Todos</button>
+								<button class="badge-filter {{ (request()->get('filter')) == '1' ? 'badge-blue' : '' }}" id="unpaid">Impago</button>
+								<button class="badge-filter {{ (request()->get('filter')) == '2' ? 'badge-blue' : '' }}" id="paid">Pagado</button>
 							</form>
 
 						</div>

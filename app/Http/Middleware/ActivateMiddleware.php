@@ -3,6 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use Illuminate\Support\Facades\Log;
 
 class ActivateMiddleware
 {
@@ -15,6 +18,14 @@ class ActivateMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+
+        $email = $request->get('email');
+        $user_token = User::where('email' , $email)->first()->registration_token;
+
+        if($user_token == null){
+            return redirect('/');
+        }else{
+           return $next($request);
+        }                    
     }
 }
