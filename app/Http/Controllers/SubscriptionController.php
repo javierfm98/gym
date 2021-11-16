@@ -21,24 +21,20 @@ class SubscriptionController extends Controller
         $filter = $request->get('filter');
 
         if($filter == 1){
-            $subscriptions = Subscription::where('status' , 0)->paginate(5);
+            $subscriptions = User::clients()->where('payment_status' , 0)->paginate(5);
         }else if($filter == 2){
-            $subscriptions = Subscription::where('status' , 1)->paginate(5);
+            $subscriptions = User::clients()->where('payment_status' , 1)->paginate(5);
         }else if($filter == 3){
             $subscriptions = Subscription::where('status' , 2)->paginate(5);
         }else{
            if($name){
-                $users = User::clients() ->name($name)->pluck('id');
-                $subscriptions = Subscription::whereIn('user_id' , $users)->paginate(5);
+                $subscriptions = User::clients()->name($name)->paginate(5);
+             /*   $subscriptions = Subscription::whereIn('user_id' , $users)->paginate(5); */
             }else{
                 $subscriptions = Subscription::orderBy('created_at' , 'desc')->paginate(5);
-             /*   $subscriptions = Subscription::all()->sortByDesc('end_at')->unique('user_id');
-                $subscriptions = CollectionHelper::paginate($subscriptions, 5);    */
+                $subscriptions =User::clients()->orderBy('created_at' , 'desc')->paginate(5);
             }             
         } 
-
-
-      //  dd($subscriptions->toArray());
 
 
         return view('subscriptions.index', compact('subscriptions'));
@@ -97,9 +93,13 @@ class SubscriptionController extends Controller
     public function update(Request $request, $id)
     {
         $type = $request->get('type_status');
-        $subscription = Subscription::findOrFail($id);
-        $subscription->status = $type;
-        $subscription->save();
+        $user_subscription = User::findOrFail($id);
+        $user_subscription->payment_status = $type;
+        $user_subscription->save();
+
+        $subscriptions = Subscription::where('user_id', 3)->orderBy('end_at', 'desc')->first();
+        $subscriptions->status = $type;
+        $subscriptions->save();
 
         return redirect('/subscriptions');
     }

@@ -39,6 +39,10 @@ Route::resource('bodies' , 'BodyController')->middleware('auth');
 
 Route::resource('goals' , 'GoalController')->middleware('auth');
 
+Route::resource('stats' , 'StatController')->middleware('auth');
+
+Route::resource('payments' , 'PaymentController')->middleware('auth');
+
 //Route::resource('verified' , 'VerifiedController');
 
 Route::get('verified/{token}' , 'VerifiedController@confirm')->name('verified.confirm')->middleware('activate');

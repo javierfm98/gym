@@ -50,14 +50,14 @@
 							<tbody>
 								@foreach ($subscriptions as $subscription)
 									<tr style="text-align:center;">
-										<td> {{ $subscription->user->name }} </td>
-										<td> {{ $subscription->user->surname }} </td>
-										<td> {{ $subscription->rate->name}} </td>
-										<td> {{ $subscription->end_at->format('d/m/Y') }} </td>
+										<td> {{ $subscription->name }} </td>
+										<td> {{ $subscription->surname }} </td>
+										<td> Falta relacion </td>
+										<td> Falta relacion </td>
 										<td>
-											@if($subscription->status == 1)
+											@if($subscription->payment_status == 1)
 												<span class="badge-custom badge-green">PAGADO</span>
-											@elseif($subscription->status == 0)
+											@elseif($subscription->payment_status == 0)
 												<span class="badge-custom badge-red">IMPAGO</span>
 											@else
 												<span class="badge-custom badge-yellow">PENDIENTE</span>

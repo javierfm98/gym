@@ -39,6 +39,12 @@
 						<i class="fas fa-heartbeat fa-fw"></i>
 						<span>Mi cuerpo</span>
 					</a>
+					@if(auth()->user()->hasRole(['client', 'trainer']))
+					<a href="{{ route('payments.index') }}" class="link {{ (request()->routeIs('payments.index')) ? 'active' : '' }}">
+						<i class="fas fa-credit-card fa-fw"></i>
+						<span>Mis pagos</span>
+					</a>
+					@endif
 					<a href="{{ route('profiles.index') }}" class="link {{ (request()->routeIs('profiles.index')) ? 'active' : '' }}">
 						<i class="fas fa-user-edit fa-fw"></i>
 						<span>Perfil</span>
@@ -63,13 +69,17 @@
 						<i class="fas fa-dollar-sign fa-fw"></i>
 						<span>Pagos</span>
 					</a> 
-					<a href="#" class="link">
+					<a href="{{ route('stats.index') }}" class="link {{ (request()->routeIs('stats.index')) ? 'active' : '' }}">
 						<i class="fas fa-chart-area fa-fw"></i>
 						<span>Estadisticas</span>
 					</a>
 					<a href="{{ route('trainings.index') }}" class="link  {{ (request()->routeIs('trainings.index')) ? 'active' : '' }}">
 						<i class="fas fa-dumbbell fa-fw"></i>
 						<span>Entrenos</span>
+					</a>
+					<a href="#" class="link">
+						<i class="fas fa-wrench fa-fw"></i>
+						<span>Ajustes gimnasio</span>
 					</a>
 					@endif
 					@if(auth()->user()->hasRole(['trainer'])) 

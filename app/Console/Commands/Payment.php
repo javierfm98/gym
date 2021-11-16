@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Subscription;
+use App\User;
 use Carbon\Carbon;
 
 class Payment extends Command
@@ -43,10 +44,8 @@ class Payment extends Command
         $date = $currentDay->subDays(1)->format('Y-m-d');
         $allSubs = Subscription::where('end_at', $date)->get();
 
-     //   
-
         foreach($allSubs as $subs){
-            if($subs->status == 1){
+            if($subs->user->payment_status == 1 && $subs->status == 1){
                 $subscription = Subscription::create([
                     'user_id' => $subs->user->id,
                     'rate_id' => $subs->rate->id,
@@ -55,7 +54,12 @@ class Payment extends Command
                 ]);
             }else if($subs->status == 2){
                 $subs->status = 0;
+
+                $user = User::findOrFail($subs->user_id);
+                $user->payment_status = 0;
+
                 $subs->save();
+                $user->save();
             }
         }
   

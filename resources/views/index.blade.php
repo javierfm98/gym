@@ -45,7 +45,9 @@
 					<div class="wrapper card-home">
 						<div class="card-home-header">
 							Pagos recientes
-							<span class="{{ ($nextPay < 0) ? 'text-red' : '' }} text-opacity-05">(Siguiente pago: {{ $nextPay }} dia/s)</span> 
+							@if(!(auth()->user()->hasRole(['admin']) or $payments->isEmpty()))
+							<span class="{{ ($nextPay < 0) ? 'text-red' : '' }} text-opacity-05">(Siguiente pago: {{ $nextPay }} dia/s)</span>
+							@endif 
 						</div>
 						<div class="card-home-body">					
 							@foreach($payments as $payment)
@@ -68,7 +70,7 @@
 									<h3>No hay pagos</h3>
 								</div>
 							@else
-								<button class="button button-primary text-bold button-home-list">Ver todos</button>
+								<a href="{{ route('payments.index') }}" class="button button-primary text-bold button-home-list">Ver todos</a>
 							@endif
 						</div>
 					</div>
@@ -78,4 +80,3 @@
 
 @endsection
 
-{{ (request()->has('filter')) ? '' : 'badge-blue' }}

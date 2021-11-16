@@ -331,7 +331,7 @@ class TrainingController extends Controller
                     }
 
                     $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
-              //      $statusSub = $this->canReservation($user_id);
+                    $statusSub = $this->canReservation($user_id);
                     $statusSub = true;
                     if($isReserved){
                         $botones = '<button type="submit" class="button button-primary text-bold">Cancelar Reserva</button>
@@ -427,8 +427,8 @@ class TrainingController extends Controller
     }
 
     public function canReservation($user_id){
-        $user_sub = Subscription::where('user_id' , $user_id)->first();
-        if($user_sub->status == 1){
+        $user_sub = User::findOrFail($user_id)->first();
+        if($user_sub->payment_status == 1){
             return true;
         }else{
             return false;

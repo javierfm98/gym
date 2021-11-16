@@ -20,7 +20,8 @@ class UsersTableSeeder extends Seeder
         	'email' => 'javier@gmail.com',
         	'role_id' => 1,
             'photo_id' => 1,
-        	'password' => bcrypt('123456789')
+        	'password' => bcrypt('123456789'),
+            'payment_status' => 1
 		]);
 
         User::create([
@@ -30,7 +31,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'en@gmail.com',
             'role_id' => 2,
             'photo_id' => 1,
-            'password' => bcrypt('123456789')
+            'password' => bcrypt('123456789'),
+            'payment_status' => 1
         ]);
 
         User::create([
@@ -40,7 +42,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@gmail.com',
             'role_id' => 3,
             'photo_id' => 1,
-            'password' => bcrypt('123456789')
+            'password' => bcrypt('123456789'),
+            'payment_status' => 1
         ]);
 
           factory(User::class, 50)->create();

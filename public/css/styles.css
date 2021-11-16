@@ -1402,8 +1402,12 @@
 }
 
 .card-home-header span{
-  opacity: .5;
   display: block;
+}
+
+.day-pay-box{
+  display: block;
+  opacity: 0.5;
 }
 
 .card-home-body{
@@ -1438,6 +1442,8 @@
 .button-home-list{
   width: 100%;
   margin: 15px 0 5px;
+  display: block;
+  text-align: center;
 }
 
 .list-training{
@@ -1518,6 +1524,33 @@
   cursor: pointer;
 }
 
+
+/************************************************************/
+
+/* SCROLL */
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #d1d1d1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #999; 
+}
 
 /************************************************************/
 

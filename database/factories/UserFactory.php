@@ -28,7 +28,8 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' => $faker->e164PhoneNumber ,
         'username' => $faker->userName ,
         'role_id' => $faker->randomElement([2,3]) ,
-        'photo_id' => 1
+        'photo_id' => 1,
+        'payment_status' => 1
     ];
 });
 

@@ -36,13 +36,19 @@ class HomeController extends Controller
 
 
         $user_id =  auth()->user()->id;
-        $payments = Subscription::where('user_id', $user_id)->orderBy('end_at' , 'desc')->take(3)->get();
 
-        $currentDay = Carbon::now();
-        $end_at = $payments->first()->end_at;
-        $nextPay = $currentDay->diffInDays($end_at);
-        if($end_at->lt($currentDay)){
-            $nextPay = $nextPay * (-1);
+        if(auth()->user()->id == 1){
+            $payments = Subscription::take(3)->get();
+            $nextPay = 0;
+        }else{
+            $payments = Subscription::where('user_id', $user_id)->orderBy('end_at' , 'desc')->take(3)->get();
+            $currentDay = Carbon::now();
+            $end_at = $payments->first()->end_at;
+            $nextPay = $currentDay->diffInDays($end_at);
+
+            if($end_at->lt($currentDay)){
+                $nextPay = $nextPay * (-1);
+            }
         }
 
         $trainings = Reservation::where('user_id', $user_id)->orderBy('created_at' , 'desc')->take(3)->get();
