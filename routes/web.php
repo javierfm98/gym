@@ -51,9 +51,6 @@ Route::post('/admin-reservation', 'ReservationController@storeModal')->name('res
 Route::get('/search', 'SearchController@search')->name('searches.search')->middleware('auth');
 Route::get('/display-trainings', 'TrainingController@displayTrainings')->name('reservations.displayTrainings')->middleware('auth');
 Route::post('/back-reservation', 'ReservationController@backReservation')->name('reservations.backReservation')->middleware('auth');
-Route::post('/paid', 'SubscriptionController@paid')->name('subscriptions.paid')->middleware('auth');
-Route::post('/unpaid', 'SubscriptionController@unpaid')->name('subscriptions.unpaid')->middleware('auth');
-Route::get('/payment', 'SubscriptionController@payment')->name('subscriptions.payment')->middleware('auth');
 
 
 

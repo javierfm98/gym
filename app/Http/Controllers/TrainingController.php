@@ -331,7 +331,8 @@ class TrainingController extends Controller
                     }
 
                     $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
-                    $statusSub = $this->canReservation($user_id);
+              //      $statusSub = $this->canReservation($user_id);
+                    $statusSub = true;
                     if($isReserved){
                         $botones = '<button type="submit" class="button button-primary text-bold">Cancelar Reserva</button>
                                     <a href="/trainings/'.$training->id.'"class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
@@ -378,7 +379,7 @@ class TrainingController extends Controller
                                                     '.$badgeFull.'
                                                     '.$badge.'              
                                                 </div>
-                                                <span class="text-bold text-capcity">Plazas ocupadas: <span class="'.$classSpan.'">'.$training->enroll.'/'.$training->capacity.'</span></span>
+                                                <span class="text-bold text-capacity">Plazas ocupadas: <span class="'.$classSpan.'">'.$training->enroll.'/'.$training->capacity.'</span></span>
                                             </div>
                                             <div class="button-training">
                                                 '.$botones.'

@@ -65,7 +65,7 @@ class User extends Authenticatable implements JWTSubject  /*implements MustVerif
     }
 
     public function subscription(){
-        return $this->hasOne(Subscription::class);
+        return $this->hasMany(Subscription::class);
     }
 
     

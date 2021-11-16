@@ -45,21 +45,24 @@
 					<div class="wrapper card-home">
 						<div class="card-home-header">
 							Pagos recientes
+							<span class="{{ ($nextPay < 0) ? 'text-red' : '' }} text-opacity-05">(Siguiente pago: {{ $nextPay }} dia/s)</span> 
 						</div>
-						<div class="card-home-body">
+						<div class="card-home-body">					
 							@foreach($payments as $payment)
 								<div class="list-home">
 									<div>
 										<h6 class="list-home-info">{{ $payment->rate->price }}€</h6>
 										@if($payment->status == 1)
 											<span class="badge-custom badge-green">PAGADO</span>
-										@else
+										@elseif($payment->status == 0)
 											<span class="badge-custom badge-red">NO PAGADO</span>
+										@else
+											<span class="badge-custom badge-yellow">PENDIENTE</span>
 										@endif
 										<small class="list-home-sub">{{ $payment->end_at->format('d/m/Y') }}</small>
 									</div>
 								</div>							
-							@endforeach
+							@endforeach		
 							@if($payments->isEmpty())
 								<div class="empty-data small-empty">
 									<h3>No hay pagos</h3>
@@ -70,6 +73,9 @@
 						</div>
 					</div>
 				</div>
-			</div> 
+			</div>
+		
 
 @endsection
+
+{{ (request()->has('filter')) ? '' : 'badge-blue' }}

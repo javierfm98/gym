@@ -18,9 +18,10 @@
 						<div class="option-filter">
 							<form>
 								<input id="filter" type="hidden" name="filter"> 
-								<button class="badge-filter {{ (request()->has('filter')) ? '' : 'badge-blue' }} {{ (request()->get('filter')) == '0' ? 'badge-blue' : '' }}" id="all">Todos</button>
-								<button class="badge-filter {{ (request()->get('filter')) == '1' ? 'badge-blue' : '' }}" id="unpaid">Impago</button>
-								<button class="badge-filter {{ (request()->get('filter')) == '2' ? 'badge-blue' : '' }}" id="paid">Pagado</button>
+								<button class="badge-filter {{ (request()->has('filter')) ? '' : 'badge-blue' }} {{ (request()->get('filter')) == '0' ? 'badge-blue' : '' }}" id="all" onclick="setFilter(0)">Todos</button>
+								<button class="badge-filter {{ (request()->get('filter')) == '1' ? 'badge-blue' : '' }}" onclick="setFilter(1)" id="unpaid">Impago</button>
+								<button class="badge-filter {{ (request()->get('filter')) == '3' ? 'badge-blue' : '' }}" onclick="setFilter(3)" id="pending">Pendiente</button>
+								<button class="badge-filter {{ (request()->get('filter')) == '2' ? 'badge-blue' : '' }}" onclick="setFilter(2)" id="paid">Pagado</button>
 							</form>
 
 						</div>
@@ -41,6 +42,7 @@
 							    <th>nombre</th>
 							    <th>apellido</th>
 							    <th>tipo</th>
+							    <th>Fecha</th>
 							    <th>estatus</th>
 							    <th></th>
 							 </tr>
@@ -51,25 +53,27 @@
 										<td> {{ $subscription->user->name }} </td>
 										<td> {{ $subscription->user->surname }} </td>
 										<td> {{ $subscription->rate->name}} </td>
+										<td> {{ $subscription->end_at->format('d/m/Y') }} </td>
 										<td>
 											@if($subscription->status == 1)
 												<span class="badge-custom badge-green">PAGADO</span>
-											@else
+											@elseif($subscription->status == 0)
 												<span class="badge-custom badge-red">IMPAGO</span>
+											@else
+												<span class="badge-custom badge-yellow">PENDIENTE</span>
 											@endif	
 										</td>
 										<td>
 											<div class="action-container">
-												<form action="{{ route('subscriptions.paid') }}" method="POST">
+
+												<form action="{{ route('subscriptions.update' , $subscription->id) }}" method="POST">
 													@csrf
-													<input type="hidden" name="id" value="{{ $subscription->id }}">
-													<button class="button-circle"><i class="fas fa-check fa-fw "></i></button>	
-												</form>
-												<form action="{{ route('subscriptions.unpaid') }}" method="POST">
-													@csrf
-													<input type="hidden" name="id" value="{{ $subscription->id }}">
-													<button type="submit" class="button-circle"><i class="fas fa-times fa-fw"></i></button>	
-												</form>
+													@method('PUT')
+													<input  type="hidden" name="type_status" id="type_status_{{$subscription->id}}"> 
+													<button type="submit" class="button-circle" onclick="setType(1,{{$subscription->id}})"><i class="fas fa-check fa-fw"></i></button>
+													<button type="submit" class="button-circle" onclick="setType(0,{{$subscription->id}})"><i class="fas fa-times fa-fw"></i></button>
+													<button type="submit" class="button-circle" onclick="setType(2,{{$subscription->id}})"><i class="fas fa-clock fa-fw"></i></button>		
+												</form> 
 											</div>
 										</td>
 									</tr>
@@ -93,19 +97,18 @@
 @section('scripts')
 
 				<script src="{{ asset('js/search.js') }}"></script>
+				
 				<script>
-					var all = document.getElementById('all');
-					var unpaid = document.getElementById('unpaid');
-					var paid = document.getElementById('paid');
-
-					$(window).unbind().click(function(e) {
-						if(e.target == all){
-							document.getElementById("filter").value = 0;
-						}else if(e.target == unpaid){
-							document.getElementById("filter").value = 1;
-						}else{
-							document.getElementById("filter").value = 2;
-						}
-					});
+					function setFilter(type){
+						document.getElementById("filter").value = type;
+					}
 				</script>
+
+				<script>
+					function setType(type,id){
+						var input_id = "type_status_" + id;
+						document.getElementById(input_id).value = type;
+					}
+				</script>
+
 @endsection

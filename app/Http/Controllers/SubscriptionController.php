@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Subscription;
+use App\Helpers\CollectionHelper;
 
 class SubscriptionController extends Controller
 {
@@ -23,16 +24,21 @@ class SubscriptionController extends Controller
             $subscriptions = Subscription::where('status' , 0)->paginate(5);
         }else if($filter == 2){
             $subscriptions = Subscription::where('status' , 1)->paginate(5);
+        }else if($filter == 3){
+            $subscriptions = Subscription::where('status' , 2)->paginate(5);
         }else{
            if($name){
                 $users = User::clients() ->name($name)->pluck('id');
                 $subscriptions = Subscription::whereIn('user_id' , $users)->paginate(5);
             }else{
-                $subscriptions = Subscription::all();
                 $subscriptions = Subscription::orderBy('created_at' , 'desc')->paginate(5);
+             /*   $subscriptions = Subscription::all()->sortByDesc('end_at')->unique('user_id');
+                $subscriptions = CollectionHelper::paginate($subscriptions, 5);    */
             }             
-        }
+        } 
 
+
+      //  dd($subscriptions->toArray());
 
 
         return view('subscriptions.index', compact('subscriptions'));
@@ -90,7 +96,12 @@ class SubscriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $type = $request->get('type_status');
+        $subscription = Subscription::findOrFail($id);
+        $subscription->status = $type;
+        $subscription->save();
+
+        return redirect('/subscriptions');
     }
 
     /**
@@ -102,40 +113,6 @@ class SubscriptionController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function paid(Request $request)
-    {
-        $subscription = Subscription::findOrFail($request->id);
-
-        $data = ['status' => 1];
-
-        $subscription->fill($data);
-        $subscription->save();
-
-        return redirect('/subscriptions');
-    }
-
-    public function unpaid(Request $request)
-    {
-        $subscription = Subscription::findOrFail($request->id);
-
-        $data = ['status' => 0];
-
-        $subscription->fill($data);
-        $subscription->save();
-
-        return redirect('/subscriptions');
-    }
-
-    public function payment()
-    {
-        $user_id =  auth()->user()->id;
-        $payments = Subscription::where('user_id', $user_id)->get();
-
-        dd($payments->toArray());
-
-        return 'Hola';
     }
 
 }

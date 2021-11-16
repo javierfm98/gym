@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 use App\Subscription;
 use Carbon\Carbon;
 
-class Payments extends Command
+class Payment extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'payments:start';
+    protected $signature = 'payment:start';
 
     /**
      * The console command description.
@@ -39,16 +39,26 @@ class Payments extends Command
      */
     public function handle()
     {
-        $currentDay = Carbon::now()->format('Y-m-d');
-        $date = $currentDay->subDays(1);
+        $currentDay = Carbon::now();
+        $date = $currentDay->subDays(1)->format('Y-m-d');
         $allSubs = Subscription::where('end_at', $date)->get();
 
-        foreach($allSubs as $subs){
-            $subs->status = 0;
-            $subs->save();
+     //   
 
+        foreach($allSubs as $subs){
+            if($subs->status == 1){
+                $subscription = Subscription::create([
+                    'user_id' => $subs->user->id,
+                    'rate_id' => $subs->rate->id,
+                    'status' => 2,
+                    'end_at' => $subs->end_at->addMonths($subs->rate->duration)
+                ]);
+            }else if($subs->status == 2){
+                $subs->status = 0;
+                $subs->save();
+            }
         }
   
-       $this->info('Comando ejecutado correctamente');
+       $this->info('Pagos actualizados correctamente');
     }
 }

@@ -1050,6 +1050,10 @@
     background: #dc3545
  }
 
+ .badge-yellow{
+    background: #f0ad4e; 
+ }
+
    .badge-filter{
     display: inline-block;
     min-width: 10px;
@@ -1087,7 +1091,7 @@
  }
 
 
- .text-capcity{
+ .text-capacity{
     margin: 0px; 
     font-size: 0.875em; 
     opacity: 0.5;
@@ -1397,9 +1401,19 @@
   font-weight: bold;
 }
 
+.card-home-header span{
+  opacity: .5;
+  display: block;
+}
+
 .card-home-body{
   padding: 10px;
 }
+
+.day-pay{
+  display: inline;
+}
+
 
 .list-home{
   padding: 8px;
@@ -1505,12 +1519,10 @@
 }
 
 
-
 /************************************************************/
 
+
 @media screen and (max-width: 1297px){
-
-
   .button-circle{
     margin-bottom: 10px;
   }

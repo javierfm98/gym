@@ -56,8 +56,19 @@ class BodyController extends Controller
             }
          }
 
-        $measurementsWeight = Body::select('value' , 'date')->where('user_id' , $user_id)->where('stat_id' , 1)->orderBy('date')->get()->toArray();
-        $measurementsBodyFat = Body::select('value' , 'date')->where('user_id' , $user_id)->where('stat_id' , 2)->orderBy('date')->get()->toArray();
+        $measurementsWeight = Body::select('value' , 'date')
+                                    ->where('user_id' , $user_id)
+                                    ->where('stat_id' , 1)
+                                    ->orderBy('date')
+                                    ->get()
+                                    ->toArray();
+
+        $measurementsBodyFat = Body::select('value' , 'date')
+                                    ->where('user_id' , $user_id)
+                                    ->where('stat_id' , 2)
+                                    ->orderBy('date')
+                                    ->get()
+                                    ->toArray();
 
      //  dd($measurementsWeight);
 

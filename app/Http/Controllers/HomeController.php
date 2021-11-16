@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Subscription;
 use App\Reservation;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -35,10 +36,19 @@ class HomeController extends Controller
 
 
         $user_id =  auth()->user()->id;
-        $payments = Subscription::where('user_id', $user_id)->orderBy('created_at' , 'desc')->take(3)->get();
+        $payments = Subscription::where('user_id', $user_id)->orderBy('end_at' , 'desc')->take(3)->get();
+
+        $currentDay = Carbon::now();
+        $end_at = $payments->first()->end_at;
+        $nextPay = $currentDay->diffInDays($end_at);
+        if($end_at->lt($currentDay)){
+            $nextPay = $nextPay * (-1);
+        }
+
         $trainings = Reservation::where('user_id', $user_id)->orderBy('created_at' , 'desc')->take(3)->get();
 
-        return view('index', compact('payments', 'trainings', 'phrases'));
+
+        return view('index', compact('payments', 'trainings', 'phrases', 'nextPay'));
     }
 
 
