@@ -1554,6 +1554,17 @@
 
 /************************************************************/
 
+/* STATS */
+
+.stat-container{
+  display: flex;
+  gap: 50px;
+  padding: 0px 50px;
+}
+
+
+/************************************************************/
+
 
 @media screen and (max-width: 1297px){
   .button-circle{
@@ -1734,6 +1745,10 @@
 
     .empty-data h3{
       font-size: 20px;
+    }
+
+    .stat-container{
+      display: block;
     }
  }
 
