@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rate;
+use App\User;
 use App\Subscription;
+use Carbon\Carbon;
+use DB;
 
 class StatController extends Controller
 {
@@ -16,78 +19,78 @@ class StatController extends Controller
     public function index()
     {
 
-        $rate = Rate::all()->toArray();
+        $rate = Rate::all()->pluck('name')->toArray();
 
-       // dd($rate);
+        $arrayRatesClients = Subscription::select(
+            DB::raw('COUNT(1) as count')
+        )->groupBy('rate_id')->pluck('count')->toArray();
 
 
+        $countClientsRates = array_fill(0, count($rate), 0);
 
-        return view('stats.index');
+        foreach ($arrayRatesClients as $index => $arrayRatesClient) {
+            $countClientsRates[$index] = $arrayRatesClient;
+        }
+
+     /*   $months = Subscription::get()->groupBy([function($d){
+            return Carbon::parse($d->end_at)->format('m-Y');
+        },'rate_id']);
+
+        $monthlyCounts = Subscription::select(
+            DB::raw('MONTH(end_at) as month'), 
+            DB::raw('COUNT(1) as count')
+        )->groupBy('month')->get()->toArray();*/
+
+        $chartStatus = $this->getStatusGym();
+
+        return view('stats.index', compact('rate', 'countClientsRates' , 'chartStatus'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getStatusGym(){
+
+        $countClients = User::clients()->count();
+        $statusCounts = User::clients()->select(DB::raw('COUNT(1) as count'))->groupBy('payment_status')->pluck('count')->toArray();
+
+        $countStatusClients = array_fill(0, 3, 0);
+
+        foreach($statusCounts as $index => $statusCount){
+            $countStatusClients[$index] = $statusCount;
+        }
+
+        $percentageStatusClients = [];
+
+        for($i = 0; $i < 3; $i++){
+            $percentageStatusClients[$i] = ($countStatusClients[$i] * 100)/$countClients;
+        }
+
+        $series = [];
+        $series1['name'] = 'Clientes';
+
+        $data = [];
+
+        $data1['name'] = 'Pagados';
+        $data1['y'] = $percentageStatusClients[0];
+        $data1['clients'] = $countStatusClients[0];
+
+        $data2['name'] = 'Impagos';
+        $data2['y'] = $percentageStatusClients[1];
+        $data2['clients'] = $countStatusClients[1];
+
+        $data3['name'] = 'Pendiente';
+        $data3['y'] = $percentageStatusClients[2];
+        $data3['clients'] = $countStatusClients[2];
+
+        $data[] = $data1;
+        $data[] = $data2;
+        $data[] = $data3;
+
+        $series1['data'] = $data;
+
+        $series[] = $series1;
+
+        return $series;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
+

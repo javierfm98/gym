@@ -59,6 +59,7 @@ Route::post('/back-reservation', 'ReservationController@backReservation')->name(
 
 
 
+
 Route::resource('trainings', 'TrainingController')->middleware('auth');
 Route::resource('trainings_settings', 'SettingController')->middleware('auth');
 

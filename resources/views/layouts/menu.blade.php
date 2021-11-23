@@ -65,6 +65,10 @@
 						<i class="fas fa-briefcase fa-fw"></i>
 						<span>Entrenadores</span>
 					</a> 
+					<a href="{{ route('trainings.index') }}" class="link  {{ (request()->routeIs('trainings.index')) ? 'active' : '' }}">
+						<i class="fas fa-dumbbell fa-fw"></i>
+						<span>Entrenos</span>
+					</a>
 					<a href="{{ route('subscriptions.index') }}" class="link {{ (request()->routeIs('subscriptions.index')) ? 'active' : '' }}">
 						<i class="fas fa-dollar-sign fa-fw"></i>
 						<span>Pagos</span>
@@ -72,10 +76,6 @@
 					<a href="{{ route('stats.index') }}" class="link {{ (request()->routeIs('stats.index')) ? 'active' : '' }}">
 						<i class="fas fa-chart-area fa-fw"></i>
 						<span>Estadisticas</span>
-					</a>
-					<a href="{{ route('trainings.index') }}" class="link  {{ (request()->routeIs('trainings.index')) ? 'active' : '' }}">
-						<i class="fas fa-dumbbell fa-fw"></i>
-						<span>Entrenos</span>
 					</a>
 					<a href="#" class="link">
 						<i class="fas fa-wrench fa-fw"></i>
@@ -88,10 +88,10 @@
 						<span> Mis Entrenos</span>
 					</a>
 					@endif 
-					<a href="#" class="link">
+				<!--	<a href="#" class="link">
 						<i class="fas fa-envelope fa-fw"></i>
 						<span>Enviar mensaje</span>
-					</a>
+					</a> -->
 					@endif 
 				</nav>
 

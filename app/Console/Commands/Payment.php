@@ -52,6 +52,11 @@ class Payment extends Command
                     'status' => 2,
                     'end_at' => $subs->end_at->addMonths($subs->rate->duration)
                 ]);
+
+                $user = User::findOrFail($subs->user_id);
+                $user->payment_status = 2;
+                $user->save();
+
             }else if($subs->status == 2){
                 $subs->status = 0;
 
