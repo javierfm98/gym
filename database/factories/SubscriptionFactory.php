@@ -19,7 +19,9 @@ $factory->define(Subscription::class, function (Faker $faker) use ($getUserId) {
         'user_id' => $user_id,
         'rate_id' => $faker->randomElement([1,2,3]),
         'status' =>  $faker->randomElement([0,1]),
-        'end_at' =>  $faker->dateTimeThisMonth()
+       // 'end_at' =>  $faker->dateTimeThisMonth()
+        'end_at' => $faker->dateTimeBetween($startDate = '-2 years', $endDate = '2021-11-25', $timezone = null)
+
     ];
 });
 

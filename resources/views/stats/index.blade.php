@@ -5,15 +5,27 @@
 		<div class="no-wrapper">
 			<h3>Estadisticas del gimnasio</h3>
 		</div>
-		<div class="stat-container">
-			<div class="wrapper">
-				<div id="rates"></div>
+		<div class="wrapper">
+			<h3 class="title">Clientes</h3>
+			<div class="container-chart">
+				<div id="total" class="chart-size"></div>
+				<div id="paid" class="chart-size"></div>
+				<div id="unpaid" class="chart-size"></div>
+				<div id="pending" class="chart-size"></div>
 			</div>
-			<div class="wrapper">
-				<div id="payments"></div>
-			</div>			
 		</div>
-
+		<div class="wrapper">
+			<div id="profits"></div>
+		</div>
+	<!--	<div class="wrapper">
+			<div id="profits2"></div>
+		</div> -->
+	<!--	<div class="wrapper">
+			<div id="profits3"></div>
+		</div> -->
+		<div class="wrapper">
+			<div id="rates"></div>
+		</div>
 
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -28,7 +40,7 @@ Highcharts.chart('rates', {
 			    type: 'column'
 			  },
 			  title: {
-			    text: 'Clientes totales por tarifas'
+			    text: 'Clientes por tarifas'
 			  },
 			  xAxis: {
 			    categories: @json($rate),
@@ -52,6 +64,9 @@ Highcharts.chart('rates', {
 			    column: {
 			      pointPadding: 0.2,
 			      borderWidth: 0
+			    },
+			    series:{
+			    	pointWidth: 50
 			    }
 			  },
 			  series: [{
@@ -65,40 +80,332 @@ Highcharts.chart('rates', {
 		</script>
 
 		<script>
-			Highcharts.chart('payments', {
+				Highcharts.chart('total',{
     chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
+      type: 'pie',
+      renderTo: 'container'
     },
     title: {
-        text: 'Clientes estado de pago'
-    },
-    tooltip: {
-        pointFormat: '<span>Porcentaje</span>: <b>{point.y}%</b><br/><span">{series.name}</span>: <b>{point.clients}</b><br/>'
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
+      verticalAlign: 'middle',
+      floating: true,
+      text: '<span class="text-bold">{{ $totalClients }}</span><br>TOTAL'
     },
     plotOptions: {
-        pie: {
-        	colors: ['#28a745', '#dc3545', '#f0ad4e'],
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
+      pie: {
+        innerSize: '90%',
+        dataLabels: {
+        	enabled:false
         }
+      },
+      series:{
+      	states:{
+      		hover:{
+      			enabled:false
+      		},
+      		inactive:{
+      			opacity: 1
+      		}
+      	}
+      }
     },
-    	series: @json($chartStatus)
-   });
+
+    tooltip:{
+    	enabled:false
+    },
+
+    series: [{
+      	data: [
+            	{  y: 100, color: '#00b8ff' },
+            	{  y: 0, color: '#ececec' },
+      	]
+    }],
+        exporting: {
+    	enabled: false
+    },credits: {
+    enabled: false
+}
+  });
+		</script>
+
+
+<script>
+		Highcharts.chart('paid',{
+    chart: {
+      type: 'pie',
+      renderTo: 'container'
+    },
+    title: {
+      verticalAlign: 'middle',
+      floating: true,
+      text: '<span class="text-bold">{{ $paidClients }}</span><br>PAGADOS'
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '90%',
+        dataLabels: {
+        	enabled:false
+        }
+      },
+      series:{
+      	states:{
+      		hover:{
+      			enabled:false
+      		},
+      		inactive:{
+      			opacity: 1
+      		}
+      	}
+      }
+    },
+
+        tooltip:{
+ 			formatter: function() {
+		        if(!this.point.noTooltip) {
+		            return '<br/>Porcentaje: <b>'+this.point.y+
+		                   '</b> %<br/>';
+        		}
+   
+       		 	return false;
+    		},
+    		hideDelay: 150	
+      },
+
+    series: [{
+      	data: @json($paidClientsJSON)
+    }],
+        exporting: {
+    	enabled: false
+    },credits: {
+    enabled: false
+}
+  });
+
+</script>
+
+
+<script>
+		Highcharts.chart('unpaid',{
+    chart: {
+      type: 'pie',
+      renderTo: 'container'
+    },
+    title: {
+      verticalAlign: 'middle',
+      floating: true,
+      text: '<span class="text-bold">{{ $unpaidClients }}</span><br>IMPAGOS'
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '90%',
+        dataLabels: {
+        	enabled:false
+        }
+      },
+      series:{
+      	states:{
+      		hover:{
+      			enabled:false
+      		},
+      		inactive:{
+      			opacity: 1
+      		}
+      	}
+      }
+    },
+
+    tooltip:{
+ 			formatter: function() {
+		        if(!this.point.noTooltip) {
+		            return '<br/>Porcentaje: <b>'+this.point.y+
+		                   '</b> %<br/>';
+        		}
+   
+       		 	return false;
+    		},
+    		hideDelay: 150
+    },
+
+    series: [{
+      	data: @json($unpaidClientsJSON)
+    }],
+        exporting: {
+    	enabled: false
+    },credits: {
+    enabled: false
+}
+  });
+
+</script>
+
+
+<script>
+		Highcharts.chart('pending',{
+    chart: {
+      type: 'pie',
+      renderTo: 'container'
+    },
+    title: {
+      verticalAlign: 'middle',
+      floating: true,
+      text: '<span class="text-bold">{{ $pendingClients }}</span><br>PENDIENTES'
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '90%',
+        dataLabels: {
+        	enabled:false
+        }
+      },
+      series:{
+      	states:{
+      		hover:{
+      			enabled:false
+      		},
+      		inactive:{
+      			opacity: 1
+      		}
+      	}
+      }
+    },
+
+    tooltip:{
+ 			formatter: function() {
+		        if(!this.point.noTooltip) {
+		            return '<br/>Porcentaje: <b>'+this.point.y+
+		                   '</b> %<br/>';
+        		}
+   
+       		 	return false;
+    		},
+
+    		hideDelay: 150
+    },
+
+    series: [{
+      	data: @json($pendingClientsJSON)
+    }],
+        exporting: {
+    	enabled: false
+    },credits: {
+    enabled: false
+}
+  });
+
+</script>
+
+
+		<script>
+			
+Highcharts.chart('profits', {
+			  chart: {
+			    type: 'column'
+			  },
+			  title: {
+			    text: 'Ingresos del gimnasio (1 año)'
+			  },
+			  xAxis: {
+			    categories: @json($dateProfitFormat),
+			    crosshair: true
+			  },
+			  yAxis: {
+			    min: 0,
+			    title: {
+			      text: 'Euros'
+			    }
+			  },
+			  	tooltip:{
+ 					pointFormat: 'Ingresos: <span class="text-bold">{point.y} €</span> '
+    			},
+			  plotOptions: {
+			    column: {
+			      pointPadding: 0.2,
+			      borderWidth: 0
+			    },
+			    series:{
+			    	pointWidth: 50
+			    }
+			  },
+			  series: [{
+			  	showInLegend: false,
+			    name: 'Clientes',
+			    data: @json($profitsArray),
+			    color: '#00b8ff'
+			  }]
+});
 
 		</script>
 
+
+<script>
+	Highcharts.chart('profits2', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Ingresos del gimnasio (1 año)'
+	    },
+	    xAxis: {
+	        categories: @json($dateProfitFormat)
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Euros'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    tooltip:{
+ 			pointFormat: 'Ingresos: <span class="text-bold">{point.y} €</span> '
+    	},
+
+	    series: [{
+	    	showInLegend: false,
+	        name: '',
+	        data: @json($profitsArray),
+	        color: '#00b8ff'
+    }]
+	});
+</script>
+
+
+<script>
+	Highcharts.chart('profits3', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Ingresos del gimnasio (1 año)'
+	    },
+	    xAxis: {
+	        categories: @json($dateProfitFormat)
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Euros'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: false
+	            },
+	            enableMouseTracking: true
+	        }
+	    },
+	    series: [{
+	   	fillColor: 'rgba(0, 184, 255, .1)',
+	   	type: 'area',
+        name: 'Ingresos',
+        data: @json($profitsArray)
+    }]
+	});
+</script>
 
 
 	

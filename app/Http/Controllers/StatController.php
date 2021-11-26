@@ -32,18 +32,34 @@ class StatController extends Controller
             $countClientsRates[$index] = $arrayRatesClient;
         }
 
-     /*   $months = Subscription::get()->groupBy([function($d){
-            return Carbon::parse($d->end_at)->format('m-Y');
-        },'rate_id']);
+        $totalClients = User::clients()->count();
+        $paidClients = User::clients()->where('payment_status', 1)->count();
+        $unpaidClients = User::clients()->where('payment_status', 0)->count();
+        $pendingClients = User::clients()->where('payment_status', 2)->count();
 
-        $monthlyCounts = Subscription::select(
-            DB::raw('MONTH(end_at) as month'), 
-            DB::raw('COUNT(1) as count')
-        )->groupBy('month')->get()->toArray();*/
 
-        $chartStatus = $this->getStatusGym();
+        $paidClientsJSON = $this->dataClientsJSON($totalClients, $paidClients, 1);
+        $unpaidClientsJSON = $this->dataClientsJSON($totalClients, $unpaidClients, 0);
+        $pendingClientsJSON = $this->dataClientsJSON($totalClients, $pendingClients, 2);
 
-        return view('stats.index', compact('rate', 'countClientsRates' , 'chartStatus'));
+        $calculationProfits = $this->getProfitGym();
+        $profitsArray = array_values($calculationProfits);
+        $dateProfitsArray = array_keys($calculationProfits);
+
+        $dateProfitFormat = $this->formatMonthProfit($dateProfitsArray);
+
+        return view('stats.index', compact(
+            'rate', 
+            'countClientsRates' , 
+            'totalClients' , 
+            'paidClients' ,
+            'unpaidClients',
+            'pendingClients', 
+            'paidClientsJSON',
+            'unpaidClientsJSON',
+            'pendingClientsJSON',
+            'profitsArray',
+            'dateProfitFormat'));
     }
 
     public function getStatusGym(){
@@ -91,6 +107,81 @@ class StatController extends Controller
         return $series;
     }
 
-    
+    public function dataClientsJSON($totalClients, $dataClients, $color){
+
+        $arrayColors = ['#dc3545', '#28a745', '#f0ad4e'];
+
+        $percentageClients = ($dataClients * 100)/$totalClients;
+        $remaining = 100 - $percentageClients;
+
+        $data = [];
+
+        $data1['y'] = $percentageClients;
+        $data1['color'] = $arrayColors[$color];
+
+        $data2['y'] = $remaining;
+        $data2['color'] = '#ececec';
+        $data2['noTooltip'] = true;
+
+        $data[] = $data1;
+        $data[] = $data2;
+
+        return $data;
+
+    }
+
+    public function getProfitGym(){
+
+        $now = Carbon::today()->subMonth()->endOfMonth()->toDateString();
+        $lastYear = Carbon::today()->subMonth()->startOfMonth()->subYear()->toDateString();
+
+
+        $monthlyCounts = Subscription::where('status', 1)->whereBetween('end_at', [$lastYear, $now])
+        ->select(
+                DB::raw("DATE_FORMAT(end_at, '%Y-%m') as date"),
+                DB::raw('rate_id as rate'),
+                DB::raw('COUNT(1) as count')
+            )->groupBy(['date', 'rate'])->orderBy('date', 'asc')->get()->makeHidden('subs_end')->toArray();
+
+
+        foreach($monthlyCounts as $index => $count){
+            $count[$count['date']] = $this->calculateProfit($count['count'], $count['rate']);
+            unset($count['rate']);
+            unset($count['count']);
+            $monthlyCounts[$index] = $count;
+        }
+
+        $sumProfits = [];
+
+        foreach($monthlyCounts as $total){
+            $key = $total['date'];
+            $sumProfits[$key] = array_sum(array_column($monthlyCounts,$key));
+        }
+
+        return $sumProfits;
+    }
+
+    public function calculateProfit($count, $rate){
+
+        $price = Rate::where('id', $rate)->pluck('price')->first();
+        $profit = $count * $price;
+
+        return $profit;
+    }
+
+    public function formatMonthProfit($date){
+        $months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+        $arrayDateFormat = [];
+
+        foreach($date as $format){
+            $splitDate = explode("-",$format);
+            $indexMonth = $splitDate[1]-1;
+            $monthName = $months[$indexMonth];
+            $arrayDateFormat[] = $monthName.' '.$splitDate[0];
+        }
+
+        return $arrayDateFormat;
+    }   
 }
+
 

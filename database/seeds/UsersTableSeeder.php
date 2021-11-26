@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
             'payment_status' => 1
         ]);
 
-          factory(User::class, 50)->create();
+          factory(User::class, 250)->create();
     }
 }
 

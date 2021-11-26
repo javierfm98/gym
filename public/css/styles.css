@@ -1047,7 +1047,7 @@
  }
 
  .badge-red{
-    background: #dc3545;
+    background: #dc3545
  }
 
  .badge-yellow{
@@ -1556,10 +1556,39 @@
 
 /* STATS */
 
+
+.wrapper-50{
+    background: #fff;
+    border-radius: 4px;
+    padding: 40px;
+    -webkit-box-shadow: 0px 0px 24px 1px rgba(0,0,0,0.1); 
+    box-shadow: 0px 0px 24px 1px rgba(0,0,0,0.1);
+    width:90%;
+    margin-bottom: 50px;
+
+  }
+
 .stat-container{
   display: flex;
   gap: 50px;
-  padding: 0px 50px;
+  width:90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.container-chart{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 50px;
+}
+
+
+.chart-size{
+  height: 200px;
+  width: 200px;
+  margin: auto;
 }
 
 
@@ -1584,7 +1613,7 @@
     width: 100%;
     }
     .profile-image{
-      width: 100%;850
+      width: 100%;
 }
 
   .profile-details{
@@ -1608,6 +1637,17 @@
       margin-bottom: 20px; 
       width: 100%;
     }
+ }
+
+ @media screen and (max-width: 1000px){
+
+  .container-chart{
+    gap: 20px;
+  }
+
+  .chart-size{
+  /*  width: 100%;*/
+  }
  }
 
 
@@ -1750,8 +1790,11 @@
     .stat-container{
       display: block;
     }
- }
 
+    .wrapper-50{
+      width: 100%;
+    }
+ }
 
 
  @media screen and (max-width: 404px){
