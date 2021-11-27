@@ -93,6 +93,9 @@ class BodyController extends Controller
         $arrayWeight = array_values($arrayWeight);
         $arrayBodyFat = array_values($arrayBodyFat);
 
+        $countMouths = $this->formatdate($countMouths);
+
+
         return view('bodies.index' , compact(   'goals_weight' , 
                                                 'goals_body_fat' , 
                                                 'measurements' , 
@@ -152,6 +155,16 @@ class BodyController extends Controller
 
         return $count;
 
+    }
+
+    public function formatdate($dates){
+
+        foreach($dates as $index => $date){
+            $newDate = new Carbon($date);
+            $dates[$index] = $newDate->format('d/m/Y');
+        }
+
+        return $dates;
     }
 
     /**

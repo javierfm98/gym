@@ -113,7 +113,7 @@ class TrainingController extends Controller
         foreach($hours as $hour){
             $hour = new Carbon($hour);
             if($hour->eq($start) || $hour->eq($end)){
-                print_r($start->format('H:i'));
+               // print_r($start->format('H:i'));
                 return false;
             }
         }
