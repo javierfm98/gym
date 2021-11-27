@@ -77,7 +77,7 @@
 						<i class="fas fa-chart-area fa-fw"></i>
 						<span>Estadisticas</span>
 					</a>
-					<a href="#" class="link">
+					<a href="{{ route('settings.index') }}" class="link {{ (request()->routeIs('settings.index')) ? 'active' : '' }}">
 						<i class="fas fa-wrench fa-fw"></i>
 						<span>Ajustes gimnasio</span>
 					</a>

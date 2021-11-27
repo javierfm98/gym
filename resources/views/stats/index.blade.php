@@ -17,12 +17,6 @@
 		<div class="wrapper">
 			<div id="profits"></div>
 		</div>
-	<!--	<div class="wrapper">
-			<div id="profits2"></div>
-		</div> -->
-	<!--	<div class="wrapper">
-			<div id="profits3"></div>
-		</div> -->
 		<div class="wrapper">
 			<div id="rates"></div>
 		</div>

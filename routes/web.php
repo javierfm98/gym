@@ -55,13 +55,14 @@ Route::post('/admin-reservation', 'ReservationController@storeModal')->name('res
 Route::get('/search', 'SearchController@search')->name('searches.search')->middleware('auth');
 Route::get('/display-trainings', 'TrainingController@displayTrainings')->name('reservations.displayTrainings')->middleware('auth');
 Route::post('/back-reservation', 'ReservationController@backReservation')->name('reservations.backReservation')->middleware('auth');
+Route::post('/update/rate' , 'SettingController@updateRate')->name('settings.updateRate')->middleware('auth');
 
 
 
 
 
 Route::resource('trainings', 'TrainingController')->middleware('auth');
-Route::resource('trainings_settings', 'SettingController')->middleware('auth');
+Route::resource('settings', 'SettingController')->middleware('auth');
 
 
 

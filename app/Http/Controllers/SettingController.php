@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Setting;
+use App\Rate;
 use Carbon\Carbon;
 
 class SettingController extends Controller
@@ -16,8 +17,9 @@ class SettingController extends Controller
     public function index()
     {
         $setting = Setting::findOrFail(1);
+        $rates = Rate::all();
 
-        return view('settings.index' , compact('setting'));
+        return view('settings.index' , compact('setting' , 'rates'));
     }
 
     /**
@@ -56,7 +58,24 @@ class SettingController extends Controller
             $notification = 'Ajustes del entreno cambiados correctamente.'; 
         }
 
-        return redirect('/trainings_settings')->with(compact('notification' , 'error')); 
+        return redirect('/settings')->with(compact('notification' , 'error')); 
+    }
+
+    public function updateRate(Request $request)
+    { 
+        for($i=1; $i<=3; $i++){
+            $id = $request->get('id_rate_'.$i);
+            $price = $request->get('price_'.$i);
+            $rate = Rate::findOrFail($id);
+            $rate->price = $price;
+            $rate->save();
+        }
+
+        $notification = 'Tarifas actualizas correctamente.';
+
+        return redirect('/settings')->with(compact('notification')); 
+
+
     }
 
     /**

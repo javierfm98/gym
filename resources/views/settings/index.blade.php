@@ -4,21 +4,23 @@
 @section('content')
 
 
-		<div class="wrapper">
-			@if (session('notification'))
-	      		<div class="custom-alert alert-green">
-	            	{{ session('notification') }}
-	      		</div> 
-			@endif
+		@if (session('notification'))
+      		<div class="custom-alert alert-green alert-no-wrapper">
+            	{{ session('notification') }}
+      		</div> 
+		@endif
 
-			@if (session('error'))
-	      		<div class="custom-alert alert-red">
-	            	{{ session('error') }}
-	      		</div> 
-			@endif
+		@if (session('error'))
+      		<div class="custom-alert alert-red alert-no-wrapper">
+            	{{ session('error') }}
+      		</div> 
+		@endif
+
+		<div class="wrapper">
+
 
 			<h3 class="title">Ajustes de los entrenos</h3>
-			<form action="{{ route('trainings_settings.store') }}" method="POST">
+			<form action="{{ route('settings.store') }}" method="POST">
 				@csrf
 				<div class="input-container">
 					<div class="input-box field-outlined no-margin-bottom">
@@ -73,6 +75,25 @@
 				<div>
 					<button type="submit" class="button button-primary">Guardar</button>
 					<a href="{{ route('trainings.index') }}" class="button button-cancel ">Cancelar</a>
+				</div>
+			</form>
+		</div>
+
+		<div class="wrapper">
+			<h3 class="title">Tarifas</h3>
+			<form action="{{ route('settings.updateRate') }}" method="POST">
+				@csrf
+				<div class="input-container">
+					@foreach($rates as $rate)
+						<div class="input-box field-outlined">
+							<input type="hidden" name="id_rate_{{ $rate->id }}" value="{{ $rate->id }}">
+							<input type="text" class="input" name="price_{{ $rate->id }}" value="{{ $rate->price }}">
+							<label for="" class="label">{{ $rate->name }} (Euros)</label>
+						</div>
+					@endforeach
+				</div>
+				<div>
+					<button class="button button-primary">Guardar</button>
 				</div>
 			</form>
 		</div>

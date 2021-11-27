@@ -5,12 +5,6 @@
 
 		<div class="no-wrapper">
 
-			@if(auth()->user()->hasRole(['admin']))
-				<div class="settings-container">
-					<a href="{{ route('trainings_settings.index') }}"><i class="fas fa-cog"></i></a>						
-				</div>
-			@endif
-
 			<div class="header training-button-container">
 				@if(auth()->user()->hasRole(['admin']))
 					<h3>Todos los entrenos</h3>

@@ -1327,6 +1327,13 @@
 }
 
 
+.alert-no-wrapper{
+    width:90%;
+    max-width: 1100px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
  /************************************************************/
 
  /* HOME */

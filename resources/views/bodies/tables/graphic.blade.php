@@ -32,7 +32,7 @@
 	        }
 	    },
 	    series: [{
-        name: 'Objetivo Peso',
+        name: 'Objetivo Peso (Kg)',
         dashStyle: 'ShortDash',
         data: @json($goalWeightCount)
     }, {
@@ -40,7 +40,7 @@
         dashStyle: 'ShortDash',
         data: @json($goalBodyFatCount)
     } , {
-    	name: 'Peso',
+    	name: 'Peso (Kg)',
     	pointStart: @json($pointStartWeight),
     	data: @json($arrayWeight)
     }, {

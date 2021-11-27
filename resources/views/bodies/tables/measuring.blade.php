@@ -11,9 +11,9 @@
 				<tbody>
 					@foreach($measurements as $measurement)
 						<tr style="text-align: center;">
-						<td> {{ $measurement->value }} </td>
+						<td> {{ $measurement->value }} Kg</td>
 						<td> {{ $measurement->stat->description }} </td>
-						<td> {{ $measurement->date->format('d-m-Y') }} </td>
+						<td> {{ $measurement->date->format('d/m/Y') }} </td>
 						<td>
 							<div class="action-container">
 								<form action="{{ route('bodies.destroy', $measurement->id) }}" method="POST">

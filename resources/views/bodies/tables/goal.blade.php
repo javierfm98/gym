@@ -7,7 +7,7 @@
 					@else
 						<input type="text" class="input" name="goal_weight">
 					@endif
-					<label for="" class="label">Peso</label>
+					<label for="" class="label">Peso (Kg)</label>
 				</div>
 				<div class="input-box field-outlined">
 					@if($goals_body_fat)
