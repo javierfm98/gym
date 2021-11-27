@@ -11,8 +11,8 @@
 					<input type="text" class="input" name="weight">
 					<label for="" class="label">Peso (Kg)</label>
 				</div>
-				<div class="input-box-3 field-outlined" name="body_fat">
-					<input type="text" class="input">
+				<div class="input-box-3 field-outlined">
+					<input type="text" class="input" name="body_fat">
 					<label for="" class="label">% Grasa corporal</label>
 				</div>
 			</div>

@@ -119,8 +119,6 @@ class BodyController extends Controller
             }
         }
 
-        
-
         $countNumber = $this->countNumber($arrayValue);
 
         foreach($arrayValue as $key =>$item){
@@ -177,46 +175,45 @@ class BodyController extends Controller
         $user_id = auth()->user()->id;
         $date = $request->day;
 
-        if( $request->weight != null)
-        {
-            $stat_weight = Body::where('date' , $date)->where('stat_id' , 1)->first();
-
-            if($stat_weight != null){
-                $data = ['value' => $request->weight];
-
-                $stat_weight->fill($data);
-                $stat_weight->save(); 
-            }else{
-                Body::create([
-                    'user_id' => $user_id,
-                    'stat_id' => 1,
-                    'value' => $request->weight,
-                    'date' =>  $date
-                ]);
-            }    
+        if($request->weight != null){
+            $this->storeMeasuring($user_id, $date, $request->weight, 1); //Weight
         }
 
-        if( $request->body_fat != null)
-        {
-            $stat_body_fat = Body::where('date' , $date)->where('stat_id' , 2)->first();
+        if( $request->body_fat != null){
+             $this->storeMeasuring($user_id, $date, $request->body_fat, 2); //Body Fat
+        }
+        
+        return redirect('bodies');
+    }
 
-            if($stat_body_fat != null){
-                $data = ['value' => $request->body_fat];
 
-                $stat_body_fat->fill($data);
-                $stat_body_fat->save(); 
+    public function storeMeasuring($user_id, $date, $value, $stat_id)
+    {
+        $stat = Body::where('date', $date)->where('stat_id', $stat_id)->first();
+
+        if($stat != null){
+            $stat->value = $value;
+            $stat->save();
+        }else{
+            $count = Body::where('stat_id', $stat_id)->get()->count();
+
+            if($count >= 10){
+                $oldestStat = Body::where('stat_id', $stat_id)->orderBy('date')->first();
+                $oldestStat->date = $date;
+                $oldestStat->value = $value;
+                $oldestStat->save();
             }else{
                 Body::create([
                     'user_id' => $user_id,
-                    'stat_id' => 2,
-                    'value' => $request->body_fat,
-                    'date' =>  $date
+                    'stat_id' => $stat_id,
+                    'value' => $value,
+                    'date' => $date
                 ]);
             }
         }
 
-        return redirect('bodies');
     }
+
 
     /**
      * Display the specified resource.
