@@ -1,5 +1,6 @@
 		<h5>Añadir objetivos</h5>
-		<form>
+		<form action="{{ route('goals.store') }}" method="POST" autocomplete="off">
+			@csrf
 			<div class="input-container">
 				<div class="input-box field-outlined">
 					@if($goals_weight)

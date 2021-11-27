@@ -63,9 +63,14 @@ class SettingController extends Controller
 
     public function updateRate(Request $request)
     { 
+
         for($i=1; $i<=3; $i++){
             $id = $request->get('id_rate_'.$i);
             $price = $request->get('price_'.$i);
+            if($price == null || $price < 0){
+                $error = "Error el modificar las tarifas";
+                return redirect('/settings')->with(compact('error'));
+            }
             $rate = Rate::findOrFail($id);
             $rate->price = $price;
             $rate->save();
