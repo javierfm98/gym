@@ -36,7 +36,7 @@
 									<tr style="text-align:center;">
 										<td> Pago {{ $payment->rate->name }} </td>
 										<td> {{ $payment->end_at->format('d/m/Y') }} </td>
-										<td> {{ $payment->rate->price }} </td>
+										<td> {{ $payment->rate->price }} €</td>
 										<td>
 											@if($payment->status == 1)
 												<span class="badge-custom badge-green">PAGADO</span>

@@ -33,8 +33,6 @@ class HomeController extends Controller
 
         $phrases = $arrayPhrases[$phrasesIndex];
 
-
-
         $user_id =  auth()->user()->id;
 
         if(auth()->user()->id == 1){

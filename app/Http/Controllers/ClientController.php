@@ -12,6 +12,7 @@ use Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Mail\WelcomeMailable;
 
+
 class ClientController extends Controller
 {
     /**
@@ -88,7 +89,8 @@ class ClientController extends Controller
                 /*'password' => bcrypt(123456789),*/
                 'username' => $username , 
                 'photo_id' => 1 , 
-                'registration_token' => $token
+                'registration_token' => $token,
+                'payment_status' => 1
             ]
         );
 

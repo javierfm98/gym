@@ -436,6 +436,14 @@ class TrainingController extends Controller
 
     }
 
+    public function listTrainings(){
+
+        $trainings = Reservation::where('user_id', auth()->user()->id)->paginate(5);
+
+
+        return view('trainings.list' , compact('trainings'));
+    }
+
 }
 
 

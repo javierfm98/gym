@@ -24,7 +24,7 @@
 						</div>
 						<div class="card-home-body">
 							@foreach($trainings as $training)
-								<div class="list-home list-training">
+								<div class="list-home list-training" onclick="goTo({{ $training->id }})">
 									<div>
 										<h6 class="list-home-info">{{ $training->training->start->format('H:i') }} - {{ $training->training->end->format('H:i') }}</h6>
 										<small class="list-home-sub">{{ $training->training->day->format('d/m/Y') }}</small>
@@ -36,7 +36,7 @@
 									<h3>No tienes clases reservadas</h3>
 								</div>
 							@else
-								<button class="button button-primary text-bold button-home-list">Ver todos</button>
+								<a href="{{ route('trainings.list') }}" class="button button-primary text-bold button-home-list">Ver todos</a>
 							@endif
 						</div>
 					</div>							
@@ -77,6 +77,20 @@
 				</div>
 			</div>
 		
+
+@endsection
+
+@section('scripts')
+
+<script>
+	function goTo(trainingId){
+		var base_url = window.location.origin;
+		var url = base_url + '/trainings/' + trainingId;
+
+		window.location = url;
+	}
+</script>
+
 
 @endsection
 

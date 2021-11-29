@@ -56,6 +56,7 @@ Route::get('/search', 'SearchController@search')->name('searches.search')->middl
 Route::get('/display-trainings', 'TrainingController@displayTrainings')->name('reservations.displayTrainings')->middleware('auth');
 Route::post('/back-reservation', 'ReservationController@backReservation')->name('reservations.backReservation')->middleware('auth');
 Route::post('/update/rate' , 'SettingController@updateRate')->name('settings.updateRate')->middleware('auth');
+Route::get('/trainings/list' , 'TrainingController@listTrainings')->name('trainings.list')->middleware('auth');
 
 
 

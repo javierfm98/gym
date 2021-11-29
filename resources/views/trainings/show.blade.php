@@ -19,7 +19,9 @@
             				@csrf
                      		@method('DELETE')
 						   	<input type="hidden" name="user_id" value="{{ $client->user_id}}">
-							<button type="submit" class="button-delete-client"><i class="fas fa-times fa-fw icon-cross"></i></button>
+						   	@if(auth()->user()->hasRole(['admin']))
+								<button type="submit" class="button-delete-client"><i class="fas fa-times fa-fw icon-cross"></i></button>
+							@endif 
 						</form>
 						<img src="/img/{{ $client->user->photo->route }}" alt="profileImg" class="details-photo"></span>
 						<span> {{ $client->user->name }} {{ $client->user->surname }} </span>
@@ -40,7 +42,7 @@
 					<span> {{ $training->user->name }} {{ $training->user->surname }} </span>
 				</div>
 			</div>
-			<h3 class="title-wod indentation-training">ENTRENO</h3>
+			<h3 class="title-trainging indentation-training">ENTRENO</h3>
 			<div class="indentation-training">
 				<td>{!! nl2br($training->description) !!}</td>
 			</div>							
