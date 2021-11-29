@@ -24,7 +24,7 @@
 							@endif 
 						</form>
 						<img src="/img/{{ $client->user->photo->route }}" alt="profileImg" class="details-photo"></span>
-						<span> {{ $client->user->name }} {{ $client->user->surname }} </span>
+						<span> {{ $client->user->name }} </span>
 					</div>
 				@endforeach
 			</div>   
@@ -39,7 +39,7 @@
 			<div class="details-clients">
 				<div class="card-client" style="cursor: default;">
 					<img src="/img/{{ $training->user->photo->route }}" alt="profileImg" class="details-photo"></span>
-					<span> {{ $training->user->name }} {{ $training->user->surname }} </span>
+					<span> {{ $training->user->name }} </span>
 				</div>
 			</div>
 			<h3 class="title-trainging indentation-training">ENTRENO</h3>

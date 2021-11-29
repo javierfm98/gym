@@ -21,7 +21,8 @@
     font-weight: bold;
     padding: 0 0.75rem;
     margin-top: 10px;
-    margin-bottom: 20px;
+    height: calc(100% - 170px);;
+    overflow-y: auto;
   } 
 
 
@@ -985,7 +986,7 @@
     border-radius: 4px;
     border: 1px solid rgba(0,0,0,0.1);
     font-size: 12px;
-    width: 160px;
+    width: 180px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

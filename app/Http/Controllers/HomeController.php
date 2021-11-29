@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $user_id =  auth()->user()->id;
 
-        if(auth()->user()->id == 1){
+        if(auth()->user()->hasRole(['admin', 'trainer'])){
             $payments = Subscription::take(3)->get();
             $nextPay = 0;
         }else{

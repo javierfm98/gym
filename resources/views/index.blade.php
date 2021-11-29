@@ -24,7 +24,7 @@
 						</div>
 						<div class="card-home-body">
 							@foreach($trainings as $training)
-								<div class="list-home list-training" onclick="goTo({{ $training->id }})">
+								<div class="list-home list-training" onclick="goTo({{ $training->training->id }})">
 									<div>
 										<h6 class="list-home-info">{{ $training->training->start->format('H:i') }} - {{ $training->training->end->format('H:i') }}</h6>
 										<small class="list-home-sub">{{ $training->training->day->format('d/m/Y') }}</small>

@@ -33,22 +33,23 @@
 					</a> 
 					<a href="{{ route('reservations.index') }}" class="link {{ (request()->routeIs('reservations.index')) ? 'active' : '' }}">
 						<i class="fas fa-calendar-alt fa-fw"></i>
-						<span>Reservar</span>
+						<span>@if(auth()->user()->hasRole(['client'])) Reservar @else Reservas @endif</span>
 					</a>
+				{{--  	@if(auth()->user()->hasRole(['client'])) --}}
 					<a href="{{ route('trainings.list') }}" class="link {{ (request()->routeIs('trainings.list')) ? 'active' : '' }}">
 						<i class="fas fa-dumbbell fa-fw"></i>
 						<span>Mis entrenos</span>
 					</a> 
-					@if(auth()->user()->hasRole(['client', 'trainer']))
 					<a href="{{ route('payments.index') }}" class="link {{ (request()->routeIs('payments.index')) ? 'active' : '' }}">
 						<i class="fas fa-credit-card fa-fw"></i>
 						<span>Mis pagos</span>
 					</a>
-					@endif
 					<a href="{{ route('bodies.index') }}" class="link {{ (request()->routeIs('bodies.index')) ? 'active' : '' }}">
 						<i class="fas fa-heartbeat fa-fw"></i>
 						<span>Mi cuerpo</span>
 					</a>
+				{{-- 	@endif --}}
+
 					<a href="{{ route('profiles.index') }}" class="link {{ (request()->routeIs('profiles.index')) ? 'active' : '' }}">
 						<i class="fas fa-user-edit fa-fw"></i>
 						<span>Perfil</span>
@@ -86,16 +87,12 @@
 						<span>Ajustes gimnasio</span>
 					</a>
 					@endif
-					@if(auth()->user()->hasRole(['trainer'])) 
-					<a href="{{ route('trainings.index') }}" class="link">
-						<i class="fas fa-dumbbell fa-fw"></i>
-						<span> Mis Entrenos</span>
-					</a>
-					@endif 
-				<!--	<a href="#" class="link">
-						<i class="fas fa-envelope fa-fw"></i>
-						<span>Enviar mensaje</span>
-					</a> -->
+						@if(auth()->user()->hasRole(['trainer'])) 
+						<a href="{{ route('trainings.index') }}" class="link">
+							<i class="fas fa-dumbbell fa-fw"></i>
+							<span> Mis Entrenos</span>
+						</a>
+						@endif 
 					@endif 
 				</nav>
 

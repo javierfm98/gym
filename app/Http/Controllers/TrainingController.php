@@ -324,7 +324,7 @@ class TrainingController extends Controller
                                         <div class="admin-container">
                                             <a class="mini-button button-cancel" id="open-modal" onClick="openModal('.$training->id.')">Apuntar a un atleta</a>
                                             <input type="hidden" value="'.$training->id.'" id="trainingId">
-                                            <a href="#" class="mini-button button-cancel" style="margin-bottom: 0px">Modificar entreno</a>
+                                        <!--     <a href="#" class="mini-button button-cancel" style="margin-bottom: 0px">Modificar entreno</a> -->
                                         </div>';
                     }else{
                         $botonAdmin = '';

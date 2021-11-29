@@ -25,7 +25,7 @@ class SubscriptionController extends Controller
         }else if($filter == 2){
             $subscriptions = User::clients()->where('payment_status' , 1)->paginate(5);
         }else if($filter == 3){
-            $subscriptions = Subscription::where('status' , 2)->paginate(5);
+             $subscriptions = User::clients()->where('payment_status' , 2)->paginate(5);
         }else{
            if($name){
                 $subscriptions = User::clients()->name($name)->paginate(5);
