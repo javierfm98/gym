@@ -18,6 +18,7 @@ class SubscriptionsTableSeeder extends Seeder
         $number = count($ids);
 
         factory(Subscription::class, $number)->create();
+        factory(Subscription::class, 250)->states('many')->create();
     }
 }
 

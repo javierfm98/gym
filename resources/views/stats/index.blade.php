@@ -155,7 +155,7 @@ Highcharts.chart('rates', {
         tooltip:{
  			formatter: function() {
 		        if(!this.point.noTooltip) {
-		            return '<br/>Porcentaje: <b>'+this.point.y+
+		            return '<br/>Porcentaje: <b>'+Highcharts.numberFormat(this.point.y,1,',','.')+
 		                   '</b> %<br/>';
         		}
    
@@ -210,7 +210,7 @@ Highcharts.chart('rates', {
     tooltip:{
  			formatter: function() {
 		        if(!this.point.noTooltip) {
-		            return '<br/>Porcentaje: <b>'+this.point.y+
+		            return '<br/>Porcentaje: <b>'+Highcharts.numberFormat(this.point.y,1,',','.')+
 		                   '</b> %<br/>';
         		}
    
@@ -265,7 +265,7 @@ Highcharts.chart('rates', {
     tooltip:{
  			formatter: function() {
 		        if(!this.point.noTooltip) {
-		            return '<br/>Porcentaje: <b>'+this.point.y+
+		            return '<br/>Porcentaje: <b>'+Highcharts.numberFormat(this.point.y,1,',','.')+
 		                   '</b> %<br/>';
         		}
    

@@ -15,7 +15,7 @@ class PaymentController extends Controller
     public function index()
     {
 
-        $payments = Subscription::where('user_id', auth()->user()->id)->paginate(5);
+        $payments = Subscription::where('user_id', auth()->user()->id)->orderBy('end_at', 'desc')->paginate(5);
 
     
 
