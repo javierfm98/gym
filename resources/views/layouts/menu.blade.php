@@ -98,7 +98,7 @@
 
 			<div class="profile">
 				<div class="photo">
-					<img src="/img/{{ auth()->user()->photo->route }}" alt="profilePhoto" class="profile-photo"> 
+					<img src="{{ asset('img/'.auth()->user()->photo->route) }}" alt="profilePhoto" class="profile-photo">
 				</div>
 				<div class="full-name">
 						<a href="{{ route('profiles.index') }}" class="link">

@@ -53,8 +53,6 @@ class HomeController extends Controller
             }
         }
 
-
-
         $trainings = Reservation::where('user_id', $user_id)->orderBy('created_at' , 'desc')->take(3)->get();
 
 
