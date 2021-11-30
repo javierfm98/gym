@@ -52,7 +52,7 @@
 					</div>
 				</div>
 				<div>
-					<button type="submit" class="button button-primary">Dar de alta</button>
+					<button type="submit" class="button button-primary">Guardar</button>
 					<a href="{{ route('clients.index') }}" class="button button-cancel ">Cancelar</a>
 				</div>
 			</form>

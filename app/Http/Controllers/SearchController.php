@@ -15,6 +15,7 @@ class SearchController extends Controller
        if($request->ajax()){
             $name = $request->search;
             $salida = "";
+            $urlForm = route('reservations.storeModal');
 
             if(url()->previous() == url('/')."/reservations"){
 
@@ -25,7 +26,7 @@ class SearchController extends Controller
                                         <td>
                                             <div class="table-modal-content">
                                                 <span>' .$client->name.  '</span>
-                                                <form action="/admin-reservation" method="POST">
+                                                <form action="'.$urlForm.'" method="POST">
                                                     '.csrf_field().'
                                                     <input type="hidden" value='.$client->id.' name="cliente_id">
                                                     <input type="hidden" name="training_id" id="training_id" class="entreno">

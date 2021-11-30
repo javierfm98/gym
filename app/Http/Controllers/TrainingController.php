@@ -333,23 +333,24 @@ class TrainingController extends Controller
                     $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
                     $statusSub = $this->canReservation($user_id);
                     $statusSub = true;
+                    $detailsUrl = route('trainings.show', 1);
                     if($isReserved){
                         $botones = '<button type="submit" class="button button-primary text-bold">Cancelar Reserva</button>
-                                    <a href="/trainings/'.$training->id.'"class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
+                                    <a href="'.$detailsUrl.'"class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
                         $badge = '<span class="badge-custom badge-green">CLASE RESERVADA</span>';
-                        $link = '/reservations/'.$training->id;
+                        $link = route('reservations.destroy', $training->id);
                         $method =  '<input type="hidden" name="_method" value="DELETE">';
                     }else{
                         if($statusSub){
                             $botones = '<button type="submit" class="button button-primary text-bold">Reservar</button>
-                                        <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';                            
+                                        <a href="'.$detailsUrl.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';                            
                         }else{
                             $botones = '<button type="submit" class="button button-primary button-disabled text-bold">Reservar</button>
-                                        <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';                            
+                                        <a href="'.$detailsUrl.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';                            
                         }
 
                         $badge = '';
-                        $link = '/reservations';
+                        $link = route('reservations.store');
                         $method = '';
                     }
 
@@ -359,7 +360,7 @@ class TrainingController extends Controller
                             $classSpan = 'text-red';
                             if(!$isReserved)
                             $botones = '<button type="submit" class="button button-primary button-disabled text-bold">Disable button</button>
-                                        <a href="/trainings/'.$training->id.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
+                                        <a href="'.$detailsUrl.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
                      }else{
                             $badgeFull = '';
                             $classSpan = '';

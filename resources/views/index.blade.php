@@ -15,6 +15,7 @@
 					</div>
 				</div>
 			</div>
+			
 
 			@if(auth()->user()->hasRole(['client']))
 				@include('home.client')
@@ -30,9 +31,8 @@
 
 <script>
 	function goTo(trainingId){
-		var base_url = window.location.origin;
+		var base_url = document.getElementById('url').value;
 		var url = base_url + '/trainings/' + trainingId;
-
 		window.location = url;
 	}
 </script>

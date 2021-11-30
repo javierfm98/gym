@@ -1,5 +1,7 @@
 let $date = $('#datePicker');
 let $horario = $('#currentHour');
+let $baseUrl = $("#url").val();
+
 
 
 //console.log($horario.val());
@@ -16,10 +18,10 @@ function loadHours(){
 	
 }
 
-function displayHours(date , schedule){
+function displayHours(date , schedule, baseUrl){
 	$.ajax({
 		type: 'GET' , 
-		url : '/hours' ,
+		url : $baseUrl+'/hours' ,
 		data:{'date':date , 'schedule' : schedule } ,
 		success:function(data){
 			$('#horario').html(data);

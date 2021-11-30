@@ -20,6 +20,7 @@
 </head>
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<input type="hidden" value="{{url('/')}}" id="url" name="url">
 			<div class="sidebar" id="sidebar">
 				<div class="logo-container"> 
 					<a href="{{ route('home') }}">
@@ -127,7 +128,7 @@
 					 @yield('content')
 				</div>
 			</div>
-
+			
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

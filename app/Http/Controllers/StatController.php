@@ -111,7 +111,12 @@ class StatController extends Controller
 
         $arrayColors = ['#dc3545', '#28a745', '#f0ad4e'];
 
-        $percentageClients = ($dataClients * 100)/$totalClients;
+        if($totalClients != 0){
+            $percentageClients = ($dataClients * 100)/$totalClients;
+        }else{
+            $percentageClients = 0;
+        }
+   
         $remaining = 100 - $percentageClients;
 
         $data = [];

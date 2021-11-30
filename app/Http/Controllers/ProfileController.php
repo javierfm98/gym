@@ -108,11 +108,13 @@ class ProfileController extends Controller
         }
         
 
+
         if($photo){
             $namePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             $uniqueNamePhoto = $namePhoto."_".time().'.'.$photo->getClientOriginalExtension();
-            $photo->move('img' , $uniqueNamePhoto);
-
+         //   $photo->move(asset('/img') , $uniqueNamePhoto);
+            $destinationPath = public_path('img/');
+            $photo->move($destinationPath, $uniqueNamePhoto);
             $profilePhoto = Photo::create(['route' => $uniqueNamePhoto]);
 
             $photoId = $profilePhoto->id;

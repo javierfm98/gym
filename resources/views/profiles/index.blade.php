@@ -9,11 +9,11 @@
           <div class="profile-image-container">
             <div class="image-profile-container">
               <label for="file-input">
-                <img src="/img/{{ auth()->user()->photo->route }}" alt="Foto perfil" class="image-profile real-image" id="profilePhoto">
-                <img src="/img/change.png" alt="Change" class="image-profile change">
+                <img src="{{ asset('img/'.auth()->user()->photo->route) }}" alt="Foto perfil" class="image-profile real-image" id="profilePhoto">
+                <img src="{{ asset('img/change.png') }}" alt="Change" class="image-profile change">
               </label>
-              <form action="/profiles/{{ auth()->user()->id }}" method="POST" enctype="multipart/form-data">
-              <input type="file" name="" class="input-file" id="file-input">
+              <form action="{{ route('profiles.update' , auth()->user()->id) }}" method="POST" enctype="multipart/form-data">
+              <input type="file" name="photo" class="input-file" id="file-input">
             </div>
             <div class="name-profile-container">
               <span> {{ auth()->user()->name }} </span>

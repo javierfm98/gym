@@ -23,7 +23,7 @@
 								<button type="submit" class="button-delete-client"><i class="fas fa-times fa-fw icon-cross"></i></button>
 							@endif 
 						</form>
-						<img src="/img/{{ $client->user->photo->route }}" alt="profileImg" class="details-photo"></span>
+						<img src="{{ asset('img/'.auth()->user()->photo->route) }}" alt="profileImg" class="details-photo"></span>
 						<span> {{ $client->user->name }} </span>
 					</div>
 				@endforeach
@@ -38,7 +38,7 @@
 			<h6 class="indentation-training">Entrenador</h6>
 			<div class="details-clients">
 				<div class="card-client" style="cursor: default;">
-					<img src="/img/{{ $training->user->photo->route }}" alt="profileImg" class="details-photo"></span>
+					<img src="{{ asset('img/'.auth()->user()->photo->route) }}" alt="profileImg" class="details-photo"></span>
 					<span> {{ $training->user->name }} </span>
 				</div>
 			</div>

@@ -3,6 +3,8 @@
 	var modal = document.getElementById('modal');
 	var training_id = document.getElementById("trainingId");
 
+	var baseUrl = document.getElementById("url").value;
+
 
 	$(window).unbind().click(function(e) {
     if(e.target == modalC){
@@ -45,7 +47,7 @@ $(document).ready(function(){
 function searchClient(client){
 	$.ajax({
 	type: 'GET' , 
-	url : '/search' ,
+	url : baseUrl+'/search' ,
 	data:{'search':client } ,
 	success:function(data){
 		$('#result').html(data);

@@ -1,4 +1,5 @@
 let $date = $('#datePicker');
+let $baseUrl = $("#url").val();
 
 window.onload = loadHours;
 $date.change(loadHours);
@@ -17,7 +18,7 @@ function loadHours(){
 function displayHours(date){
 	$.ajax({
 		type: 'GET' , 
-		url : '/hours' ,
+		url : $baseUrl+'/hours' ,
 		data:{'date':date } ,
 		success:function(data){
 			$('#schedule').html(data);

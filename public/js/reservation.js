@@ -1,4 +1,5 @@
 let $date = $('#datePicker');
+let $baseUrl = $("#url").val();
 
 
 window.onload = loadTrainings;
@@ -10,8 +11,8 @@ function loadTrainings(){
     value = document.getElementById('juan').value;
     console.log(value);
     $date.val(value);
+   
   }
-
 	displayTrainings($date.val());
 }
 
@@ -19,7 +20,7 @@ function loadTrainings(){
 function displayTrainings(date){
 	$.ajax({
 		type: 'GET' , 
-		url : '/display-trainings' ,
+		url : $baseUrl+'/display-trainings' ,
 		data:{'date':date } ,
 		success:function(data){
 			$('#trainings').html(data);
