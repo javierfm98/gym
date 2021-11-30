@@ -20,7 +20,8 @@ $factory->define(Subscription::class, function (Faker $faker) use ($getUserId, $
     $user_id_pay = (int) $getPaymentStatus->current();
     $getPaymentStatus->next();
 
-    $startMonth = Carbon::today()->startOfMonth()->toDateString();
+   // $startMonth = Carbon::today()->startOfMonth()->toDateString();
+    $now = Carbon::today()->toDateString();
     $endMonth = Carbon::today()->endOfMonth()->toDateString();
 
 
@@ -29,7 +30,7 @@ $factory->define(Subscription::class, function (Faker $faker) use ($getUserId, $
         'rate_id' => $faker->randomElement([1,2,3]),
         'status' =>  $user_id_pay,
         //'end_at' =>  $faker->dateTimeThisMonth()
-        'end_at' => $faker->dateTimeBetween($startDate =  $startMonth, $endDate = $endMonth, $timezone = null)
+        'end_at' => $faker->dateTimeBetween($startDate =  $now, $endDate = $endMonth, $timezone = null)
 
     ];
 });

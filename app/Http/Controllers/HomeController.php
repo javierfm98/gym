@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Subscription;
 use App\Reservation;
+use App\User;
+use App\Training;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -35,9 +37,11 @@ class HomeController extends Controller
 
         $user_id =  auth()->user()->id;
 
-        if(auth()->user()->hasRole(['admin', 'trainer'])){
-            $payments = Subscription::take(3)->get();
+        if(auth()->user()->hasRole(['admin'])){
+            $payments = Subscription::take(3)->orderBy('end_at', 'desc')->get();
             $nextPay = 0;
+        }else if(auth()->user()->hasRole(['trainer'])){
+            $trainingsTrainer = Training::where('user_id', $user_id)->orderBy('day', 'desc')->take(3)->get();    
         }else{
             $payments = Subscription::where('user_id', $user_id)->orderBy('end_at' , 'desc')->take(3)->get();
             $currentDay = Carbon::now();
@@ -49,10 +53,12 @@ class HomeController extends Controller
             }
         }
 
+
+
         $trainings = Reservation::where('user_id', $user_id)->orderBy('created_at' , 'desc')->take(3)->get();
 
 
-        return view('index', compact('payments', 'trainings', 'phrases', 'nextPay'));
+        return view('index', compact('payments', 'trainings', 'phrases', 'nextPay', 'trainingsTrainer'));
     }
 
 

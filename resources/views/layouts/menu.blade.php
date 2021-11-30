@@ -33,7 +33,7 @@
 					</a> 
 					<a href="{{ route('reservations.index') }}" class="link {{ (request()->routeIs('reservations.index')) ? 'active' : '' }}">
 						<i class="fas fa-calendar-alt fa-fw"></i>
-						<span>@if(auth()->user()->hasRole(['client'])) Reservar @else Reservas @endif</span>
+						<span>Reservar</span>
 					</a>
 				{{--  	@if(auth()->user()->hasRole(['client'])) --}}
 					<a href="{{ route('trainings.list') }}" class="link {{ (request()->routeIs('trainings.list')) ? 'active' : '' }}">
