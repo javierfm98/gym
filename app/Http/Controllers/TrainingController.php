@@ -439,8 +439,9 @@ class TrainingController extends Controller
 
     public function listTrainings(){
 
-        $trainings = Reservation::where('user_id', auth()->user()->id)->paginate(5);
-
+        $currentDate = Carbon::now();
+        $reservation = Reservation::where('user_id' , auth()->user()->id)->get(['training_id']);
+        $trainings = Training::whereIn('id' , $reservation)->whereDate('day' , '>=' ,  $currentDate)->paginate(5);
 
         return view('trainings.list' , compact('trainings'));
     }

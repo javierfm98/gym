@@ -36,12 +36,13 @@ class HomeController extends Controller
         $phrases = $arrayPhrases[$phrasesIndex];
 
         $user_id =  auth()->user()->id;
+        $currentDate = Carbon::now();
 
         if(auth()->user()->hasRole(['admin'])){
             $payments = Subscription::take(3)->orderBy('end_at', 'desc')->get();
             $nextPay = 0;
         }else if(auth()->user()->hasRole(['trainer'])){
-            $trainingsTrainer = Training::where('user_id', $user_id)->orderBy('day', 'desc')->take(3)->get();    
+            $trainingsTrainer = Training::where('user_id', $user_id)->whereDate('day' , '>=' , $currentDate)->orderBy('day', 'desc')->take(3)->get();    
         }else{
             $payments = Subscription::where('user_id', $user_id)->orderBy('end_at' , 'desc')->take(3)->get();
             $currentDay = Carbon::now();
@@ -53,8 +54,9 @@ class HomeController extends Controller
             }
         }
 
-        $trainings = Reservation::where('user_id', $user_id)->orderBy('created_at' , 'desc')->take(3)->get();
-
+        
+        $reservation = Reservation::where('user_id' ,  $user_id)->get(['training_id']);
+        $trainings = Training::whereIn('id' , $reservation)->whereDate('day' , '>=' ,  $currentDate)->take(3)->get();
 
         return view('index', compact('payments', 'trainings', 'phrases', 'nextPay', 'trainingsTrainer'));
     }

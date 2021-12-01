@@ -19,12 +19,12 @@
 							<tbody>
 								@foreach ($trainings as $training)
 									<tr style="text-align:center;">
-										<td> {{ $training->training->day->format('d/m/Y') }} </td>
-										<td> {{ $training->training->start->format('H:i') }} - {{ $training->training->end->format('H:i') }} </td>
+										<td> {{ $training->day->format('d/m/Y') }} </td>
+										<td> {{ $training->start->format('H:i') }} - {{ $training->end->format('H:i') }} </td>
 										<td> Crossfit </td>
 										<td>
 											<div class="show-training-container">
-												<a href="{{ route('trainings.show', $training->training->id) }}" class="button-circle"><i class="fas fa-eye fa-fw "></i></a>
+												<a href="{{ route('trainings.show', $training->id) }}" class="button-circle"><i class="fas fa-eye fa-fw "></i></a>
 											</div>
 										</td>
 									</tr>

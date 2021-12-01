@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Reservation;
 use App\Training;
@@ -79,7 +80,7 @@ class UserController extends Controller
     public function subs()
     {
         $user = Auth::user();
-        $subscription = Subscription::where('user_id' , $user->id)->get();
+        $subscription = Subscription::where('user_id' , $user->id)->orderBy('end_at', 'desc')->get();
 
         return $subscription;
     }
@@ -106,5 +107,46 @@ class UserController extends Controller
 
         $success = true;
         return $success;
+    }
+
+    public function password(Request $request)
+    {
+        $user = Auth::user();
+
+        $rules = [
+            'current_password' => 'password|required_with:new_password',
+            'new_password' => 'required|min:9',
+            'confirm_password' => 'required|same:new_password',
+        ];
+
+        $messages = [
+            'new_password.min' =>'La contraseña nueva debe tener al menos 9 caracteres.',
+            'confirm_password.same' =>'La contraseña nueva no coincicen con la confirmación.',
+            'current_password.password' => 'La contraseña actual no coincice.',
+            'current_password.required_with' => 'Para cambiar la contraseña tiene que introducir la contraseña actual',
+            'current_password.required' => 'Debe escribir una contraseña',
+            'new_password.required' => 'Debe escribir una contraseña',
+            'confirm_password.required' => 'Debe escribir una contraseña'    
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if($validator->fails()){
+          //  dd($validator->errors()->toJson());
+            $success = false;
+           // $errors = $validator->errors()->toJson();
+          //  return compact('success' ,  'errors');
+            return compact('success'); 
+        }else{
+            $newPassword = $request->get('new_password');
+            $password = bcrypt($newPassword);
+
+            $user->password = $password;
+         //   $user->save();
+         /*   $data['success'] = true;
+            return $data; */
+            $success = true;
+           return compact('success'); 
+        }
     }
 }
