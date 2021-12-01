@@ -9,7 +9,7 @@
 					<button class="button-body active-body" onclick="tabClick(event,'graphic')">Grafica</button>
 					<button class="button-body" onclick="tabClick(event,'add')">Mediciones</button>
 					<button class="button-body" onclick="tabClick(event,'goal')">Añadir medicion</button>
-					<button class="button-body" onclick="tabClick(event,'measuring')" style="margin-right: 0;">Objectivos</button>
+					<button class="button-body" onclick="tabClick(event,'measuring')" style="margin-right: 0;">Objetivos</button>
 				</div>
 
 				<div class="tab-container">

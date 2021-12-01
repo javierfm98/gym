@@ -42,14 +42,14 @@ class BodyController extends Controller
          $countMouths = array_values($countMouths);
 
 
-         if($goals_weight_array){
+         if(!$goals_weight_array->isEmpty()){
             $goals_weight_array = $goals_weight_array->first();
             for($i = 0 ; $i< count($countMouths) ; $i++){
                 array_push($goalWeightCount , $goals_weight_array['value']);
             }
          }
 
-         if($goals_body_fat_array){
+         if(!$goals_body_fat_array->isEmpty()){
             $goals_body_fat_array = $goals_body_fat_array->first();
             for($i = 0 ; $i< count($countMouths) ; $i++){
                 array_push($goalBodyFatCount , $goals_body_fat_array['value']);
@@ -202,16 +202,16 @@ class BodyController extends Controller
 
     public function storeMeasuring($user_id, $date, $value, $stat_id)
     {
-        $stat = Body::where('date', $date)->where('stat_id', $stat_id)->first();
+        $stat = Body::where('date', $date)->where('user_id', $user_id)->where('stat_id', $stat_id)->first();
 
         if($stat != null){
             $stat->value = $value;
             $stat->save();
         }else{
-            $count = Body::where('stat_id', $stat_id)->get()->count();
+            $count = Body::where('stat_id', $stat_id)->where('user_id', $user_id)->get()->count();
 
             if($count >= 10){
-                $oldestStat = Body::where('stat_id', $stat_id)->orderBy('date')->first();
+                $oldestStat = Body::where('stat_id', $stat_id)->where('user_id', $user_id)->orderBy('date')->first();
                 $oldestStat->date = $date;
                 $oldestStat->value = $value;
                 $oldestStat->save();

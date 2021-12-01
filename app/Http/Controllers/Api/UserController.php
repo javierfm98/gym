@@ -142,7 +142,7 @@ class UserController extends Controller
             $password = bcrypt($newPassword);
 
             $user->password = $password;
-         //   $user->save();
+            $user->save();
          /*   $data['success'] = true;
             return $data; */
             $success = true;
