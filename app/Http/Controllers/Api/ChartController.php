@@ -35,14 +35,14 @@ class ChartController extends Controller
         $countMouths = array_values($countMouths);
 
  
-        if(!$goals_weight_array->isEmpty() && $goals_weight_array->toArray()[0]['value'] != 0){
+        if(!$goals_weight_array->isEmpty()){
             $goals_weight_array = $goals_weight_array->first();
             for($i = 0 ; $i< count($countMouths) ; $i++){
                 array_push($goalWeightCount , $goals_weight_array['value']);
             }
         }
 
-         if(!$goals_body_fat_array->isEmpty() && $goals_body_fat_array->toArray()[0]['value'] != 0){
+         if(!$goals_body_fat_array->isEmpty()){
             $goals_body_fat_array = $goals_body_fat_array->first();
             for($i = 0 ; $i< count($countMouths) ; $i++){
                 array_push($goalBodyFatCount , $goals_body_fat_array['value']);
