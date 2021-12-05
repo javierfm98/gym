@@ -13,15 +13,17 @@ function loadTrainings(){
     $date.val(value);
    
   }
+
 	displayTrainings($date.val());
 }
 
+//var refInterval = window.setInterval('displayTrainings($date.val())', 3000); // 30 seconds
   
 function displayTrainings(date){
 	$.ajax({
 		type: 'GET' , 
 		url : $baseUrl+'/display-trainings' ,
-		data:{'date':date } ,
+		data:{'date':date} ,
 		success:function(data){
 			$('#trainings').html(data);
 		} 
@@ -35,3 +37,4 @@ function func(img) {
     $("#juan").remove();
   }
 }
+

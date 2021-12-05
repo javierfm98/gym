@@ -333,7 +333,7 @@ class TrainingController extends Controller
                     $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
                     $statusSub = $this->canReservation($user_id);
                     $statusSub = true;
-                    $detailsUrl = route('trainings.show', 1);
+                    $detailsUrl = route('trainings.show', $training->id);
                     if($isReserved){
                         $botones = '<button type="submit" class="button button-primary text-bold">Cancelar Reserva</button>
                                     <a href="'.$detailsUrl.'"class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
@@ -359,7 +359,7 @@ class TrainingController extends Controller
                             $badgeFull = '<span class="badge-custom badge-red">CLASE COMPLETA</span>';
                             $classSpan = 'text-red';
                             if(!$isReserved)
-                            $botones = '<button type="submit" class="button button-primary button-disabled text-bold">Disable button</button>
+                            $botones = '<button type="submit" class="button button-primary button-disabled text-bold">Reservar</button>
                                         <a href="'.$detailsUrl.'" class="button button-primary text-bold" style="margin-bottom: 0px">Detalles</a>';
                      }else{
                             $badgeFull = '';
@@ -398,9 +398,8 @@ class TrainingController extends Controller
 
             }
 
-            
-
             return $salida;
+
         } //Fin if ajax
 
     } //Fin funcion displayTrainings    

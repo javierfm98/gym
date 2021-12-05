@@ -57,8 +57,8 @@ class ReservationController extends Controller
         $reservadoYa = Reservation::where('user_id' , $user_id)->whereIn('training_id' , $entrenoCurrentDay)->get();
 
          $cosa = $dateTraining;
-
-        if($reservadoYa->isEmpty()){
+         $isFull = $this->isFull($training->capacity ,  $training->enroll);
+        if($reservadoYa->isEmpty() && !$isFull){
             Reservation::create($data);
             $countClientRes = Reservation::where('training_id' , $training_id)->get()->count();
             $trainingUpdate = Training::findOrFail($training_id);
@@ -66,18 +66,22 @@ class ReservationController extends Controller
             $trainingUpdate->save();
             return redirect('/reservations')->with(compact('cosa'));
         }else{
-            $notification = 'Ya estás apuntando a un entrenamiento este día. Cancele el anterior entrenamiento y apuntate al nuevo';
+            if($isFull){
+                $notification = 'El entrenamiento ya esta completo. Lo sentimos no se puede apuntar';
+            }else{
+              $notification = 'Ya estás apuntando a un entrenamiento este día. Cancele el anterior entrenamiento y apuntate al nuevo';  
+            }
+            
             return redirect('/reservations')->with(compact('notification','cosa'));
         }
+    }
 
-       
+        public function isFull( $capacity , $enroll){
+        if($capacity == $enroll){
+            return true;
+        }
 
-       
-         
-       // return redirect('/trainings')->with(compact('cosa'));
-       
-
-       //  return view('trainings.index')->with('notification',$notification);
+        return false;
     }
 
     /**
@@ -202,7 +206,6 @@ class ReservationController extends Controller
        // $dateTraining = $request->date;
 
         $cosa =  $request->date;
-
         return redirect('/reservations')->with(compact('cosa'));
     }
 
