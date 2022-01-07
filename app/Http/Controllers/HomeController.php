@@ -58,7 +58,7 @@ class HomeController extends Controller
         $reservation = Reservation::where('user_id' ,  $user_id)->get(['training_id']);
         $trainings = Training::whereIn('id' , $reservation)->whereDate('day' , '>=' ,  $currentDate)->take(3)->get();
 
-        return view('index', compact('payments', 'trainings', 'phrases', 'nextPay', 'trainingsTrainer'));
+        return view('home.index', compact('payments', 'trainings', 'phrases', 'nextPay', 'trainingsTrainer'));
     }
 
 

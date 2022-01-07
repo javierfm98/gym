@@ -39,7 +39,7 @@
 				{{--  	@if(auth()->user()->hasRole(['client'])) --}}
 					<a href="{{ route('trainings.list') }}" class="link {{ (request()->routeIs('trainings.list')) ? 'active' : '' }}">
 						<i class="fas fa-dumbbell fa-fw"></i>
-						<span>Mis entrenos</span>
+						<span>Mis reservas</span>
 					</a> 
 					<a href="{{ route('payments.index') }}" class="link {{ (request()->routeIs('payments.index')) ? 'active' : '' }}">
 						<i class="fas fa-credit-card fa-fw"></i>

@@ -202,7 +202,7 @@ class ClientController extends Controller
         $subscription->save();
 
 
-        $notification = 'Cliente se ha actualizado correctamente.';
+        $notification = 'Cliente actualizado correctamente.';
         return redirect('/clients')->with(compact('notification'));
     }
 
