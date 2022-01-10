@@ -37,7 +37,7 @@ class ChartController extends Controller
  
         if(!$goals_weight_array->isEmpty()){
             $goals_weight_array = $goals_weight_array->first();
-            for($i = 0 ; $i< count($countmonths) ; $i++){
+            for($i = 0 ; $i< count($countMonths) ; $i++){
                 array_push($goalWeightCount , $goals_weight_array['value']);
             }
         }
