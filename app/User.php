@@ -27,7 +27,7 @@ class User extends Authenticatable implements JWTSubject  /*implements MustVerif
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'email_verified_at' , 'created_at' , 'updated_at' , 'photo_id' , 'registration_token' , 'payment_status'
+        'password', 'remember_token', 'email_verified_at' , 'created_at' , 'updated_at' , 'photo_id' , 'registration_token'/* , 'payment_status' */
     ];
 
     /**

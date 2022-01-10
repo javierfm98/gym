@@ -22,9 +22,9 @@ class BodyController extends Controller
         $goals_body_fat = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->first();
         $measurements = Body::where('user_id' , $user_id)->orderBy('date' , 'DESC')->get();
 
-        $mouths = Body::where('user_id' , $user_id)->orderBy('date')->get();
-        $countMouths = [];
-        $countMouthsFormat = [];
+        $months = Body::where('user_id' , $user_id)->orderBy('date')->get();
+        $countMonths = [];
+        $countMonthsFormat = [];
         $goalWeightCount = [];
         $goalBodyFatCount = [];
 
@@ -34,24 +34,24 @@ class BodyController extends Controller
         $goals_weight_array = Goal::where('user_id' , $user_id)->where('name_goal_id' , 1)->get();
         $goals_body_fat_array = Goal::where('user_id' , $user_id)->where('name_goal_id' , 2)->get();
 
-        foreach($mouths as $mouth){
-            array_push($countMouths , $mouth->date_format);
+        foreach($months as $month){
+            array_push($countMonths , $month->date_format);
         }
 
-         $countMouths = array_unique($countMouths);
-         $countMouths = array_values($countMouths);
+         $countMonths = array_unique($countMonths);
+         $countMonths = array_values($countMonths);
 
 
          if(!$goals_weight_array->isEmpty()){
             $goals_weight_array = $goals_weight_array->first();
-            for($i = 0 ; $i< count($countMouths) ; $i++){
+            for($i = 0 ; $i< count($countMonths) ; $i++){
                 array_push($goalWeightCount , $goals_weight_array['value']);
             }
          }
 
          if(!$goals_body_fat_array->isEmpty()){
             $goals_body_fat_array = $goals_body_fat_array->first();
-            for($i = 0 ; $i< count($countMouths) ; $i++){
+            for($i = 0 ; $i< count($countMonths) ; $i++){
                 array_push($goalBodyFatCount , $goals_body_fat_array['value']);
             }
          }
@@ -72,10 +72,10 @@ class BodyController extends Controller
 
      //  dd($measurementsWeight);
 
-        $arrayWeight = $this->createArrayData($countMouths, $measurementsWeight);
+        $arrayWeight = $this->createArrayData($countMonths, $measurementsWeight);
         $pointStartWeight = $this->setPointStart($arrayWeight);
 
-        $arrayBodyFat = $this->createArrayData($countMouths, $measurementsBodyFat);
+        $arrayBodyFat = $this->createArrayData($countMonths, $measurementsBodyFat);
         $pointStartBodyFat = $this->setPointStart($arrayBodyFat);
 
         foreach($arrayWeight as $key =>$weight){
@@ -93,13 +93,13 @@ class BodyController extends Controller
         $arrayWeight = array_values($arrayWeight);
         $arrayBodyFat = array_values($arrayBodyFat);
 
-        $countMouths = $this->formatdate($countMouths);
+        $countMonths = $this->formatdate($countMonths);
 
 
         return view('bodies.index' , compact(   'goals_weight' , 
                                                 'goals_body_fat' , 
                                                 'measurements' , 
-                                                'countMouths' , 
+                                                'countMonths' , 
                                                 'goalWeightCount' , 
                                                 'goalBodyFatCount',
                                                 'arrayWeight',
@@ -109,13 +109,13 @@ class BodyController extends Controller
                                             ));
     }
 
-    public function createArrayData($mouths, $dataArray)
+    public function createArrayData($months, $dataArray)
     {
-        $arrayValue = array_fill(0 , count($mouths) , -1);
+        $arrayValue = array_fill(0 , count($months) , -1);
 
         foreach($dataArray as $data){
-            foreach($mouths as $key => $mouth){
-                if($data['date_format'] == $mouth){
+            foreach($months as $key => $month){
+                if($data['date_format'] == $month){
                     $arrayValue[$key] = $data['value'];
                     break;
                 }

@@ -40,15 +40,22 @@ class UserController extends Controller
         $clientReservation = Reservation::where('user_id' , $user->id)->get();
         $success = false;
 
-        foreach($trainings as $training){
-            $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
-            if($isReserved){
-                $success = true;
-                 return compact('success' , 'training');
+        if($user->payment_status == 0){
+            $status = false;
+            return compact('status');
+        }else{
+            foreach($trainings as $training){
+                $isReserved = $this->isReserved($clientReservation , $trainings ,  $training->id);
+                if($isReserved){
+                    $success = true;
+                     return compact('success' , 'training');
+                }
             }
+
+            return compact('success');          
         }
 
-        return compact('success');   
+
     }
 
 

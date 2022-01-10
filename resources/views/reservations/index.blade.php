@@ -3,8 +3,8 @@
 @section('title', 'Reservar')
 @section('content')
 
-				@if(session('cosa'))
-					<input type="hidden" id="juan" value="{{ session('cosa') }}">
+				@if(session('dateBack'))
+					<input type="hidden" id="flag" value="{{ session('dateBack') }}">
 				@endif
 
 				<div class="training-container no-wrapper">

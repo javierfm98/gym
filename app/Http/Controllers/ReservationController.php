@@ -56,7 +56,7 @@ class ReservationController extends Controller
         $entrenoCurrentDay = Training::where('day' ,   $dateTraining)->get(['id'])->makeHidden(['training_time', 'training_day' , 'training_day_DB']);
         $reservadoYa = Reservation::where('user_id' , $user_id)->whereIn('training_id' , $entrenoCurrentDay)->get();
 
-         $cosa = $dateTraining;
+         $dateBack = $dateTraining;
          $isFull = $this->isFull($training->capacity ,  $training->enroll);
         if($reservadoYa->isEmpty() && !$isFull){
             Reservation::create($data);
@@ -64,7 +64,7 @@ class ReservationController extends Controller
             $trainingUpdate = Training::findOrFail($training_id);
             $trainingUpdate->enroll = $countClientRes;
             $trainingUpdate->save();
-            return redirect('/reservations')->with(compact('cosa'));
+            return redirect('/reservations')->with(compact('dateBack'));
         }else{
             if($isFull){
                 $notification = 'El entrenamiento ya esta completo. Lo sentimos no se puede apuntar';
@@ -72,7 +72,7 @@ class ReservationController extends Controller
               $notification = 'Ya estás apuntando a un entrenamiento este día. Cancele el anterior entrenamiento y apuntate al nuevo';  
             }
             
-            return redirect('/reservations')->with(compact('notification','cosa'));
+            return redirect('/reservations')->with(compact('notification','dateBack'));
         }
     }
 
@@ -152,11 +152,11 @@ class ReservationController extends Controller
         $trainingUpdate->enroll = $countClientRes;
         $trainingUpdate->save();
 
-         $cosa = $day;
+         $dateBack = $day;
          if($request->user_id){
             return redirect('/trainings/'.$id);
          }else{
-            return redirect('/reservations')->with(compact('cosa'));
+            return redirect('/reservations')->with(compact('dateBack'));
          }
          
     }
@@ -193,10 +193,10 @@ class ReservationController extends Controller
 
         
 
-        $cosa =  $dateTraining;
+        $dateBack =  $dateTraining;
 
        
-         return redirect('/reservations')->with(compact('notification','cosa'));
+         return redirect('/reservations')->with(compact('notification','dateBack'));
 
     }
 
@@ -205,8 +205,8 @@ class ReservationController extends Controller
 
        // $dateTraining = $request->date;
 
-        $cosa =  $request->date;
-        return redirect('/reservations')->with(compact('cosa'));
+        $dateBack =  $request->date;
+        return redirect('/reservations')->with(compact('dateBack'));
     }
 
 }

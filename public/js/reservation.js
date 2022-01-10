@@ -7,8 +7,8 @@ $date.change(loadTrainings);
 
 function loadTrainings(){
 
-  if(document.getElementById('juan')){
-    value = document.getElementById('juan').value;
+  if(document.getElementById('flag')){
+    value = document.getElementById('flag').value;
     console.log(value);
     $date.val(value);
    
@@ -33,8 +33,8 @@ function displayTrainings(date){
 function func(img) {
   img.parentNode.removeChild(img);
 
-  if($("juan")){
-    $("#juan").remove();
+  if($("flag")){
+    $("#flag").remove();
   }
 }
 

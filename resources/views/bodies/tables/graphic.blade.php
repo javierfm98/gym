@@ -16,7 +16,7 @@
 	        text: 'Mi cuerpo'
 	    },
 	    xAxis: {
-	        categories: @json($countMouths)
+	        categories: @json($countMonths)
 	    },
 	    yAxis: {
 	        title: {
