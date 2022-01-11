@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subscription;
+use PDF;
 
 class PaymentController extends Controller
 {
@@ -15,11 +16,20 @@ class PaymentController extends Controller
     public function index()
     {
 
-        $payments = Subscription::where('user_id', auth()->user()->id)->orderBy('end_at', 'desc')->paginate(5);
-
-    
+        $payments = Subscription::where('user_id', auth()->user()->id)->where('status' , 1)->orderBy('end_at', 'desc')->paginate(5);
 
         return view('payments.index', compact('payments'));
+    }
+
+    public function createPDF(Request $request)
+    {
+        $date = $request->date;
+        $user_id = auth()->user()->id;
+
+        $payment = Subscription::where('user_id' , $user_id)->where('end_at' , $date)->first();
+        $pdf = PDF::loadView('payments.invoice' , ['payment' => $payment]);
+       // return view('payments.invoice' , compact('payment'));
+        return $pdf->download('factura_'.$date.'.pdf');
     }
 
     /**

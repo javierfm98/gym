@@ -36,20 +36,20 @@
 						<i class="fas fa-calendar-alt fa-fw"></i>
 						<span>Reservar</span>
 					</a>
-				{{--  	@if(auth()->user()->hasRole(['client'])) --}}
 					<a href="{{ route('trainings.list') }}" class="link {{ (request()->routeIs('trainings.list')) ? 'active' : '' }}">
 						<i class="fas fa-dumbbell fa-fw"></i>
 						<span>Mis reservas</span>
-					</a> 
+					</a>
+					@if(auth()->user()->hasRole(['client']))
 					<a href="{{ route('payments.index') }}" class="link {{ (request()->routeIs('payments.index')) ? 'active' : '' }}">
 						<i class="fas fa-credit-card fa-fw"></i>
 						<span>Mis pagos</span>
 					</a>
+					@endif
 					<a href="{{ route('bodies.index') }}" class="link {{ (request()->routeIs('bodies.index')) ? 'active' : '' }}">
 						<i class="fas fa-heartbeat fa-fw"></i>
 						<span>Mi cuerpo</span>
 					</a>
-				{{-- 	@endif --}}
 
 					<a href="{{ route('profiles.index') }}" class="link {{ (request()->routeIs('profiles.index')) ? 'active' : '' }}">
 						<i class="fas fa-user-edit fa-fw"></i>

@@ -57,6 +57,7 @@ Route::get('/display-trainings', 'TrainingController@displayTrainings')->name('r
 Route::post('/back-reservation', 'ReservationController@backReservation')->name('reservations.backReservation')->middleware('auth');
 Route::post('/update/rate' , 'SettingController@updateRate')->name('settings.updateRate')->middleware('auth');
 Route::get('/trainings/list' , 'TrainingController@listTrainings')->name('trainings.list')->middleware('auth');
+Route::post('/invoice' , 'PaymentController@createPDF')->name('payments.invoice')->middleware('auth');
 
 
 
